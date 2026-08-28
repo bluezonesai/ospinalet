@@ -264,6 +264,51 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .match-done .time{font-family:var(--display);font-weight:700;font-size:52px;line-height:1;margin:0 0 4px;font-variant-numeric:tabular-nums}
 .match-done p{color:var(--muted);margin:0 0 20px}
 
+/* ---------- word bank ---------- */
+.wb-list{display:grid}
+.wb-row{
+  display:grid;grid-template-columns:26px 168px 1fr;gap:8px 14px;align-items:center;
+  padding:11px 0;border-bottom:1px solid var(--line);
+}
+.wb-row:last-child{border-bottom:0}
+.wb-num{font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.wb-box{
+  min-height:46px;border:2px dashed var(--line);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;padding:6px 10px;
+  font-size:15.5px;font-style:italic;font-weight:600;color:var(--muted);
+  cursor:pointer;text-align:center;line-height:1.2;
+  transition:border-color .12s ease,background .12s ease;
+}
+.wb-box:hover{border-color:var(--accent)}
+.wb-box:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wb-box.filled{border-style:solid;border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.wb-box.over{border-color:var(--accent);background:var(--accent-soft)}
+.wb-box.correct{border-color:var(--good);background:var(--good-soft);color:var(--good);cursor:default}
+.wb-box.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);cursor:default}
+.wb-def{margin:0;font-size:15px;line-height:1.4}
+.wb-def.spanish{font-style:italic}
+.wb-fix{grid-column:2/-1;margin:0;font-size:13px;color:var(--muted)}
+.wb-fix .es{color:var(--good);font-weight:600}
+
+.wb-bank{
+  position:sticky;bottom:12px;margin-top:18px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 15px;
+}
+.wb-bank-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.wb-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
+.wb-words{display:flex;flex-wrap:wrap;gap:7px;max-height:168px;overflow-y:auto}
+.wb-word{
+  appearance:none;cursor:grab;font-family:var(--sans);font-size:14.5px;font-style:italic;font-weight:600;
+  color:var(--ink);background:var(--surface-2);border:1px solid var(--line);
+  border-radius:8px;padding:8px 13px;
+}
+.wb-word:hover{border-color:var(--accent);color:var(--accent)}
+.wb-word:active{cursor:grabbing}
+.wb-word.sel{background:var(--accent);border-color:var(--accent);color:var(--btn-ink)}
+.wb-word:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wb-empty{font-size:13px;color:var(--muted)}
+
 /* ---------- test ---------- */
 .q{border-bottom:1px solid var(--line);padding:22px 0}
 .q:first-of-type{padding-top:4px}
@@ -312,8 +357,14 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .missed{margin-top:22px;text-align:left}
 .missed h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 
+.go button:nth-child(5):last-child{grid-column:1 / -1}
 @media (max-width:640px){
   .vocab{grid-template-columns:1fr}
+  .wb-row{grid-template-columns:24px 1fr}
+  .wb-box{grid-column:2;order:2}
+  .wb-def{grid-column:2;order:1}
+  .wb-fix{grid-column:2;order:3}
+  .wb-words{max-height:132px}
   h1{font-size:22px}
   .prompt{font-size:24px}
   .prompt.def{font-size:19px}
@@ -351,6 +402,7 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
     <div class="tabs" role="tablist" id="tabs" hidden>
       <button class="tab" role="tab" aria-selected="true" data-mode="learn">Aprender</button>
       <button class="tab" role="tab" aria-selected="false" data-mode="test">Examen</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="wordbank">Banco</button>
       <button class="tab" role="tab" aria-selected="false" data-mode="match">Emparejar</button>
       <button class="tab" role="tab" aria-selected="false" data-mode="list">Lista</button>
     </div>
@@ -548,7 +600,7 @@ function makeType(term, diff){
 
 /* ---------- state ---------- */
 const state = { view:"home", mode:"learn", setId:SETS[0].id, group:"sust", diff:"easy", matchDiff:"easy", testLen:10 };
-let learn = null, test = null, match = null, matchTimer = null, bestTimes = {};
+let learn = null, test = null, match = null, wb = null, matchTimer = null, bestTimes = {};
 
 const curSet = () => SETS.find(s=>s.id===state.setId);
 function curPool(){
@@ -571,7 +623,7 @@ function updateReportLink(){
     lines.splice(2,0,
       "Set: " + set.name,
       "Section: " + (state.group==="all" ? "Ambos" : (set.groups.find(g=>g.id===state.group)||{}).name),
-      "Mode: " + ({learn:"Aprender",test:"Examen",match:"Emparejar",list:"Lista"})[state.mode],
+      "Mode: " + ({learn:"Aprender",test:"Examen",wordbank:"Banco",match:"Emparejar",list:"Lista"})[state.mode],
       "Level: " + (state.mode==="match" ? MATCH_DIFF[state.matchDiff].label : DIFF[state.diff].label));
     const t = currentTermOnScreen();
     if(t) lines.splice(2,0, "Term on screen: " + t.es + " — " + t.en);
@@ -594,6 +646,7 @@ function renderHome(){
       <div class="go">
         <button data-set="${set.id}" data-go="learn">Aprender</button>
         <button data-set="${set.id}" data-go="test">Examen</button>
+        <button data-set="${set.id}" data-go="wordbank">Banco</button>
         <button data-set="${set.id}" data-go="match">Emparejar</button>
         <button data-set="${set.id}" data-go="list">Lista</button>
       </div>
@@ -875,6 +928,167 @@ function tileClick(btn){
   }
 }
 
+/* ---------- WORD BANK ----------
+   15 random terms. Definition on each row, an empty box beside it, the words
+   in a bank at the bottom. Drag a word into a box, or tap the word then the
+   box. ---------------------------------------------------------------------- */
+const WB_LEN = 15;
+const WB_PROMPT = {easy:"en", medium:"de", hard:"ds"};
+const WB_NOTE = {
+  easy:"English meaning on each row &mdash; drop in the Spanish word.",
+  medium:"English definition on each row &mdash; drop in the Spanish word.",
+  hard:"Definici&oacute;n en espa&ntilde;ol &mdash; arrastra la palabra correcta. No English."
+};
+
+function startWordbank(){
+  const pool = curPool();
+  const n = Math.min(WB_LEN, pool.length);
+  const questions = shuffle(pool).slice(0,n);
+  wb = { pool, diff:state.diff, questions, bank:shuffle(questions).map(t=>t.id),
+         placed:{}, selected:null, graded:false };
+  renderWordbank();
+}
+function wbPlace(qi, termId){
+  /* if that word sits in another box, clear that one first */
+  Object.keys(wb.placed).forEach(k=>{ if(wb.placed[k]===termId) delete wb.placed[k]; });
+  const displaced = wb.placed[qi];
+  wb.placed[qi] = termId;
+  wb.bank = wb.bank.filter(id=>id!==termId);
+  if(displaced && displaced!==termId) wb.bank.push(displaced);
+  wb.selected = null;
+  renderWordbank();
+}
+function wbReturn(qi){
+  const id = wb.placed[qi];
+  if(!id) return;
+  delete wb.placed[qi];
+  if(!wb.bank.includes(id)) wb.bank.push(id);
+  renderWordbank();
+}
+function renderWordbank(){
+  const key = WB_PROMPT[wb.diff];
+  const spanish = wb.diff==="hard";
+  const byId = id => wb.pool.find(t=>t.id===id);
+  const filled = Object.keys(wb.placed).length;
+
+  let head = "";
+  if(wb.graded){
+    const right = wb.questions.filter((t,i)=>wb.placed[i]===t.id).length;
+    head = `<div class="score">
+      <span class="big">${Math.round(right/wb.questions.length*100)}%</span>
+      <span class="detail">${right} of ${wb.questions.length} correct</span>
+      <span class="spacer"></span>
+      <span class="row"><button class="btn" id="wbNew">Otra hoja</button></span>
+    </div>`;
+  }
+
+  const rows = wb.questions.map((t,i)=>{
+    const placedId = wb.placed[i];
+    const placedTerm = placedId ? byId(placedId) : null;
+    let cls = "wb-box" + (placedTerm ? " filled" : "");
+    let inner = placedTerm ? esc(placedTerm.es) : "";
+    if(wb.graded){
+      const ok = placedId===t.id;
+      cls = "wb-box filled " + (ok ? "correct" : "wrong");
+      if(!placedTerm) inner = "&mdash;";
+    }
+    return `<div class="wb-row${wb.graded?(wb.placed[i]===t.id?" ok":" no"):""}">
+      <span class="wb-num">${i+1}.</span>
+      <div class="${cls}" data-box="${i}" tabindex="0" role="button"
+        aria-label="Respuesta ${i+1}">${inner}</div>
+      <p class="wb-def ${spanish?"spanish":""}">${esc(t[key])}</p>
+      ${wb.graded && wb.placed[i]!==t.id
+        ? `<p class="wb-fix">Correcta: <span class="es">${esc(t.es)}</span></p>` : ""}
+    </div>`;
+  }).join("");
+
+  const bank = wb.graded ? "" : `
+    <div class="wb-bank">
+      <div class="wb-bank-head">
+        <span class="label">Banco de palabras</span>
+        <span class="wb-count">${wb.bank.length} left</span>
+      </div>
+      <div class="wb-words" id="wbWords">${
+        wb.bank.length
+          ? wb.bank.map(id=>`<button class="wb-word${wb.selected===id?" sel":""}" draggable="true" data-word="${id}">${esc(byId(id).es)}</button>`).join("")
+          : `<span class="wb-empty">Bank empty &mdash; every word is placed.</span>`
+      }</div>
+    </div>`;
+
+  const footer = wb.graded ? "" : `
+    <div class="row" style="margin-top:18px">
+      <button class="btn" id="wbSubmit">Entregar</button>
+      <button class="btn ghost" id="wbClear">Vaciar</button>
+      <span class="hint" style="margin:0" id="wbCount">${filled} of ${wb.questions.length} filled</span>
+    </div>`;
+
+  panel.innerHTML = head + `<div class="card"><div class="wb-list">${rows}</div></div>` + bank + footer;
+  updateReportLink();
+  if(wb.graded){
+    $("#wbNew").addEventListener("click", startWordbank);
+    return;
+  }
+
+  /* click / tap to place */
+  panel.querySelectorAll(".wb-word").forEach(w=>{
+    w.addEventListener("click",()=>{
+      wb.selected = wb.selected===w.dataset.word ? null : w.dataset.word;
+      renderWordbank();
+    });
+    w.addEventListener("dragstart",e=>{
+      e.dataTransfer.setData("text/plain", w.dataset.word);
+      e.dataTransfer.effectAllowed = "move";
+      wb.selected = w.dataset.word;
+    });
+  });
+  panel.querySelectorAll(".wb-box").forEach(box=>{
+    const qi = +box.dataset.box;
+    const activate = ()=>{
+      if(wb.selected) wbPlace(qi, wb.selected);
+      else if(wb.placed[qi]) wbReturn(qi);
+    };
+    box.addEventListener("click", activate);
+    box.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(); }});
+    box.addEventListener("dragover",e=>{ e.preventDefault(); box.classList.add("over"); });
+    box.addEventListener("dragleave",()=>box.classList.remove("over"));
+    box.addEventListener("drop",e=>{
+      e.preventDefault(); box.classList.remove("over");
+      const id = e.dataTransfer.getData("text/plain");
+      if(id) wbPlace(qi, id);
+    });
+  });
+  /* drag a placed word back out onto the bank */
+  const words = $("#wbWords");
+  if(words){
+    words.addEventListener("dragover",e=>e.preventDefault());
+    words.addEventListener("drop",e=>{
+      e.preventDefault();
+      const id = e.dataTransfer.getData("text/plain");
+      const qi = Object.keys(wb.placed).find(k=>wb.placed[k]===id);
+      if(qi!==undefined) wbReturn(+qi);
+    });
+  }
+  $("#wbSubmit").addEventListener("click",()=>{
+    const blanks = wb.questions.length - Object.keys(wb.placed).length;
+    if(blanks>0 && !wbConfirm(blanks)) return;
+    wb.graded = true; renderWordbank(); window.scrollTo({top:0,behavior:"smooth"});
+  });
+  $("#wbClear").addEventListener("click",()=>{
+    wb.placed = {}; wb.selected = null;
+    wb.bank = shuffle(wb.questions).map(t=>t.id);
+    renderWordbank();
+  });
+}
+let wbWarned = false;
+function wbConfirm(blanks){
+  if(wbWarned){ wbWarned = false; return true; }
+  wbWarned = true;
+  const c = $("#wbCount");
+  c.textContent = `${blanks} still empty — those count as wrong. Press Entregar again.`;
+  c.style.color = "var(--bad)";
+  return false;
+}
+
 /* ---------- TEST (multiple choice only) ---------- */
 function startTest(){
   const pool = curPool();
@@ -1034,12 +1248,15 @@ function render(){
   buildDiffChips();
   $("#modeNote").innerHTML = state.mode==="list"
     ? "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>"
+    : state.mode==="wordbank"
+      ? `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions, all the words at the bottom. Drag one into a box, or tap the word then the box.</span>`
     : state.mode==="match"
       ? `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock — a wrong pair costs a second.</span>`
       : `<b>${DIFF[state.diff].label}</b><span>${DIFF[state.diff].note}${state.mode==="learn"?" Rounds of five: multiple choice until all five are right, then the same five by typing. Miss one and it comes back later in the round.":""}</span>`;
 
   if(state.mode==="learn") startLearn();
   else if(state.mode==="test") startTest();
+  else if(state.mode==="wordbank") startWordbank();
   else if(state.mode==="match") startMatch();
   else renderList();
 }
