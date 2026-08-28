@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ospinalet</title>
+
+<style>
+:root{
+  --bg:#FFFFFF;
+  --surface:#FFFFFF;
+  --surface-2:#F5F5F5;
+  --line:#DBDBDB;
+  --ink:#1A1A1A;
+  --muted:#666666;
+  --accent:#16607A;
+  --accent-soft:#E7F0F3;
+  --good:#2C6E52;
+  --good-soft:#E6EFEA;
+  --bad:#A8322B;
+  --bad-soft:#F6E5E3;
+  --btn-ink:#FFFFFF;
+  --shadow:none;
+  --radius:10px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:var(--sans);
+  --display:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151515; --surface:#1C1C1C; --surface-2:#232323; --line:#383838;
+    --ink:#ECECEC; --muted:#9A9A9A; --accent:#6DB5CD; --accent-soft:#1E3239;
+    --good:#7ECBA3; --good-soft:#1B2E25; --bad:#EE928B; --bad-soft:#331E1C;
+    --btn-ink:#151515;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151515; --surface:#1C1C1C; --surface-2:#232323; --line:#383838;
+  --ink:#ECECEC; --muted:#9A9A9A; --accent:#6DB5CD; --accent-soft:#1E3239;
+  --good:#7ECBA3; --good-soft:#1B2E25; --bad:#EE928B; --bad-soft:#331E1C;
+  --btn-ink:#151515;
+  --shadow:none;
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- header ---------- */
+header{border-bottom:1px solid var(--line);background:var(--surface);margin-bottom:22px}
+.head-inner{max-width:820px;margin:0 auto;padding:18px 20px 0}
+.head-top{display:flex;gap:16px;align-items:flex-start}
+.head-top .titles{flex:1;min-width:0}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 6px}
+h1{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+.sub{margin:0 0 16px;color:var(--muted);font-size:14px}
+.back{
+  appearance:none;background:none;border:0;cursor:pointer;padding:0;margin:0 0 8px;
+  font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);
+}
+.back:hover{color:var(--accent)}
+.back:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.report{
+  flex:none;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-size:12.5px;font-weight:600;color:var(--muted);
+  border:1px solid var(--line);border-radius:99px;padding:6px 13px;background:var(--surface-2);
+  white-space:nowrap;
+}
+.report:hover{color:var(--bad);border-color:var(--bad)}
+.report:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.report svg{width:13px;height:13px;flex:none}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tab{
+  appearance:none;border:0;background:none;cursor:pointer;
+  font-family:var(--sans);font-size:14px;font-weight:600;color:var(--muted);
+  padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+
+/* ---------- controls ---------- */
+.bar{display:flex;flex-wrap:wrap;gap:9px 14px;align-items:center;margin-bottom:10px}
+.field{display:flex;align-items:center;gap:8px}
+.label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.group{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.chip{
+  appearance:none;border:0;background:none;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);
+  padding:7px 13px;border-right:1px solid var(--line);white-space:nowrap;
+}
+.chip:last-child{border-right:0}
+.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mode-note{
+  font-size:13px;color:var(--muted);margin:0 0 18px;padding-left:2px;
+  display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;
+}
+.mode-note b{color:var(--ink);font-weight:600}
+
+/* ---------- shared ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+}
+.es{font-family:var(--serif);font-style:italic}
+.btn{
+  appearance:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:14px;
+  padding:10px 18px;border-radius:8px;border:1px solid var(--accent);
+  background:var(--accent);color:var(--btn-ink);
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:none;color:var(--muted);border-color:var(--line)}
+.btn.ghost:hover{color:var(--ink);border-color:var(--muted);filter:none}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.spacer{flex:1}
+
+/* ---------- home ---------- */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.setcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:14px;
+}
+.setcard h2{font-family:var(--display);font-weight:700;font-size:18px;margin:0;line-height:1.25;text-wrap:balance}
+.setcard .meta{font-size:13px;color:var(--muted);margin:0}
+.setcard .parts{display:flex;gap:7px;flex-wrap:wrap}
+.pill{
+  font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--accent);
+  background:var(--accent-soft);border-radius:99px;padding:3px 10px;
+}
+.setcard .go{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.go button{
+  appearance:none;cursor:pointer;font-family:var(--sans);font-size:13.5px;font-weight:600;
+  color:var(--ink);background:var(--surface-2);border:1px solid var(--line);
+  border-radius:8px;padding:10px 12px;text-align:center;
+}
+.go button:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.go button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.setcard.blank{
+  border-style:dashed;box-shadow:none;background:none;justify-content:center;
+  align-items:center;text-align:center;color:var(--muted);min-height:180px;
+}
+.setcard.blank h2{color:var(--muted);font-size:16px;font-weight:600}
+.setcard.blank p{margin:0;font-size:13px;max-width:26em}
+
+/* ---------- progress ---------- */
+.progress{margin-bottom:14px}
+.meter{height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+.meter > i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
+.progress .stats{
+  display:flex;justify-content:space-between;font-size:12px;color:var(--muted);
+  margin-top:7px;font-variant-numeric:tabular-nums;
+}
+
+.roundline{
+  display:flex;gap:10px;align-items:center;margin-bottom:9px;font-size:12px;color:var(--muted);
+}
+.roundline .roundno{font-weight:600;color:var(--ink);letter-spacing:.02em}
+.roundline .roundno span{color:var(--muted);font-weight:400}
+.roundline .phase{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);
+}
+.roundline .phase.type{color:var(--accent);background:var(--accent-soft);border-color:transparent}
+.roundline .pips{display:flex;gap:5px}
+.roundline .pips i{
+  width:16px;height:5px;border-radius:99px;background:var(--line);display:block;
+  transition:background .2s ease;
+}
+.roundline .pips i.on{background:var(--accent)}
+
+/* ---------- question ---------- */
+.prompt-kind{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+.prompt{font-size:29px;line-height:1.2;margin:0 0 24px;text-wrap:balance}
+.prompt.term{font-family:var(--serif);font-style:italic;font-weight:600}
+.prompt.def{font-size:21px;line-height:1.35;max-width:32em}
+.prompt.def.spanish{font-family:var(--serif);font-style:italic}
+.opts{display:grid;gap:9px}
+.opt{
+  display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;
+  appearance:none;cursor:pointer;font-family:var(--sans);font-size:16px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:13px 15px;
+  transition:background .12s ease,border-color .12s ease;
+}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt:disabled{cursor:default}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt .num{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600;min-width:12px}
+.opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:600}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.opt.chosen{border-color:var(--accent);background:var(--accent-soft)}
+.opt .es{font-family:var(--serif);font-style:italic}
+
+.typebox{display:flex;gap:10px;flex-wrap:wrap}
+input[type="text"]{
+  flex:1;min-width:220px;font-family:var(--sans);font-size:17px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+}
+input[type="text"].spanish{font-family:var(--serif);font-style:italic}
+input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+
+.verdict{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:15px}
+.verdict b{font-weight:600}
+.verdict.ok{color:var(--good)}
+.verdict.no{color:var(--bad)}
+.verdict .answer{color:var(--ink);display:block;margin-top:4px}
+.verdict .gloss{color:var(--muted);display:block;margin-top:3px;font-size:14px}
+.hint{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* ---------- match ---------- */
+.match-bar{
+  display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-bottom:14px;
+  font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;
+}
+.match-bar .clock{font-family:var(--display);font-weight:700;font-size:26px;color:var(--ink);line-height:1}
+.match-bar .pen{color:var(--bad)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.tile{
+  appearance:none;cursor:pointer;font-family:var(--sans);font-size:14.5px;line-height:1.35;
+  color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:15px 14px;min-height:104px;text-align:left;display:flex;align-items:center;
+  box-shadow:var(--shadow);transition:transform .12s ease,opacity .18s ease,background .12s ease,border-color .12s ease;
+}
+.tile.word{font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px}
+.tile.esdef{font-family:var(--serif);font-style:italic}
+.tile:hover:not(:disabled){border-color:var(--accent)}
+.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tile.sel{border-color:var(--accent);background:var(--accent-soft);transform:scale(.98)}
+.tile.hit{border-color:var(--good);background:var(--good-soft);color:var(--good)}
+.tile.miss{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.tile.gone{opacity:0;pointer-events:none}
+.match-done{text-align:center;padding:22px 0}
+.match-done .time{font-family:var(--display);font-weight:700;font-size:52px;line-height:1;margin:0 0 4px;font-variant-numeric:tabular-nums}
+.match-done p{color:var(--muted);margin:0 0 20px}
+
+/* ---------- test ---------- */
+.q{border-bottom:1px solid var(--line);padding:22px 0}
+.q:first-of-type{padding-top:4px}
+.q:last-of-type{border-bottom:0}
+.q-head{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
+.q-num{font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;min-width:26px}
+.q-text{font-size:19px;line-height:1.35;margin:0}
+.q-text.term{font-family:var(--serif);font-style:italic;font-weight:600;font-size:21px}
+.q-text.def.spanish{font-family:var(--serif);font-style:italic}
+.q .opts{margin-left:38px}
+.q.marked-wrong .q-num{color:var(--bad)}
+.q.marked-ok .q-num{color:var(--good)}
+.q .gloss{margin:10px 0 0 38px;font-size:13px;color:var(--muted)}
+.score{
+  display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 22px;margin-bottom:20px;
+}
+.score .big{font-family:var(--display);font-weight:700;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.score .detail{color:var(--muted);font-size:14px}
+
+/* ---------- list ---------- */
+.listsec + .listsec{margin-top:28px}
+.listsec h2{
+  font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 12px;
+}
+.vocab{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.vocab .item{
+  display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  padding:7px 0;border-bottom:1px solid var(--line);font-size:15px;
+}
+.vocab .item .en{color:var(--muted);text-align:right;font-size:14px}
+.deftable{display:grid;gap:0}
+.deftable .row2{padding:11px 0;border-bottom:1px solid var(--line)}
+.deftable .row2:last-child{border-bottom:0}
+.deftable .t{font-family:var(--serif);font-style:italic;font-weight:600;font-size:16px}
+.deftable .t .en{font-family:var(--sans);font-style:normal;font-weight:400;color:var(--muted);font-size:14px;margin-left:9px}
+.deftable .d{font-size:14px;color:var(--muted);margin-top:3px}
+.deftable .d.spanish{font-family:var(--serif);font-style:italic}
+.foot{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
+
+.done{text-align:center;padding:14px 0}
+.done .big{font-family:var(--display);font-weight:700;font-size:30px;margin:0 0 6px}
+.done p{color:var(--muted);margin:0 0 20px}
+.missed{margin-top:22px;text-align:left}
+.missed h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+
+@media (max-width:640px){
+  .vocab{grid-template-columns:1fr}
+  h1{font-size:22px}
+  .prompt{font-size:24px}
+  .prompt.def{font-size:19px}
+  .card{padding:20px}
+  .tiles{grid-template-columns:1fr 1fr;gap:8px}
+  .tile{min-height:92px;font-size:13px;padding:12px 11px}
+  .tile.word{font-size:15px}
+  .home-grid{grid-template-columns:1fr}
+  .report span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="head-inner">
+    <div class="head-top">
+      <div class="titles">
+        <button class="back" id="backBtn" hidden>&larr; Todos los sets</button>
+        <p class="eyebrow" id="eyebrow">Vocabulario</p>
+        <h1 id="pageTitle">Ospinalet</h1>
+        <p class="sub" id="pageSub"></p>
+      </div>
+      <a class="report" id="reportBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1a1 1 0 0 1 1 1v.35l1.2-.3a5 5 0 0 1 3.3.3 5 5 0 0 0 3.3.3l1.5-.37A.6.6 0 0 1 14 2.9v6.2a.6.6 0 0 1-.45.58l-1.36.34a5 5 0 0 1-3.3-.3 5 5 0 0 0-3.3-.3L4 9.7V15a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1Z"/></svg>
+        <span>Report an error</span>
+      </a>
+    </div>
+    <div class="tabs" role="tablist" id="tabs" hidden>
+      <button class="tab" role="tab" aria-selected="true" data-mode="learn">Aprender</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="test">Examen</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="match">Emparejar</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="list">Lista</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="controls" hidden>
+    <div class="bar">
+      <span class="field"><span class="label">Parte</span>
+        <span class="group" id="groupGroup"></span>
+      </span>
+      <span class="field"><span class="label">Nivel</span>
+        <span class="group" id="diffGroup"></span>
+      </span>
+      <span class="field" id="lenField" hidden><span class="label">Largo</span>
+        <span class="group" id="lenGroup">
+          <button class="chip" data-len="10" aria-pressed="true">10</button>
+          <button class="chip" data-len="20" aria-pressed="false">20</button>
+          <button class="chip" data-len="0" aria-pressed="false">Todo</button>
+        </span>
+      </span>
+    </div>
+    <p class="mode-note" id="modeNote"></p>
+  </div>
+
+  <main id="panel"></main>
+</div>
+
+<script>
+/* ============================================================
+   VOCAB SETS
+   Each term: [spanish, english, english definition, spanish definition]
+   To add a set, copy the shape below and push it onto SETS.
+   ============================================================ */
+const SETS = [
+{
+  id:"escuela",
+  name:"ESCUELA (Sustantivos + Verbos)",
+  groups:[
+    { id:"sust", name:"Sustantivos", terms:[
+      ["el aula","classroom","the room in a school where a class meets","la sala de una escuela donde se reúne una clase"],
+      ["el bachillerato","high school diploma","the diploma you earn for completing secondary studies","los estudios que se terminan antes de entrar a la universidad"],
+      ["la beca","scholarship","money awarded to a student to pay for their studies","el dinero que se le da a un estudiante para pagar sus estudios"],
+      ["la carrera","career","the profession someone follows through their working life","la profesión que una persona ejerce durante su vida"],
+      ["la cifra","number","a figure or digit used to express a quantity","el signo que se usa para escribir una cantidad"],
+      ["el comité","committee","a small group chosen to make decisions for a larger group","el grupo pequeño de personas elegidas para tomar decisiones"],
+      ["la comprensión","comprehension","the act of understanding what you read or hear","la capacidad de entender lo que se lee o se escucha"],
+      ["la conferencia","lecture","a formal talk given to an audience on one subject","la charla formal que un experto da ante un público"],
+      ["el conocimiento","knowledge","everything a person knows or has learned","todo lo que una persona sabe o ha aprendido"],
+      ["el curso","course (of study)","a series of classes on one subject over a term or year","la serie de clases sobre un tema durante un año escolar"],
+      ["el derecho","right","something you are legally or morally allowed to have or do","lo que una persona puede hacer o exigir según la ley"],
+      ["la desventaja","disadvantage","a condition that puts you in a worse position than others","la condición que pone a alguien en una posición peor"],
+      ["el director","principal","the person in charge of running a school","la persona que dirige una escuela"],
+      ["la disciplina","discipline","the order and self-control kept over behavior","el orden y el control que se mantiene en el comportamiento"],
+      ["la enseñanza","the teaching","the act or profession of instructing students","el acto de instruir a los alumnos"],
+      ["la especialización","major","the main subject a university student concentrates in","el tema principal en el que se concentra un universitario"],
+      ["el estrés","stress","the tension you feel when there is too much to handle","la tensión que se siente cuando hay demasiado que hacer"],
+      ["la facultad","faculty","a division of a university, or the professors who teach in it","la división de una universidad, o el conjunto de sus profesores"],
+      ["la habilidad","skill, talent","the ability to do something well","la capacidad de hacer algo bien"],
+      ["el horario","schedule","the list of what happens at each hour of the day","la lista de las horas en que ocurre cada actividad"],
+      ["la lectura","reading","the act of going through a written text","el acto de leer un texto escrito"],
+      ["la licenciatura","university degree","the degree earned after completing university studies","el título que se obtiene al terminar la universidad"],
+      ["la materia, la asignatura","subject","one of the areas taught in school, like math or history","cada una de las áreas que se estudian, como las matemáticas"],
+      ["la matrícula","registration","signing up officially for classes at a school","la inscripción oficial en las clases de una escuela"],
+      ["la mayoría","the majority","the greater part of a group; more than half","la parte más grande de un grupo; más de la mitad"],
+      ["el nivel","the level","the height, stage, or degree that something reaches","el grado o la altura que algo alcanza"],
+      ["las notas, las calificaciones","grades","the marks a teacher gives to show how well you did","los números o las letras que un profesor pone para evaluar"],
+      ["el papel","role","the part or function someone plays in a situation","la función que alguien cumple en una situación"],
+      ["el pensamiento","thought","an idea that forms in the mind","la idea que se forma en la mente"],
+      ["el período","period","a stretch of time with a beginning and an end","el espacio de tiempo que tiene principio y fin"],
+      ["la presión","pressure","the force or demand that pushes you to act","la fuerza o la exigencia que obliga a alguien a actuar"],
+      ["la primaria","elementary school","the first years of school, for the youngest students","los primeros años de la escuela, para los niños pequeños"],
+      ["el privilegio","privilege","a special advantage given to one person or group","la ventaja especial que se le da a una persona o a un grupo"],
+      ["el procedimiento","procedure","the ordered steps you follow to get something done","los pasos ordenados que se siguen para hacer algo"],
+      ["la prueba","test","an exercise given to measure what you have learned","el ejercicio que mide lo que se ha aprendido"],
+      ["el puntaje","score","the total points earned on an exam or in a game","el total de puntos que se obtiene en un examen o un juego"],
+      ["el requisito","requirement","something you must have or do in order to qualify","lo que hay que cumplir para poder entrar o participar"],
+      ["la sabiduría","wisdom","deep good judgment gained from learning and experience","el buen juicio que se gana con los años y la experiencia"],
+      ["la secundaria","high school","the school you attend after elementary, roughly ages 14 to 18","la escuela a la que se asiste después de la primaria"],
+      ["el sistema","system","a set of parts organized to work together","el conjunto de partes organizadas que funcionan juntas"],
+      ["la tarea","work","the work assigned to be done, especially at home after class","el trabajo que se manda hacer, sobre todo en casa"],
+      ["tiempo completo","full time","taking up all the normal hours of work or study","que ocupa todas las horas normales de trabajo o estudio"],
+      ["el título","diploma","the official document proving you finished your studies","el documento oficial que prueba que se terminaron los estudios"],
+      ["la ventaja","advantage, benefit","a condition that puts you in a better position than others","la condición que pone a alguien en una posición mejor"]
+    ]},
+    { id:"verb", name:"Verbos", terms:[
+      ["aburrirse","to get bored","to lose interest because something is dull or repetitive","perder el interés porque algo es monótono"],
+      ["acostumbrarse","to get used to","to grow comfortable with something new over time","adaptarse poco a poco a algo nuevo"],
+      ["aprender","to learn","to take in new knowledge or a new skill","adquirir conocimientos o habilidades nuevas"],
+      ["aprobar","to pass","to get a satisfactory result on an exam or course","sacar un resultado suficiente en un examen"],
+      ["aprovecharse","to take advantage of","to make use of an opportunity, or to use someone for your own gain","sacar provecho de una oportunidad o de otra persona"],
+      ["asistir a","to attend","to be present at a class or an event","estar presente en una clase o un evento"],
+      ["comportarse","to behave","to act in a certain way, especially with good manners","actuar de cierta manera, sobre todo con buenos modales"],
+      ["conseguir","to get","to obtain the thing you were after","obtener lo que se buscaba"],
+      ["consistir en","to consist of","to be made up of certain parts","estar formado por ciertas partes"],
+      ["dedicarse","to dedicate oneself","to devote your time and effort to one thing","entregar el tiempo y el esfuerzo a una sola cosa"],
+      ["discutir","to discuss","to talk a topic over, or to argue about it","hablar sobre un tema, o pelear por él"],
+      ["distraer","to distract","to pull someone's attention away from what they were doing","apartar la atención de alguien de lo que hacía"],
+      ["educar","to educate","to raise and form someone through instruction","formar a alguien por medio de la instrucción"],
+      ["enseñar","to teach, show","to pass knowledge to someone, or to let them see something","transmitir conocimientos a alguien, o mostrarle algo"],
+      ["entender","to understand","to grasp the meaning of something","captar el sentido de algo"],
+      ["entrenarse","to train","to practice regularly to improve, especially in a sport","practicar con regularidad para mejorar, sobre todo en un deporte"],
+      ["escoger","to choose","to pick one option out of several","tomar una opción entre varias"],
+      ["experimentar","to experience","to live through something yourself, or to test it out","vivir algo en persona, o hacer pruebas con ello"],
+      ["gozar de","to enjoy","to take pleasure in something you have","sentir placer con algo que se tiene"],
+      ["graduarse","to graduate","to finish your studies and receive the diploma","terminar los estudios y recibir el diploma"],
+      ["imponer","to impose","to force a rule or a burden onto someone","obligar a alguien a aceptar una regla o una carga"],
+      ["influir","to influence","to have an effect on how someone thinks or acts","tener efecto en lo que otro piensa o hace"],
+      ["ingresar","to enroll","to enter and become part of a school or organization","entrar a formar parte de una escuela o una organización"],
+      ["intentar","to try, attempt","to make an effort at something without knowing if it will work","hacer el esfuerzo de lograr algo, sin saber si saldrá bien"],
+      ["matricular","to register","to sign someone up officially for classes","inscribir a alguien oficialmente en unas clases"],
+      ["quejarse","to complain","to say out loud that something displeases you","expresar en voz alta que algo no gusta"],
+      ["realizar","to fulfill","to carry something out and make it real","llevar algo a cabo y hacerlo realidad"],
+      ["repasar","to review","to go over what you learned again before an exam","volver a estudiar lo aprendido antes de un examen"],
+      ["salir bien","to do well","to come out of something with a good result","terminar algo con buen resultado"],
+      ["solicitar","to apply","to formally request a place, a job, or aid","pedir formalmente un puesto, un trabajo o una ayuda"],
+      ["suspender, reprobar","to fail","to not pass an exam or a course","no alcanzar la nota mínima en un examen o un curso"]
+    ]}
+  ]
+}
+];
+
+
+/* ---------- build runtime decks ---------- */
+SETS.forEach(set=>{
+  set.groups.forEach(g=>{
+    g.items = g.terms.map((t,i)=>({id:set.id+"-"+g.id+i, group:g.id, es:t[0], en:t[1], de:t[2], ds:t[3]}));
+  });
+  set.all = set.groups.reduce((a,g)=>a.concat(g.items),[]);
+});
+
+const REPORT_EMAIL = "bluezonesai@gmail.com";
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const panel = $("#panel");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = a => a[Math.floor(Math.random()*a.length)];
+
+function norm(s){
+  return String(s).toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/\(.*?\)/g," ")
+    .replace(/[^a-z\s]/g," ")
+    .replace(/\s+/g," ").trim()
+    .replace(/^(the|to|a|an|el|la|los|las)\s+/,"");
+}
+function accepts(answer, input){
+  const given = norm(input);
+  if(!given) return false;
+  const parts = answer.split(/[,\/]/).map(norm).filter(Boolean);
+  parts.push(norm(answer), norm(answer.replace(/,/g," ")));
+  return parts.includes(given);
+}
+
+const DIFF = {
+  easy:  {promptKey:"es", answerKey:"en", promptStyle:"term",        answerLang:"en",
+          label:"Fácil", mcLabel:"Choose the English", typeLabel:"Write the English meaning",
+          note:"Spanish word &rarr; pick the English meaning.", ph:"English meaning…"},
+  medium:{promptKey:"de", answerKey:"es", promptStyle:"def",         answerLang:"es",
+          label:"Medio", mcLabel:"Choose the Spanish word", typeLabel:"Write the Spanish word",
+          note:"English definition &rarr; pick the Spanish word.", ph:"Spanish word…"},
+  hard:  {promptKey:"ds", answerKey:"es", promptStyle:"def spanish", answerLang:"es",
+          label:"Difícil", mcLabel:"Escoge la palabra correcta", typeLabel:"Escribe la palabra",
+          note:"Spanish definition &rarr; pick the Spanish word. No English anywhere.", ph:"la palabra…"}
+};
+const MATCH_DIFF = {
+  easy:{label:"Fácil", key:"de", tileClass:"", note:"Match each Spanish word to its English definition."},
+  hard:{label:"Difícil", key:"ds", tileClass:"esdef", note:"Match each Spanish definition to its Spanish word. No English."}
+};
+
+function makeMC(term, pool, diff){
+  const d = DIFF[diff], key = d.answerKey;
+  const correct = term[key];
+  const seen = new Set([norm(correct)]);
+  const opts = [correct];
+  const sameGroup = shuffle(pool.filter(t=>t.id!==term.id && t.group===term.group));
+  const rest = shuffle(pool.filter(t=>t.id!==term.id && t.group!==term.group));
+  for(const o of sameGroup.concat(rest)){
+    if(opts.length>=4) break;
+    if(seen.has(norm(o[key]))) continue;
+    seen.add(norm(o[key]));
+    opts.push(o[key]);
+  }
+  return {term, diff, kind:"mc", prompt:term[d.promptKey], answer:correct, options:shuffle(opts)};
+}
+function makeType(term, diff){
+  const d = DIFF[diff];
+  return {term, diff, kind:"type", prompt:term[d.promptKey], answer:term[d.answerKey]};
+}
+
+/* ---------- state ---------- */
+const state = { view:"home", mode:"learn", setId:SETS[0].id, group:"sust", diff:"easy", matchDiff:"easy", testLen:10 };
+let learn = null, test = null, match = null, matchTimer = null, bestTimes = {};
+
+const curSet = () => SETS.find(s=>s.id===state.setId);
+function curPool(){
+  const set = curSet();
+  if(state.group==="all") return set.all;
+  const g = set.groups.find(x=>x.id===state.group);
+  return g ? g.items : set.all;
+}
+
+/* ---------- report an error ---------- */
+function currentTermOnScreen(){
+  if(state.view!=="study") return null;
+  if(state.mode==="learn" && learn && learn.current) return learn.current.term;
+  return null;
+}
+function updateReportLink(){
+  const lines = ["", "", "---", "Sent from Ospinalet"];
+  if(state.view==="study"){
+    const set = curSet();
+    lines.splice(2,0,
+      "Set: " + set.name,
+      "Section: " + (state.group==="all" ? "Ambos" : (set.groups.find(g=>g.id===state.group)||{}).name),
+      "Mode: " + ({learn:"Aprender",test:"Examen",match:"Emparejar",list:"Lista"})[state.mode],
+      "Level: " + (state.mode==="match" ? MATCH_DIFF[state.matchDiff].label : DIFF[state.diff].label));
+    const t = currentTermOnScreen();
+    if(t) lines.splice(2,0, "Term on screen: " + t.es + " — " + t.en);
+  }
+  const subject = "Ospinalet — error report" + (state.view==="study" ? " (" + curSet().name + ")" : "");
+  const body = "Which word or definition looks wrong, and what should it say?\n" + lines.join("\n");
+  $("#reportBtn").href = "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=" + encodeURIComponent(REPORT_EMAIL) +
+    "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+}
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  panel.innerHTML = `<div class="home-grid">` + SETS.map(set=>`
+    <div class="setcard">
+      <div>
+        <h2>${esc(set.name)}</h2>
+        <p class="meta">${set.all.length} terms</p>
+      </div>
+      <div class="parts">${set.groups.map(g=>`<span class="pill">${esc(g.name)} ${g.items.length}</span>`).join("")}</div>
+      <div class="go">
+        <button data-set="${set.id}" data-go="learn">Aprender</button>
+        <button data-set="${set.id}" data-go="test">Examen</button>
+        <button data-set="${set.id}" data-go="match">Emparejar</button>
+        <button data-set="${set.id}" data-go="list">Lista</button>
+      </div>
+    </div>`).join("") + `
+    <div class="setcard blank">
+      <h2>Next unit goes here</h2>
+      <p>Send Claude a photo of the vocab pages and the set name, and it shows up here.</p>
+    </div></div>`;
+  panel.querySelectorAll(".go button").forEach(b=>b.addEventListener("click",()=>{
+    state.setId = b.dataset.set;
+    state.group = curSet().groups[0].id;
+    state.view = "study";
+    state.mode = b.dataset.go;
+    buildGroupChips();
+    render();
+    window.scrollTo({top:0});
+  }));
+}
+
+/* ---------- LEARN ----------
+   Rounds of 5 terms. Each round: multiple choice until all five are right,
+   then the same five again as typing. A miss goes to the back of the queue,
+   so it comes back later in the round. ------------------------------------ */
+const ROUND_SIZE = 5;
+
+function startLearn(){
+  const pool = curPool();
+  const order = shuffle(pool);
+  const rounds = [];
+  for(let i=0;i<order.length;i+=ROUND_SIZE) rounds.push(order.slice(i,i+ROUND_SIZE));
+  learn = { pool, diff:state.diff, rounds, roundIdx:0, phase:"mc", queue:[],
+            current:null, step:"ask", mastered:new Set(), missed:new Set(), asked:0 };
+  startPhase("mc");
+}
+const curRound = () => learn.rounds[learn.roundIdx] || [];
+function startPhase(kind){
+  learn.phase = kind;
+  learn.queue = shuffle(curRound()).map(t=>t.id);
+  nextLearn();
+}
+function nextLearn(){
+  if(!learn.queue.length){
+    if(learn.phase==="mc"){ startPhase("type"); return; }
+    curRound().forEach(t=>learn.mastered.add(t.id));
+    if(learn.roundIdx >= learn.rounds.length-1) renderLearnDone();
+    else renderRoundDone();
+    return;
+  }
+  const term = learn.pool.find(t=>t.id===learn.queue[0]);
+  learn.current = learn.phase==="mc" ? makeMC(term, learn.pool, learn.diff) : makeType(term, learn.diff);
+  learn.step = "ask";
+  renderLearn();
+}
+function learnAnswer(correct){
+  learn.asked++;
+  if(correct){
+    learn.queue.shift();
+  }else{
+    learn.missed.add(learn.queue[0]);
+    learn.queue.push(learn.queue.shift());   /* back it goes, later in the round */
+  }
+  learn.step = correct ? "right" : "wrong";
+  renderLearn();
+}
+function renderLearn(){
+  const q = learn.current, d = DIFF[learn.diff];
+  const size = curRound().length;
+  const leftInPhase = learn.queue.length;
+  const phaseName = learn.phase==="mc" ? "Opci&oacute;n m&uacute;ltiple" : "Escribir";
+  const optClass = d.answerLang==="es" ? "es" : "";
+
+  let body = "";
+  if(learn.step==="ask"){
+    if(q.kind==="mc"){
+      body = `<div class="opts">` + q.options.map((o,i)=>
+        `<button class="opt" data-opt="${esc(o)}"><span class="num">${i+1}</span><span class="${optClass}">${esc(o)}</span></button>`
+      ).join("") + `</div>`;
+    }else{
+      body = `<form class="typebox" id="typeForm">
+          <input type="text" id="typeInput" class="${d.answerLang==='es'?'spanish':''}" autocomplete="off"
+                 autocapitalize="off" spellcheck="false" placeholder="${d.ph}">
+          <button class="btn" type="submit">Check</button>
+          <button class="btn ghost" type="button" id="dunno">No s&eacute;</button>
+        </form>`;
+    }
+  }
+  let verdict = "";
+  if(learn.step!=="ask"){
+    const ok = learn.step==="right";
+    verdict = `<div class="verdict ${ok?'ok':'no'}">
+        <b>${ok?'&#10003; Correcto':'&#10007; No exactamente'}</b>
+        <span class="answer"><span class="es">${esc(q.term.es)}</span> &mdash; ${esc(q.term.en)}</span>
+        ${learn.diff!=="easy"?`<span class="gloss">${esc(q.term[learn.diff==="hard"?"ds":"de"])}</span>`:""}
+        ${!ok?`<span class="gloss">It&rsquo;ll come back later in this round.</span>`:""}
+      </div>
+      <div class="row" style="margin-top:16px"><button class="btn" id="nextBtn">Continuar</button>
+      <span class="hint" style="margin:0">press Enter</span></div>`;
+  }
+  panel.innerHTML = `
+    <div class="progress">
+      <div class="roundline">
+        <span class="roundno">Ronda ${learn.roundIdx+1} <span>de ${learn.rounds.length}</span></span>
+        <span class="phase ${learn.phase}">${phaseName}</span>
+        <span class="spacer"></span>
+        <span class="pips">${curRound().map((t,i)=>
+          `<i class="${i < size-leftInPhase ? 'on':''}"></i>`).join("")}</span>
+      </div>
+      <div class="meter"><i style="width:${Math.round(learn.mastered.size/learn.pool.length*100)}%"></i></div>
+      <div class="stats"><span>${learn.mastered.size} / ${learn.pool.length} dominadas</span><span>${learn.asked} preguntas</span></div>
+    </div>
+    <div class="card">
+      <div class="prompt-kind">${q.kind==="mc"?d.mcLabel:d.typeLabel}</div>
+      <p class="prompt ${d.promptStyle}">${esc(q.prompt)}</p>
+      ${body}${verdict}
+    </div>
+    ${learn.step==="ask"&&q.kind==="mc"?'<p class="hint">Tip: press 1&ndash;4 to answer.</p>':''}`;
+  updateReportLink();
+
+  if(learn.step==="ask"){
+    if(q.kind==="mc"){
+      panel.querySelectorAll(".opt").forEach(b=>{
+        b.addEventListener("click",()=>{
+          const ok = b.dataset.opt===q.answer;
+          panel.querySelectorAll(".opt").forEach(x=>{
+            x.disabled = true;
+            if(x.dataset.opt===q.answer) x.classList.add("correct");
+            else if(x===b) x.classList.add("wrong");
+          });
+          setTimeout(()=>learnAnswer(ok), ok?320:560);
+        });
+      });
+    }else{
+      const inp = $("#typeInput"); inp.focus();
+      $("#typeForm").addEventListener("submit",e=>{ e.preventDefault(); learnAnswer(accepts(q.answer, inp.value)); });
+      $("#dunno").addEventListener("click",()=>learnAnswer(false));
+    }
+  }else{
+    $("#nextBtn").focus();
+    $("#nextBtn").addEventListener("click", nextLearn);
+  }
+}
+function renderRoundDone(){
+  const terms = curRound();
+  panel.innerHTML = `<div class="card done">
+    <p class="big">Ronda ${learn.roundIdx+1} lista</p>
+    <p>${terms.length} words, clicked and typed. ${learn.rounds.length-learn.roundIdx-1} ${learn.rounds.length-learn.roundIdx-1===1?"round":"rounds"} to go.</p>
+    <div class="missed" style="margin-top:0;margin-bottom:22px">
+      <div class="vocab">${terms.map(t=>
+        `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>
+    </div>
+    <div class="row" style="justify-content:center">
+      <button class="btn" id="nextRound">Siguiente ronda</button>
+      <button class="btn ghost" id="toTestR">Ir al Examen</button>
+    </div></div>`;
+  updateReportLink();
+  const go = ()=>{ learn.roundIdx++; startPhase("mc"); window.scrollTo({top:0}); };
+  $("#nextRound").focus();
+  $("#nextRound").addEventListener("click", go);
+  $("#toTestR").addEventListener("click", ()=>setMode("test"));
+}
+function renderLearnDone(){
+  const missed = [...learn.missed].map(id=>learn.pool.find(t=>t.id===id)).filter(Boolean);
+  panel.innerHTML = `<div class="card done">
+    <p class="big">&iexcl;Todo dominado!</p>
+    <p>${learn.pool.length} terms across ${learn.rounds.length} rounds, ${learn.asked} questions.</p>
+    <div class="row" style="justify-content:center">
+      <button class="btn" id="again">Repetir</button>
+      <button class="btn ghost" id="toTest">Ir al Examen</button>
+    </div>
+    ${missed.length?`<div class="missed"><h3>Tripped you up along the way</h3>
+      <div class="vocab">${missed.map(t=>`<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div></div>`:""}
+  </div>`;
+  updateReportLink();
+  $("#again").addEventListener("click", startLearn);
+  $("#toTest").addEventListener("click", ()=>setMode("test"));
+}
+
+/* ---------- MATCH ---------- */
+function startMatch(){
+  const pool = curPool();
+  const n = Math.min(6, pool.length);
+  const terms = shuffle(pool).slice(0,n);
+  const key = MATCH_DIFF[state.matchDiff].key;
+  const tiles = shuffle(terms.flatMap(t=>[
+    {tid:t.id+"-w", term:t, text:t.es, side:"word"},
+    {tid:t.id+"-d", term:t, text:t[key], side:"def"}
+  ]));
+  match = { terms, tiles, matched:new Set(), sel:null, started:0, elapsed:0, penalty:0, done:false, busy:false };
+  renderMatch();
+}
+function matchClock(){
+  if(!match || match.done) return 0;
+  const run = match.started ? (Date.now()-match.started)/1000 : 0;
+  return run + match.penalty;
+}
+function renderMatch(){
+  const m = MATCH_DIFF[state.matchDiff];
+  const key = `${state.setId}|${state.group}|${state.matchDiff}`;
+  if(match.done){
+    const best = bestTimes[key];
+    panel.innerHTML = `<div class="card match-done">
+      <p class="time">${match.elapsed.toFixed(1)}s</p>
+      <p>${match.terms.length} pairs${match.penalty?` &middot; +${match.penalty}s in penalties`:" &middot; sin errores"}${
+        best!==undefined?` &middot; best ${best.toFixed(1)}s`:""}</p>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="againMatch">Otra vez</button>
+        <button class="btn ghost" id="toTestM">Ir al Examen</button>
+      </div></div>`;
+    $("#againMatch").addEventListener("click", startMatch);
+    $("#toTestM").addEventListener("click", ()=>setMode("test"));
+    updateReportLink();
+    return;
+  }
+  panel.innerHTML = `
+    <div class="match-bar">
+      <span class="clock" id="clock">0.0s</span>
+      <span>${match.matched.size} / ${match.terms.length} pairs</span>
+      ${match.penalty?`<span class="pen">+${match.penalty}s penalty</span>`:""}
+      <span class="spacer"></span>
+      <button class="btn ghost" id="resetMatch" style="padding:6px 12px">Barajar</button>
+    </div>
+    <div class="tiles">${match.tiles.map(t=>
+      `<button class="tile ${t.side==='word'?'word':m.tileClass}" data-tid="${t.tid}"
+        ${match.matched.has(t.term.id)?'disabled':''}>${esc(t.text)}</button>`).join("")}</div>`;
+  updateReportLink();
+  $("#resetMatch").addEventListener("click", startMatch);
+  panel.querySelectorAll(".tile").forEach(b=>b.addEventListener("click",()=>tileClick(b)));
+  clearInterval(matchTimer);
+  matchTimer = setInterval(()=>{
+    const c = $("#clock");
+    if(!c || !match || match.done){ clearInterval(matchTimer); return; }
+    c.textContent = matchClock().toFixed(1)+"s";
+  }, 100);
+}
+function tileClick(btn){
+  if(match.busy) return;
+  const tile = match.tiles.find(t=>t.tid===btn.dataset.tid);
+  if(!tile || match.matched.has(tile.term.id)) return;
+  if(!match.started) match.started = Date.now();
+  if(!match.sel){
+    match.sel = tile;
+    btn.classList.add("sel");
+    return;
+  }
+  if(match.sel.tid===tile.tid){ match.sel=null; btn.classList.remove("sel"); return; }
+  const first = panel.querySelector(`.tile[data-tid="${match.sel.tid}"]`);
+  if(match.sel.term.id===tile.term.id && match.sel.side!==tile.side){
+    match.matched.add(tile.term.id);
+    [first,btn].forEach(el=>{ el.classList.remove("sel"); el.classList.add("hit"); el.disabled=true; });
+    match.sel = null;
+    setTimeout(()=>{
+      [first,btn].forEach(el=>el.classList.add("gone"));
+      if(match.matched.size===match.terms.length){
+        match.elapsed = matchClock();
+        match.done = true;
+        clearInterval(matchTimer);
+        const key = `${state.setId}|${state.group}|${state.matchDiff}`;
+        if(bestTimes[key]===undefined || match.elapsed<bestTimes[key]) bestTimes[key]=match.elapsed;
+        setTimeout(renderMatch, 260);
+      }else{
+        const c = panel.querySelector(".match-bar span:nth-of-type(1)");
+        if(c) c.textContent = `${match.matched.size} / ${match.terms.length} pairs`;
+      }
+    }, 180);
+  }else{
+    match.busy = true;
+    match.penalty += 1;
+    [first,btn].forEach(el=>{ el.classList.remove("sel"); el.classList.add("miss"); });
+    setTimeout(()=>{
+      [first,btn].forEach(el=>el.classList.remove("miss"));
+      match.sel = null; match.busy = false;
+      const pen = panel.querySelector(".match-bar .pen");
+      if(pen) pen.textContent = `+${match.penalty}s penalty`;
+      else{
+        const bar = panel.querySelector(".match-bar .spacer");
+        if(bar){ const s=document.createElement("span"); s.className="pen"; s.textContent=`+${match.penalty}s penalty`; bar.parentNode.insertBefore(s,bar); }
+      }
+    }, 420);
+  }
+}
+
+/* ---------- TEST (multiple choice only) ---------- */
+function startTest(){
+  const pool = curPool();
+  const n = state.testLen===0 ? pool.length : Math.min(state.testLen, pool.length);
+  const terms = shuffle(pool).slice(0,n);
+  test = { pool, diff:state.diff, questions:terms.map(t=>makeMC(t,pool,state.diff)), answers:{}, graded:false };
+  renderTest();
+}
+function renderTest(){
+  const qs = test.questions, d = DIFF[test.diff];
+  const optClass = d.answerLang==="es" ? "es" : "";
+  let head = "";
+  if(test.graded){
+    const right = qs.filter((q,i)=>test.answers[i]===q.answer).length;
+    head = `<div class="score">
+      <span class="big">${Math.round(right/qs.length*100)}%</span>
+      <span class="detail">${right} of ${qs.length} correct</span>
+      <span class="spacer"></span>
+      <span class="row">
+        <button class="btn" id="newTest">Nuevo examen</button>
+        ${right<qs.length?'<button class="btn ghost" id="retryMissed">Repasar las falladas</button>':''}
+      </span></div>`;
+  }
+  const body = qs.map((q,i)=>{
+    const chosen = test.answers[i];
+    const cls = test.graded ? (chosen===q.answer?"marked-ok":"marked-wrong") : "";
+    return `<div class="q ${cls}">
+      <div class="q-head">
+        <span class="q-num">${test.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(i+1)+"."}</span>
+        <p class="q-text ${d.promptStyle}">${esc(q.prompt)}</p>
+      </div>
+      <div class="opts">${q.options.map(o=>{
+        let k = "";
+        if(test.graded){ if(o===q.answer) k="correct"; else if(o===chosen) k="wrong"; }
+        else if(o===chosen) k="chosen";
+        return `<button class="opt ${k}" ${test.graded?"disabled":""} data-q="${i}" data-opt="${esc(o)}">
+          <span class="${optClass}">${esc(o)}</span></button>`;
+      }).join("")}</div>
+      ${test.graded && test.diff!=="easy" ? `<p class="gloss"><span class="es">${esc(q.term.es)}</span> &mdash; ${esc(q.term.en)}</p>` : ""}
+    </div>`;
+  }).join("");
+  const footer = test.graded ? "" :
+    `<div class="row" style="margin-top:24px">
+      <button class="btn" id="submitTest">Entregar</button>
+      <span class="hint" style="margin:0" id="count">${Object.keys(test.answers).length} of ${qs.length} answered</span>
+    </div>`;
+  panel.innerHTML = head + `<div class="card">${body}</div>` + footer;
+  updateReportLink();
+
+  panel.querySelectorAll(".opt:not(:disabled)").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const i = +b.dataset.q;
+      test.answers[i] = b.dataset.opt;
+      panel.querySelectorAll('.opt[data-q="'+i+'"]').forEach(x=>x.classList.remove("chosen"));
+      b.classList.add("chosen");
+      const c = $("#count");
+      c.textContent = `${Object.keys(test.answers).length} of ${qs.length} answered`;
+      c.style.color = "";
+      skipWarned = false;
+    });
+  });
+  if(!test.graded){
+    $("#submitTest").addEventListener("click",()=>{
+      const left = qs.length - Object.keys(test.answers).length;
+      if(left>0 && !confirmSkip(left)) return;
+      test.graded = true; renderTest(); window.scrollTo({top:0,behavior:"smooth"});
+    });
+  }else{
+    $("#newTest").addEventListener("click", startTest);
+    const rm = $("#retryMissed");
+    if(rm) rm.addEventListener("click",()=>{
+      const missedTerms = test.questions.filter((q,i)=>test.answers[i]!==q.answer).map(q=>q.term);
+      test = { pool:test.pool, diff:test.diff,
+        questions:shuffle(missedTerms).map(t=>makeMC(t,test.pool,test.diff)), answers:{}, graded:false };
+      renderTest(); window.scrollTo({top:0,behavior:"smooth"});
+    });
+  }
+}
+let skipWarned = false;
+function confirmSkip(left){
+  if(skipWarned){ skipWarned = false; return true; }
+  skipWarned = true;
+  const c = $("#count");
+  c.textContent = `${left} unanswered — those count as wrong. Press Entregar again to submit.`;
+  c.style.color = "var(--bad)";
+  return false;
+}
+
+/* ---------- LISTA ---------- */
+function renderList(){
+  const set = curSet();
+  const groups = state.group==="all" ? set.groups : set.groups.filter(g=>g.id===state.group);
+  const showDefs = state.diff!=="easy";
+  const defKey = state.diff==="hard" ? "ds" : "de";
+  const inner = groups.map(g=>{
+    const rows = showDefs
+      ? `<div class="deftable">${g.items.map(t=>
+          `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
+           <div class="d ${state.diff==='hard'?'spanish':''}">${esc(t[defKey])}</div></div>`).join("")}</div>`
+      : `<div class="vocab">${g.items.map(t=>
+          `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>`;
+    return `<section class="listsec"><h2>${esc(g.name)} &middot; ${g.items.length}</h2>${rows}</section>`;
+  }).join("");
+  panel.innerHTML = `<div class="card">${inner}</div>
+    <p class="foot">Showing ${showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>`;
+  updateReportLink();
+}
+
+/* ---------- chrome ---------- */
+function buildGroupChips(){
+  const set = curSet();
+  const chips = set.groups.map(g=>({id:g.id,name:g.name}));
+  chips.push({id:"all",name:"Ambos"});
+  $("#groupGroup").innerHTML = chips.map(c=>
+    `<button class="chip" data-group="${c.id}" aria-pressed="${c.id===state.group}">${esc(c.name)}</button>`).join("");
+  $("#groupGroup").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    state.group = c.dataset.group;
+    $("#groupGroup").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
+    render();
+  }));
+}
+function buildDiffChips(){
+  const isMatch = state.mode==="match";
+  const opts = isMatch
+    ? [["easy",MATCH_DIFF.easy.label],["hard",MATCH_DIFF.hard.label]]
+    : [["easy",DIFF.easy.label],["medium",DIFF.medium.label],["hard",DIFF.hard.label]];
+  const cur = isMatch ? state.matchDiff : state.diff;
+  $("#diffGroup").innerHTML = opts.map(([id,label])=>
+    `<button class="chip" data-diff="${id}" aria-pressed="${id===cur}">${label}</button>`).join("");
+  $("#diffGroup").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    if(state.mode==="match") state.matchDiff = c.dataset.diff; else state.diff = c.dataset.diff;
+    $("#diffGroup").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
+    render();
+  }));
+}
+function render(){
+  clearInterval(matchTimer);
+  const home = state.view==="home";
+  $("#tabs").hidden = home;
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===state.mode)));
+  $("#controls").hidden = home;
+  $("#backBtn").hidden = home;
+  $("#lenField").hidden = home || state.mode!=="test";
+
+  if(home){
+    $("#eyebrow").textContent = "Vocabulario";
+    $("#pageTitle").textContent = "Ospinalet";
+    $("#pageSub").textContent = `${SETS.length} ${SETS.length===1?"set":"sets"} · learn, match and test yourself`;
+    updateReportLink();
+    renderHome();
+    return;
+  }
+  const set = curSet();
+  $("#eyebrow").textContent = "Set";
+  $("#pageTitle").textContent = set.name;
+  $("#pageSub").textContent = `${set.all.length} terms · ${set.groups.map(g=>g.name.toLowerCase()+" "+g.items.length).join(", ")}`;
+  buildDiffChips();
+  $("#modeNote").innerHTML = state.mode==="list"
+    ? "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>"
+    : state.mode==="match"
+      ? `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock — a wrong pair costs a second.</span>`
+      : `<b>${DIFF[state.diff].label}</b><span>${DIFF[state.diff].note}${state.mode==="learn"?" Rounds of five: multiple choice until all five are right, then the same five by typing. Miss one and it comes back later in the round.":""}</span>`;
+
+  if(state.mode==="learn") startLearn();
+  else if(state.mode==="test") startTest();
+  else if(state.mode==="match") startMatch();
+  else renderList();
+}
+function setMode(m){
+  state.mode = m;
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===m)));
+  render();
+}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setMode(t.dataset.mode)));
+document.querySelectorAll("#lenGroup .chip").forEach(c=>c.addEventListener("click",()=>{
+  state.testLen = +c.dataset.len;
+  document.querySelectorAll("#lenGroup .chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
+  render();
+}));
+$("#backBtn").addEventListener("click",()=>{ state.view="home"; render(); window.scrollTo({top:0}); });
+document.addEventListener("keydown",e=>{
+  if(state.view!=="study"||state.mode!=="learn"||!learn) return;
+  if(learn.step!=="ask"){ if(e.key==="Enter"){ e.preventDefault(); nextLearn(); } return; }
+  if((e.target.tagName||"").toLowerCase()==="input") return;
+  if(/^[1-4]$/.test(e.key)){
+    const btns = panel.querySelectorAll(".opt");
+    if(btns[+e.key-1]) btns[+e.key-1].click();
+  }
+});
+buildGroupChips();
+render();
+</script>
+
+</body>
+</html>
