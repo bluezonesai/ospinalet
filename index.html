@@ -58,6 +58,19 @@ header{border-bottom:1px solid var(--line);background:var(--surface);margin-bott
 .head-top .titles{flex:1;min-width:0}
 .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 6px}
 h1{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+.brand{
+  appearance:none;background:none;border:0;padding:0;cursor:pointer;display:block;
+  font-family:var(--display);font-weight:800;color:var(--accent);
+  letter-spacing:-.02em;line-height:1;font-size:21px;margin:0 0 10px;
+}
+.brand span{
+  display:inline-block;padding-bottom:4px;
+  border-bottom:3px solid var(--accent);
+}
+.brand:hover{filter:brightness(1.15)}
+.brand:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.brand.big{font-size:42px;margin:2px 0 14px;letter-spacing:-.03em}
+.brand.big span{border-bottom-width:5px;padding-bottom:7px}
 .sub{margin:0 0 16px;color:var(--muted);font-size:14px}
 .back{
   appearance:none;background:none;border:0;cursor:pointer;padding:0;margin:0 0 8px;
@@ -307,9 +320,10 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
   <div class="head-inner">
     <div class="head-top">
       <div class="titles">
+        <button class="brand" id="brandBtn" aria-label="Ospinalet — inicio"><span>Ospinalet</span></button>
         <button class="back" id="backBtn" hidden>&larr; Todos los sets</button>
-        <p class="eyebrow" id="eyebrow">Vocabulario</p>
-        <h1 id="pageTitle">Ospinalet</h1>
+        <p class="eyebrow" id="eyebrow" hidden>Set</p>
+        <h1 id="pageTitle" hidden></h1>
         <p class="sub" id="pageSub"></p>
       </div>
       <a class="report" id="reportBtn" href="#" target="_blank" rel="noopener">
@@ -569,7 +583,7 @@ function renderHome(){
     </div>`).join("") + `
     <div class="setcard blank">
       <h2>Next unit goes here</h2>
-      <p>Send Claude a photo of the vocab pages and the set name, and it shows up here.</p>
+      <p>New units get added here as we go.</p>
     </div></div>`;
   panel.querySelectorAll(".go button").forEach(b=>b.addEventListener("click",()=>{
     state.setId = b.dataset.set;
@@ -988,16 +1002,16 @@ function render(){
   $("#backBtn").hidden = home;
   $("#lenField").hidden = home || state.mode!=="test";
 
+  $("#brandBtn").classList.toggle("big", home);
+  $("#eyebrow").hidden = home;
+  $("#pageTitle").hidden = home;
   if(home){
-    $("#eyebrow").textContent = "Vocabulario";
-    $("#pageTitle").textContent = "Ospinalet";
     $("#pageSub").textContent = `${SETS.length} ${SETS.length===1?"set":"sets"} · learn, match and test yourself`;
     updateReportLink();
     renderHome();
     return;
   }
   const set = curSet();
-  $("#eyebrow").textContent = "Set";
   $("#pageTitle").textContent = set.name;
   $("#pageSub").textContent = `${set.all.length} terms · ${set.groups.map(g=>g.name.toLowerCase()+" "+g.items.length).join(", ")}`;
   buildDiffChips();
@@ -1023,7 +1037,9 @@ document.querySelectorAll("#lenGroup .chip").forEach(c=>c.addEventListener("clic
   document.querySelectorAll("#lenGroup .chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
   render();
 }));
-$("#backBtn").addEventListener("click",()=>{ state.view="home"; render(); window.scrollTo({top:0}); });
+const goHome = ()=>{ state.view="home"; render(); window.scrollTo({top:0}); };
+$("#backBtn").addEventListener("click", goHome);
+$("#brandBtn").addEventListener("click",()=>{ if(state.view!=="home") goHome(); });
 document.addEventListener("keydown",e=>{
   if(state.view!=="study"||state.mode!=="learn"||!learn) return;
   if(learn.step!=="ask"){ if(e.key==="Enter"){ e.preventDefault(); nextLearn(); } return; }
