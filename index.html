@@ -7,40 +7,40 @@
 
 <style>
 :root{
-  --bg:#FFFFFF;
+  --bg:#F1F7F9;
   --surface:#FFFFFF;
-  --surface-2:#F5F5F5;
-  --line:#DBDBDB;
-  --ink:#1A1A1A;
-  --muted:#666666;
-  --accent:#16607A;
-  --accent-soft:#E7F0F3;
-  --good:#2C6E52;
-  --good-soft:#E6EFEA;
-  --bad:#A8322B;
-  --bad-soft:#F6E5E3;
-  --btn-ink:#FFFFFF;
-  --shadow:none;
-  --radius:10px;
+  --surface-2:#F5F9FB;
+  --line:#D7E3E9;
+  --ink:#17262E;
+  --muted:#5F7480;
+  --accent:#0B7A8F;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#DDEFF3;
+  --warm:#E2703A;
+  --warm-soft:#FCEBE2;
+  --good:#2F8F5B;
+  --good-soft:#DFF2E6;
+  --bad:#C6403A;
+  --bad-soft:#FBE3E1;
+  --shadow:0 2px 10px rgba(16,40,50,.06);
+  --radius:16px;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --serif:var(--sans);
-  --display:var(--sans);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#151515; --surface:#1C1C1C; --surface-2:#232323; --line:#383838;
-    --ink:#ECECEC; --muted:#9A9A9A; --accent:#6DB5CD; --accent-soft:#1E3239;
-    --good:#7ECBA3; --good-soft:#1B2E25; --bad:#EE928B; --bad-soft:#331E1C;
-    --btn-ink:#151515;
-    --shadow:none;
+    --bg:#0F1A1F; --surface:#16242B; --surface-2:#1C2E36; --line:#2C414B;
+    --ink:#E6EEF1; --muted:#93A8B2; --accent:#5CC4D6; --accent-ink:#0F1A1F; --accent-soft:#163B45;
+    --warm:#F0916A; --warm-soft:#3A251C;
+    --good:#7ED3A2; --good-soft:#173A2A; --bad:#F2938B; --bad-soft:#3D211F;
+    --shadow:0 2px 10px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#151515; --surface:#1C1C1C; --surface-2:#232323; --line:#383838;
-  --ink:#ECECEC; --muted:#9A9A9A; --accent:#6DB5CD; --accent-soft:#1E3239;
-  --good:#7ECBA3; --good-soft:#1B2E25; --bad:#EE928B; --bad-soft:#331E1C;
-  --btn-ink:#151515;
-  --shadow:none;
+  --bg:#0F1A1F; --surface:#16242B; --surface-2:#1C2E36; --line:#2C414B;
+  --ink:#E6EEF1; --muted:#93A8B2; --accent:#5CC4D6; --accent-ink:#0F1A1F; --accent-soft:#163B45;
+  --warm:#F0916A; --warm-soft:#3A251C;
+  --good:#7ED3A2; --good-soft:#173A2A; --bad:#F2938B; --bad-soft:#3D211F;
+  --shadow:0 2px 10px rgba(0,0,0,.35);
 }
 
 *{box-sizing:border-box}
@@ -49,211 +49,221 @@ body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:820px;margin:0 auto;padding:0 20px 80px}
-
-/* ---------- alert banner ---------- */
-.alert{
-  background:#B3261E;color:#FFFFFF;
-  font-weight:700;font-size:14.5px;line-height:1.35;letter-spacing:.01em;
-  text-align:center;padding:11px 20px;
-}
-.alert b{font-weight:800;letter-spacing:.04em}
-.alert span{font-weight:600;opacity:.95}
-:root[data-theme="dark"] .alert{background:#8E2018;color:#FFF1EF}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .alert{background:#8E2018;color:#FFF1EF}
-}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 90px}
+.es{font-style:italic}
 
 /* ---------- header ---------- */
-header{border-bottom:1px solid var(--line);background:var(--surface);margin-bottom:22px}
-.head-inner{max-width:820px;margin:0 auto;padding:18px 20px 0}
-.head-top{display:flex;gap:16px;align-items:flex-start}
-.head-top .titles{flex:1;min-width:0}
-.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 6px}
-h1{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+.head-inner{max-width:860px;margin:0 auto;padding:16px 20px 14px}
+.head-row{display:flex;align-items:center;gap:14px}
 .brand{
-  appearance:none;background:none;border:0;padding:0;cursor:pointer;display:block;
-  font-family:var(--display);font-weight:800;color:var(--accent);
-  letter-spacing:-.02em;line-height:1;font-size:21px;margin:0 0 10px;
+  appearance:none;background:none;border:0;padding:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--sans);font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--accent);line-height:1;
 }
-.brand span{
-  display:inline-block;padding-bottom:4px;
-  border-bottom:3px solid var(--accent);
+.brand svg{width:26px;height:26px;flex:none}
+.brand:hover{filter:brightness(1.12)}
+.brand:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.report{
+  margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-size:13px;font-weight:600;color:var(--muted);
+  border:1px solid var(--line);border-radius:99px;padding:7px 13px;background:var(--surface-2);white-space:nowrap;
 }
-.brand:hover{filter:brightness(1.15)}
-.brand:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
-.brand.big{font-size:42px;margin:2px 0 14px;letter-spacing:-.03em}
-.brand.big span{border-bottom-width:5px;padding-bottom:7px}
-.sub{margin:0 0 16px;color:var(--muted);font-size:14px}
+.report:hover{color:var(--warm);border-color:var(--warm)}
+.report:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.report svg{width:13px;height:13px;flex:none}
+.set-head{margin-top:14px}
 .back{
   appearance:none;background:none;border:0;cursor:pointer;padding:0;margin:0 0 8px;
-  font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);
+  font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:5px;
 }
 .back:hover{color:var(--accent)}
 .back:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.report{
-  flex:none;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
-  font-size:12.5px;font-weight:600;color:var(--muted);
-  border:1px solid var(--line);border-radius:99px;padding:6px 13px;background:var(--surface-2);
-  white-space:nowrap;
-}
-.report:hover{color:var(--bad);border-color:var(--bad)}
-.report:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.report svg{width:13px;height:13px;flex:none}
-.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.set-tag{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--warm);font-weight:700;margin:0 0 4px}
+h1{font-weight:800;font-size:25px;line-height:1.15;margin:0 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+.tabs{display:inline-flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:4px;flex-wrap:wrap}
 .tab{
-  appearance:none;border:0;background:none;cursor:pointer;
+  appearance:none;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
   font-family:var(--sans);font-size:14px;font-weight:600;color:var(--muted);
-  padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px;
+  padding:8px 14px;border-radius:9px;
 }
+.tab svg{width:15px;height:15px}
 .tab:hover{color:var(--ink)}
-.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
-.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ---------- controls ---------- */
-.bar{display:flex;flex-wrap:wrap;gap:9px 14px;align-items:center;margin-bottom:10px}
-.field{display:flex;align-items:center;gap:8px}
-.label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.group{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+#controls{margin:18px 0 14px}
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:10px}
+.field{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.group{display:flex;flex-wrap:wrap;gap:6px}
 .chip{
-  appearance:none;border:0;background:none;cursor:pointer;
-  font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);
-  padding:7px 13px;border-right:1px solid var(--line);white-space:nowrap;
+  appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);
+  background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 13px;white-space:nowrap;
 }
-.chip:last-child{border-right:0}
-.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.chip:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip .n{opacity:.6;font-weight:500;margin-left:4px}
 .mode-note{
-  font-size:13px;color:var(--muted);margin:0 0 18px;padding-left:2px;
+  font-size:13.5px;color:var(--muted);margin:0 0 16px;
   display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;
 }
-.mode-note b{color:var(--ink);font-weight:600}
+.mode-note b{color:var(--ink);font-weight:700}
 
 /* ---------- shared ---------- */
-.card{
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
-}
-.es{font-family:var(--serif);font-style:italic}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
 .btn{
-  appearance:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:14px;
-  padding:10px 18px;border-radius:8px;border:1px solid var(--accent);
-  background:var(--accent);color:var(--btn-ink);
+  appearance:none;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:15px;
+  padding:11px 20px;border-radius:11px;border:1px solid var(--accent);
+  background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;gap:8px;
 }
 .btn:hover{filter:brightness(1.08)}
-.btn.ghost{background:none;color:var(--muted);border-color:var(--line)}
+.btn.ghost{background:var(--surface);color:var(--muted);border-color:var(--line)}
 .btn.ghost:hover{color:var(--ink);border-color:var(--muted);filter:none}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .spacer{flex:1}
+.hint{font-size:13px;color:var(--muted);margin-top:14px}
 
 /* ---------- home ---------- */
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.hero{padding:26px 0 18px}
+.hero h2{font-size:30px;font-weight:800;margin:0 0 6px;letter-spacing:-.02em;text-wrap:balance;line-height:1.15}
+.hero p{margin:0;color:var(--muted);font-size:16px;max-width:36em}
+.home-grid{display:grid;grid-template-columns:1fr;gap:16px}
 .setcard{
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:14px;
+  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;overflow:hidden;
 }
-.setcard h2{font-family:var(--display);font-weight:700;font-size:18px;margin:0;line-height:1.25;text-wrap:balance}
-.setcard .meta{font-size:13px;color:var(--muted);margin:0}
+.setcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent)}
+.setcard.featured::before{background:var(--warm)}
+.setcard .top{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.setcard h2{font-weight:800;font-size:20px;margin:0;line-height:1.25;text-wrap:balance;flex:1;min-width:220px}
+.badge{
+  font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--warm);background:var(--warm-soft);border-radius:99px;padding:5px 11px;white-space:nowrap;
+}
+.setcard .tag{font-size:13px;color:var(--muted);margin:-8px 0 0}
 .setcard .parts{display:flex;gap:7px;flex-wrap:wrap}
-.pill{
-  font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--accent);
-  background:var(--accent-soft);border-radius:99px;padding:3px 10px;
-}
-.setcard .go{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.pill{font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:4px 11px}
+.pill.quiz{color:var(--warm);background:var(--warm-soft)}
+.setcard .go{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 .go button{
-  appearance:none;cursor:pointer;font-family:var(--sans);font-size:13.5px;font-weight:600;
+  appearance:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;
   color:var(--ink);background:var(--surface-2);border:1px solid var(--line);
-  border-radius:8px;padding:10px 12px;text-align:center;
+  border-radius:11px;padding:11px 15px;display:inline-flex;align-items:center;gap:8px;
 }
-.go button:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.go button svg{width:16px;height:16px;color:var(--accent)}
+.go button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.go button.primary svg{color:var(--accent-ink)}
+.go button:hover{border-color:var(--accent);filter:brightness(1.04)}
 .go button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.setcard.blank{
-  border-style:dashed;box-shadow:none;background:none;justify-content:center;
-  align-items:center;text-align:center;color:var(--muted);min-height:180px;
+.tip{
+  margin-top:18px;background:var(--warm-soft);border:1px solid transparent;border-radius:14px;padding:13px 16px;
+  font-size:14px;color:var(--ink);display:flex;gap:10px;align-items:flex-start;
 }
-.setcard.blank h2{color:var(--muted);font-size:16px;font-weight:600}
-.setcard.blank p{margin:0;font-size:13px;max-width:26em}
+.tip svg{width:18px;height:18px;flex:none;color:var(--warm);margin-top:2px}
+.tip b{font-weight:700}
 
 /* ---------- progress ---------- */
-.progress{margin-bottom:14px}
-.meter{height:5px;background:var(--line);border-radius:99px;overflow:hidden}
-.meter > i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
-.progress .stats{
-  display:flex;justify-content:space-between;font-size:12px;color:var(--muted);
-  margin-top:7px;font-variant-numeric:tabular-nums;
-}
-
-.roundline{
-  display:flex;gap:10px;align-items:center;margin-bottom:9px;font-size:12px;color:var(--muted);
-}
-.roundline .roundno{font-weight:600;color:var(--ink);letter-spacing:.02em}
-.roundline .roundno span{color:var(--muted);font-weight:400}
+.progress{margin-bottom:16px}
+.roundline{display:flex;gap:10px;align-items:center;margin-bottom:9px;font-size:13px;color:var(--muted)}
+.roundline .roundno{font-weight:700;color:var(--ink);white-space:nowrap}
+.roundline .roundno span{color:var(--muted);font-weight:500}
 .roundline .phase{
-  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 9px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line);white-space:nowrap;
 }
 .roundline .phase.type{color:var(--accent);background:var(--accent-soft);border-color:transparent}
 .roundline .pips{display:flex;gap:5px}
-.roundline .pips i{
-  width:16px;height:5px;border-radius:99px;background:var(--line);display:block;
-  transition:background .2s ease;
-}
-.roundline .pips i.on{background:var(--accent)}
+.roundline .pips i{width:18px;height:6px;border-radius:99px;background:var(--line);display:block;transition:background .2s ease}
+.roundline .pips i.on{background:var(--good)}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.meter > i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
+.progress .stats{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-top:7px;font-variant-numeric:tabular-nums}
 
 /* ---------- question ---------- */
-.prompt-kind{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
-.prompt{font-size:29px;line-height:1.2;margin:0 0 24px;text-wrap:balance}
-.prompt.term{font-family:var(--serif);font-style:italic;font-weight:600}
-.prompt.def{font-size:21px;line-height:1.35;max-width:32em}
-.prompt.def.spanish{font-family:var(--serif);font-style:italic}
+.prompt-kind{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:10px}
+.prompt{font-size:29px;line-height:1.2;margin:0 0 22px;text-wrap:balance}
+.prompt.term{font-style:italic;font-weight:700}
+.prompt.def{font-size:21px;line-height:1.35;max-width:32em;font-weight:500}
+.prompt.def.spanish{font-style:italic}
+.prompt.ask{font-size:23px;line-height:1.3;max-width:26em;font-weight:700}
 .opts{display:grid;gap:9px}
 .opt{
-  display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;
+  display:flex;gap:13px;align-items:center;text-align:left;width:100%;
   appearance:none;cursor:pointer;font-family:var(--sans);font-size:16px;color:var(--ink);
-  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:13px 15px;
-  transition:background .12s ease,border-color .12s ease;
+  background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;
+  transition:background .12s ease,border-color .12s ease,transform .08s ease;
 }
 .opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt:active:not(:disabled){transform:scale(.995)}
 .opt:disabled{cursor:default}
 .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.opt .num{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600;min-width:12px}
-.opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:600}
+.opt .num{
+  flex:none;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);
+}
+.opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:700}
+.opt.correct .num{background:var(--good);color:#fff;border-color:var(--good)}
 .opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.opt.wrong .num{background:var(--bad);color:#fff;border-color:var(--bad)}
 .opt.chosen{border-color:var(--accent);background:var(--accent-soft)}
-.opt .es{font-family:var(--serif);font-style:italic}
+.opt.chosen .num{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 
 .typebox{display:flex;gap:10px;flex-wrap:wrap}
 input[type="text"]{
   flex:1;min-width:220px;font-family:var(--sans);font-size:17px;color:var(--ink);
-  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+  background:var(--surface-2);border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;
 }
-input[type="text"].spanish{font-family:var(--serif);font-style:italic}
+input[type="text"].spanish{font-style:italic}
 input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
 
 .verdict{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:15px}
-.verdict b{font-weight:600}
-.verdict.ok{color:var(--good)}
-.verdict.no{color:var(--bad)}
-.verdict .answer{color:var(--ink);display:block;margin-top:4px}
+.verdict b{font-weight:800;font-size:16px}
+.verdict.ok b{color:var(--good)}
+.verdict.no b{color:var(--bad)}
+.verdict .answer{color:var(--ink);display:block;margin-top:5px}
 .verdict .gloss{color:var(--muted);display:block;margin-top:3px;font-size:14px}
-.hint{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* ---------- test ---------- */
+.q{border-bottom:1px solid var(--line);padding:22px 0}
+.q:first-of-type{padding-top:4px}
+.q:last-of-type{border-bottom:0}
+.q-head{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
+.q-num{font-size:13px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;min-width:26px}
+.q-text{font-size:19px;line-height:1.35;margin:0}
+.q-text.term{font-style:italic;font-weight:700;font-size:21px}
+.q-text.def.spanish{font-style:italic}
+.q-text.ask{font-size:18px;line-height:1.4;font-weight:700}
+.q .opts{margin-left:38px}
+.q.marked-wrong .q-num{color:var(--bad)}
+.q.marked-ok .q-num{color:var(--good)}
+.q .gloss{margin:10px 0 0 38px;font-size:13px;color:var(--muted)}
+.score{
+  display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:18px 22px;margin-bottom:18px;
+}
+.score .big{font-weight:800;font-size:40px;line-height:1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.score .detail{color:var(--muted);font-size:14.5px}
+.score .detail b{color:var(--ink);display:block;font-size:16px;font-weight:700}
 
 /* ---------- match ---------- */
-.match-bar{
-  display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-bottom:14px;
-  font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;
-}
-.match-bar .clock{font-family:var(--display);font-weight:700;font-size:26px;color:var(--ink);line-height:1}
-.match-bar .pen{color:var(--bad)}
+.match-bar{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:14px;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.match-bar .clock{font-weight:800;font-size:28px;color:var(--ink);line-height:1}
+.match-bar .pen{color:var(--bad);font-weight:600}
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
 .tile{
   appearance:none;cursor:pointer;font-family:var(--sans);font-size:14.5px;line-height:1.35;
-  color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:14px;
   padding:15px 14px;min-height:104px;text-align:left;display:flex;align-items:center;
   box-shadow:var(--shadow);transition:transform .12s ease,opacity .18s ease,background .12s ease,border-color .12s ease;
 }
-.tile.word{font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px}
-.tile.esdef{font-family:var(--serif);font-style:italic}
+.tile.word{font-style:italic;font-weight:700;font-size:17px}
+.tile.esdef{font-style:italic}
 .tile:hover:not(:disabled){border-color:var(--accent)}
 .tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .tile.sel{border-color:var(--accent);background:var(--accent-soft);transform:scale(.98)}
@@ -261,23 +271,18 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .tile.miss{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
 .tile.gone{opacity:0;pointer-events:none}
 .match-done{text-align:center;padding:22px 0}
-.match-done .time{font-family:var(--display);font-weight:700;font-size:52px;line-height:1;margin:0 0 4px;font-variant-numeric:tabular-nums}
+.match-done .time{font-weight:800;font-size:54px;line-height:1;margin:0 0 4px;font-variant-numeric:tabular-nums;color:var(--accent)}
 .match-done p{color:var(--muted);margin:0 0 20px}
 
 /* ---------- word bank ---------- */
-.wb-list{display:grid}
-.wb-row{
-  display:grid;grid-template-columns:26px 168px 1fr;gap:8px 14px;align-items:center;
-  padding:11px 0;border-bottom:1px solid var(--line);
-}
+.wb-row{display:grid;grid-template-columns:26px 168px 1fr;gap:8px 14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
 .wb-row:last-child{border-bottom:0}
-.wb-num{font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.wb-num{font-size:13px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .wb-box{
-  min-height:46px;border:2px dashed var(--line);border-radius:8px;
+  min-height:46px;border:2px dashed var(--line);border-radius:11px;
   display:flex;align-items:center;justify-content:center;padding:6px 10px;
-  font-size:15.5px;font-style:italic;font-weight:600;color:var(--muted);
-  cursor:pointer;text-align:center;line-height:1.2;
-  transition:border-color .12s ease,background .12s ease;
+  font-size:15.5px;font-style:italic;font-weight:700;color:var(--muted);
+  cursor:pointer;text-align:center;line-height:1.2;transition:border-color .12s ease,background .12s ease;
 }
 .wb-box:hover{border-color:var(--accent)}
 .wb-box:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -288,123 +293,103 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .wb-def{margin:0;font-size:15px;line-height:1.4}
 .wb-def.spanish{font-style:italic}
 .wb-fix{grid-column:2/-1;margin:0;font-size:13px;color:var(--muted)}
-.wb-fix .es{color:var(--good);font-weight:600}
-
-.wb-bank{
-  position:sticky;bottom:12px;margin-top:18px;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  padding:13px 15px;
-}
+.wb-fix .es{color:var(--good);font-weight:700}
+.wb-bank{position:sticky;bottom:12px;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:13px 15px}
 .wb-bank-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.wb-hint{font-size:12px;color:var(--warm);font-weight:700}
 .wb-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
 .wb-words{display:flex;flex-wrap:wrap;gap:7px;max-height:168px;overflow-y:auto}
 .wb-word{
-  appearance:none;cursor:grab;font-family:var(--sans);font-size:14.5px;font-style:italic;font-weight:600;
-  color:var(--ink);background:var(--surface-2);border:1px solid var(--line);
-  border-radius:8px;padding:8px 13px;
+  appearance:none;cursor:grab;font-family:var(--sans);font-size:14.5px;font-style:italic;font-weight:700;
+  color:var(--ink);background:var(--surface-2);border:1.5px solid var(--line);border-radius:10px;padding:8px 13px;
 }
 .wb-word:hover{border-color:var(--accent);color:var(--accent)}
 .wb-word:active{cursor:grabbing}
-.wb-word.sel{background:var(--accent);border-color:var(--accent);color:var(--btn-ink)}
+.wb-word.sel{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .wb-word:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .wb-empty{font-size:13px;color:var(--muted)}
 
-/* ---------- test ---------- */
-.q{border-bottom:1px solid var(--line);padding:22px 0}
-.q:first-of-type{padding-top:4px}
-.q:last-of-type{border-bottom:0}
-.q-head{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
-.q-num{font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;min-width:26px}
-.q-text{font-size:19px;line-height:1.35;margin:0}
-.q-text.term{font-family:var(--serif);font-style:italic;font-weight:600;font-size:21px}
-.q-text.def.spanish{font-family:var(--serif);font-style:italic}
-.q .opts{margin-left:38px}
-.q.marked-wrong .q-num{color:var(--bad)}
-.q.marked-ok .q-num{color:var(--good)}
-.q .gloss{margin:10px 0 0 38px;font-size:13px;color:var(--muted)}
-.score{
-  display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;
-  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);
-  padding:18px 22px;margin-bottom:20px;
-}
-.score .big{font-family:var(--display);font-weight:700;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
-.score .detail{color:var(--muted);font-size:14px}
-
 /* ---------- list ---------- */
 .listsec + .listsec{margin-top:28px}
-.listsec h2{
-  font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin:0 0 12px;
-}
+.listsec h2{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
 .vocab{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
-.vocab .item{
-  display:flex;justify-content:space-between;gap:14px;align-items:baseline;
-  padding:7px 0;border-bottom:1px solid var(--line);font-size:15px;
-}
+.vocab.one{grid-template-columns:1fr}
+.vocab .item{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
 .vocab .item .en{color:var(--muted);text-align:right;font-size:14px}
-.deftable{display:grid;gap:0}
+.vocab .item .qa{font-size:14px;line-height:1.35;flex:1}
+.vocab.one .item .en{color:var(--accent);font-weight:600;flex:none;max-width:45%}
 .deftable .row2{padding:11px 0;border-bottom:1px solid var(--line)}
 .deftable .row2:last-child{border-bottom:0}
-.deftable .t{font-family:var(--serif);font-style:italic;font-weight:600;font-size:16px}
-.deftable .t .en{font-family:var(--sans);font-style:normal;font-weight:400;color:var(--muted);font-size:14px;margin-left:9px}
+.deftable .t{font-style:italic;font-weight:700;font-size:16px}
+.deftable .t .en{font-style:normal;font-weight:400;color:var(--muted);font-size:14px;margin-left:9px}
 .deftable .d{font-size:14px;color:var(--muted);margin-top:3px}
-.deftable .d.spanish{font-family:var(--serif);font-style:italic}
+.deftable .d.spanish{font-style:italic}
+.deftable .qq{font-size:15px;font-weight:700;line-height:1.35}
+.deftable .aa{font-size:14.5px;color:var(--accent);margin-top:3px}
 .foot{margin-top:22px;font-size:13px;color:var(--muted);text-align:center}
 
 .done{text-align:center;padding:14px 0}
-.done .big{font-family:var(--display);font-weight:700;font-size:30px;margin:0 0 6px}
+.done .big{font-weight:800;font-size:30px;margin:0 0 6px;color:var(--accent)}
 .done p{color:var(--muted);margin:0 0 20px}
 .missed{margin-top:22px;text-align:left}
 .missed h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.empty{padding:32px 20px;text-align:center;color:var(--muted)}
 
-.go button:nth-child(5):last-child{grid-column:1 / -1}
+@media (min-width:700px){ .home-grid{grid-template-columns:1fr} }
 @media (max-width:640px){
   .vocab{grid-template-columns:1fr}
+  h1{font-size:21px}
+  .hero h2{font-size:25px}
+  .prompt{font-size:24px}
+  .prompt.def{font-size:19px}
+  .prompt.ask{font-size:19px}
+  .q-text.ask{font-size:16.5px}
+  .card{padding:20px}
+  .tiles{grid-template-columns:1fr 1fr;gap:8px}
+  .tile{min-height:92px;font-size:13px;padding:12px 11px}
+  .tile.word{font-size:15px}
   .wb-row{grid-template-columns:24px 1fr}
   .wb-box{grid-column:2;order:2}
   .wb-def{grid-column:2;order:1}
   .wb-fix{grid-column:2;order:3}
   .wb-words{max-height:132px}
-  h1{font-size:22px}
-  .prompt{font-size:24px}
-  .prompt.def{font-size:19px}
-  .card{padding:20px}
-  .tiles{grid-template-columns:1fr 1fr;gap:8px}
-  .tile{min-height:92px;font-size:13px;padding:12px 11px}
-  .tile.word{font-size:15px}
-  .home-grid{grid-template-columns:1fr}
   .report span{display:none}
+  .tab{padding:8px 11px;font-size:13.5px}
+  .tabs{gap:2px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
 </head>
 <body>
-<div class="alert" role="alert">
-  <b>TEST WAS NOT MCQ</b> &mdash; <span>it is fill in the blank from a word bank.</span>
-</div>
-
 <header>
   <div class="head-inner">
-    <div class="head-top">
-      <div class="titles">
-        <button class="brand" id="brandBtn" aria-label="Ospinalet — inicio"><span>Ospinalet</span></button>
-        <button class="back" id="backBtn" hidden>&larr; Todos los sets</button>
-        <p class="eyebrow" id="eyebrow" hidden>Set</p>
-        <h1 id="pageTitle" hidden></h1>
-        <p class="sub" id="pageSub"></p>
-      </div>
+    <div class="head-row">
+      <button class="brand" id="brandBtn" aria-label="Ospinalet — inicio">
+        <svg viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <circle cx="13" cy="13" r="12" fill="currentColor" opacity=".14"/>
+          <path d="M4 15c2.2 0 2.2-2.4 4.5-2.4S10.7 15 13 15s2.2-2.4 4.5-2.4S19.8 15 22 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M6 19.5c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+        </svg>
+        <span>Ospinalet</span>
+      </button>
       <a class="report" id="reportBtn" href="#" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1a1 1 0 0 1 1 1v.35l1.2-.3a5 5 0 0 1 3.3.3 5 5 0 0 0 3.3.3l1.5-.37A.6.6 0 0 1 14 2.9v6.2a.6.6 0 0 1-.45.58l-1.36.34a5 5 0 0 1-3.3-.3 5 5 0 0 0-3.3-.3L4 9.7V15a1 1 0 0 1-2 0V2a1 1 0 0 1 1-1Z"/></svg>
         <span>Report an error</span>
       </a>
     </div>
-    <div class="tabs" role="tablist" id="tabs" hidden>
-      <button class="tab" role="tab" aria-selected="true" data-mode="learn">Aprender</button>
-      <button class="tab" role="tab" aria-selected="false" data-mode="test">Examen</button>
-      <button class="tab" role="tab" aria-selected="false" data-mode="wordbank">Banco</button>
-      <button class="tab" role="tab" aria-selected="false" data-mode="match">Emparejar</button>
-      <button class="tab" role="tab" aria-selected="false" data-mode="list">Lista</button>
+    <div class="set-head" id="setHead" hidden>
+      <button class="back" id="backBtn">&larr; Todos los sets</button>
+      <p class="set-tag" id="setTag"></p>
+      <h1 id="pageTitle"></h1>
+      <p class="sub" id="pageSub"></p>
+      <div class="tabs" role="tablist" id="tabs">
+        <button class="tab" role="tab" data-mode="learn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3.5h4.5A2 2 0 0 1 8.5 5.5V14a1.5 1.5 0 0 0-1.5-1.5H2zM14 3.5H9.5A2 2 0 0 0 7.5 5.5V14A1.5 1.5 0 0 1 9 12.5h5z"/></svg><span>Aprender</span></button>
+        <button class="tab" role="tab" data-mode="test"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="m5.5 8 2 2 3.5-4"/></svg><span>Examen</span></button>
+        <button class="tab" role="tab" data-mode="wordbank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="5" height="4" rx="1"/><rect x="9" y="3" width="5" height="4" rx="1"/><rect x="2" y="9" width="5" height="4" rx="1"/><path d="M9 11h5"/></svg><span>Banco</span></button>
+        <button class="tab" role="tab" data-mode="match"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h3l6 8h3M2 12h3l1.5-2M11 4h3l-1.5 2"/></svg><span>Emparejar</span></button>
+        <button class="tab" role="tab" data-mode="list"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 8h9M5 12h9"/><circle cx="2.5" cy="4" r=".6"/><circle cx="2.5" cy="8" r=".6"/><circle cx="2.5" cy="12" r=".6"/></svg><span>Lista</span></button>
+      </div>
     </div>
   </div>
 </header>
@@ -412,12 +397,11 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 <div class="wrap">
   <div id="controls" hidden>
     <div class="bar">
-      <span class="field"><span class="label">Parte</span>
-        <span class="group" id="groupGroup"></span>
-      </span>
-      <span class="field"><span class="label">Nivel</span>
-        <span class="group" id="diffGroup"></span>
-      </span>
+      <span class="field" id="sectionField" hidden><span class="label">Parte</span><span class="group" id="sectionGroup"></span></span>
+      <span class="field" id="groupField"><span class="label" id="groupLabel">Parte</span><span class="group" id="groupGroup"></span></span>
+    </div>
+    <div class="bar">
+      <span class="field" id="diffField"><span class="label">Nivel</span><span class="group" id="diffGroup"></span></span>
       <span class="field" id="lenField" hidden><span class="label">Largo</span>
         <span class="group" id="lenGroup">
           <button class="chip" data-len="10" aria-pressed="true">10</button>
@@ -433,17 +417,154 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 </div>
 
 <script>
-/* ============================================================
-   VOCAB SETS
-   Each term: [spanish, english, english definition, spanish definition]
-   To add a set, copy the shape below and push it onto SETS.
-   ============================================================ */
 const SETS = [
 {
-  id:"escuela",
-  name:"ESCUELA (Sustantivos + Verbos)",
+  id:"unidad2",
+  name:"EL VASO DE LECHE + EL MUELLE DE SAN BLAS",
+  tag:"Unidad 2 · Memoria y recuerdos",
+  featured:true, badge:"Próximo examen",
+  sections:[{id:"vocab",name:"Vocabulario"},{id:"vaso",name:"El vaso de leche"},{id:"muelle",name:"El muelle de San Blas"}],
   groups:[
-    { id:"sust", name:"Sustantivos", terms:[
+    { id:"sust", name:"Sustantivos", section:"vocab", kind:"vocab", terms:[
+      ["la alegría","happiness","the feeling of being glad and full of joy","el sentimiento de estar contento"],
+      ["la angustia","anguish","deep distress or torment of the mind","la aflicción muy grande que aprieta el pecho"],
+      ["el barco","boat","a vessel that carries people or cargo on water","el vehículo que navega por el agua"],
+      ["la cara","face","the front of a person's head","la parte delantera de la cabeza"],
+      ["la caridad","charity","generous help given to people in need","la ayuda generosa que se da a los necesitados"],
+      ["la costa","coast","the land along the edge of the sea","la tierra que está al lado del mar"],
+      ["el descanso","rest","a pause taken from work or effort","la pausa que se toma después del esfuerzo"],
+      ["el dolor","pain","the physical hurt you feel from a wound or illness","la sensación que produce una herida o una enfermedad"],
+      ["la frescura","coolness, freshness","the quality of being cool and newly made","la sensación agradable de algo frío y limpio"],
+      ["el hambre","hunger","the need to eat","la necesidad de comer"],
+      ["el marinero","sailor","a person who works aboard a ship","la persona que trabaja en el mar"],
+      ["el orgullo","pride","a high opinion of your own worth or achievements","la alta opinión que alguien tiene de sí mismo"],
+      ["la pena","grief, suffering","deep sadness, especially over a loss","la tristeza profunda, sobre todo por una pérdida"],
+      ["el peso","weight","how heavy something is","cuántos kilos tiene una cosa"],
+      ["el puerto","port","the place where ships dock to load and unload","el sitio junto al mar donde atracan las embarcaciones"],
+      ["el rostro","face","a person's features; another word for the face","la parte del cuerpo donde están los ojos y la boca"],
+      ["el saco","bag","a large bag for carrying things","la bolsa grande que sirve para llevar cosas"],
+      ["la sonrisa","smile","the expression made when the corners of the mouth turn up","el gesto alegre que se hace con la boca"],
+      ["la vergüenza","shame","the bad feeling of having done something wrong in front of others","lo que se siente cuando uno queda mal delante de otros"]
+    ]},
+    { id:"verb", name:"Verbos", section:"vocab", kind:"vocab", terms:[
+      ["andar","to walk","to move along on foot","moverse a pie de un lugar a otro"],
+      ["aparecer","to appear","to come into sight","dejarse ver, hacerse visible"],
+      ["atreverse (a)","to dare (to)","to be bold enough to do something risky","tener el valor de hacer algo arriesgado"],
+      ["cargar","to load","to put a load onto something, or carry it","poner algo pesado encima para transportarlo"],
+      ["conseguir","to obtain","to get the thing you were after","obtener lo que se buscaba"],
+      ["dejar","to leave (behind)","to let something stay where it is and go without it","no llevarse algo, abandonarlo en un sitio"],
+      ["descansar","to rest","to stop working for a while to recover","tomar una pausa para recuperar las fuerzas"],
+      ["detenerse","to stop","to come to a halt","interrumpir la marcha y quedarse quieto"],
+      ["elegir","to choose, elect","to pick one option out of several","tomar una opción entre varias"],
+      ["gritar","to shout, yell","to say something very loudly","hablar muy fuerte, dando voces"],
+      ["llorar","to cry","to shed tears","echar lágrimas por los ojos"],
+      ["pagar","to pay","to give money for something","dar dinero a cambio de algo"],
+      ["pararse","to stop","to come to a halt, or to stand up","quedarse quieto en un sitio; ponerse de pie"],
+      ["resistir","to resist","to hold out against something and endure it","aguantar algo sin ceder"],
+      ["temer","to fear","to be afraid of something","tener miedo de algo"],
+      ["vagar","to wander","to walk around with no fixed destination","ir de un lado a otro sin rumbo fijo"]
+    ]},
+    { id:"adj", name:"Adjetivos", section:"vocab", kind:"vocab", terms:[
+      ["ardiente","burning","on fire, or extremely hot","que arde o quema"],
+      ["avergonzado","ashamed","feeling bad about something you did","que se siente mal por algo que hizo"],
+      ["caliente","warm, hot","having a high temperature","que tiene una temperatura alta"],
+      ["corto","short","not long","que no es largo"],
+      ["delgado","thin","slim, not fat","que no es gordo"],
+      ["desesperado","desperate","having lost hope and ready to do anything","que ha perdido la esperanza"],
+      ["distinto","different","not the same as something else","que no es igual a otro"],
+      ["distraído","distracted","not paying attention","que no presta atención"],
+      ["fatigado","fatigued","worn out and very tired","muy cansado"],
+      ["lejano","far away","at a great distance","que está muy lejos"],
+      ["manchado","stained","marked with spots of dirt","que está sucio con marcas"],
+      ["suave","soft","smooth and gentle to the touch","que es agradable y blando al tacto"]
+    ]},
+    { id:"adv", name:"Adverbios", section:"vocab", kind:"vocab", terms:[
+      ["ante","before","in the presence of; faced with","en presencia de alguien o de algo"],
+      ["delante de","in front of","positioned at the front of something","en la zona anterior de algo, no en la de atrás"],
+      ["detrás de","behind","at the back of something","en la parte de atrás de algo"],
+      ["frente a","in front of (and facing)","directly facing something","cara a cara con algo, mirándolo"],
+      ["hacia","toward(s)","in the direction of","en dirección a un lugar"]
+    ]},
+    { id:"expr", name:"Expresiones", section:"vocab", kind:"vocab", terms:[
+      ["como si...","as if...","used to compare something with an imagined situation","se usa para comparar con algo imaginario"],
+      ["estar de pie","to be standing","to be on your feet rather than sitting","estar levantado, no sentado"],
+      ["lo importante","the important thing","the thing that matters most","lo que más vale de todo"],
+      ["poco a poco","little by little","gradually, in small steps","de manera gradual, en pasos pequeños"],
+      ["tener ganas (de + inf.)","to feel like (doing something)","to want to do something right now","querer hacer algo en ese momento"]
+    ]},
+    { id:"puerto", name:"En el puerto", section:"vaso", kind:"quiz", terms:[
+      ["¿Dónde tiene lugar el cuento?","en un puerto junto al mar","en un pueblo de la montaña","en una finca en el campo","en la capital del país"],
+      ["¿Qué le ofrece el marinero al joven al principio?","comida en un bulto de papel","trabajo a bordo de un barco","dinero para pagar la cena","un sitio para pasar la noche"],
+      ["¿Por qué el joven no acepta la comida del marinero?","tiene vergüenza de parecer pobre","ya ha comido en un figón cercano","no le gusta la comida del barco","tiene prisa por llegar al muelle"],
+      ["¿Cuánto tiempo llevaba el joven sin comer?","tres días justos","seis días justos","dos días justos","cinco días justos"],
+      ["¿Cuánto tiempo llevaba vagando por aquel puerto?","seis días","tres días","ocho días","diez días"],
+      ["¿Cómo llegó el joven a aquel puerto?","lo desembarcaron de un vapor","llegó a pie desde otro pueblo","vino en tren desde el norte","lo trajo un amigo marinero"],
+      ["¿Qué trabajo le dieron cuando lo descubrieron a bordo?","trabajar en las calderas","servir la mesa al capitán","limpiar toda la cubierta","cargar los sacos de trigo"],
+      ["Después de que se fue el vapor, el joven…","anduvo buscando comida y trabajo","consiguió un trabajo en seguida","se reunió con toda su familia","se embarcó otra vez hacia el sur"],
+      ["¿Qué trabajo consiguió por fin en el puerto?","cargar sacos pesados de trigo","vender periódicos en la calle","servir mesas en una lechería","pintar el casco de un vapor"],
+      ["¿Qué le pidió el joven al capataz?","que le pagara por adelantado","que le diera comida caliente","que le guardara el trabajo","que le prestara su carretilla"],
+      ["¿Qué le contestó el capataz?","que se pagaba al final del trabajo","que ya no lo necesitaba más allí","que volviera muy temprano mañana","que hablara con el dueño del vapor"],
+      ["¿Qué le ofreció el capataz al joven?","prestarle unos cuarenta centavos","pagarle la mitad del jornal hoy","darle un plato de sopa caliente","conseguirle un sitio para dormir"],
+      ["A causa del hambre que tenía, el joven…","imaginó su casa y a su familia","se desmayó delante del capataz","le robó el dinero a un obrero","se puso a gritar en la calle"],
+      ["¿Qué decidió hacer cuando ya no aguantaba el hambre?","comer en cualquier sitio sin pagar","pedirle comida a varios marineros","esperar hasta el domingo siguiente","volver a su casa a pedir ayuda"]
+    ]},
+    { id:"lecheria", name:"La lechería", section:"vaso", kind:"quiz", terms:[
+      ["¿Qué encontró en una de las calles de la ciudad?","una lechería clara y limpia","una panadería buena y barata","un figón lleno de marineros","un mercado junto al puerto"],
+      ["¿Quién estaba detrás del mostrador?","una señora rubia con delantal","un viejo con unos anteojos negros","una muchacha joven de pelo oscuro","un hombre alto y muy delgado"],
+      ["¿Quién era el único cliente de la lechería?","un viejo que leía un periódico","un joven que tomaba mucho café","una mujer que comía un pastel","un marinero que bebía su leche"],
+      ["¿Por qué esperó el muchacho fuera de la lechería?","quería que saliera el viejo","esperaba que llegaran clientes","no sabía muy bien qué pedir","buscaba dinero en el bolsillo"],
+      ["¿Qué pidió el joven en la lechería?","un vaso grande de leche y vainillas","un café con leche y unos bizcochos","un plato de sopa y pan con queso","un vaso de agua fría y un pastel"],
+      ["¿Por qué comió las vainillas lentamente?","quería esconder el hambre que tenía","le dolía muchísimo el estómago vacío","estaba leyendo el periódico del viejo","quería que le durara más la leche"],
+      ["¿Qué hizo el joven al terminar la leche y las vainillas?","lloró con la cabeza entre las manos","pagó toda la cuenta y salió corriendo","pidió otro vaso muy grande de leche","se quedó dormido sobre la mesita"],
+      ["¿Qué hizo la señora cuando lo vio llorar?","le acarició la cabeza y lo consoló","le pidió que pagara la cuenta ya","llamó al dueño de aquella lechería","salió a la calle sin decir nada"],
+      ["Cuando terminó de llorar, en la mesita había…","más leche y más vainillas","la cuenta de todo aquel día","el periódico de aquel viejo","un poco de pan con queso"],
+      ["¿Qué pensó hacer el joven por la señora en el futuro?","pagarle y recompensarla dignamente","escribirle una carta de las gracias","volver a trabajar en la lechería","traerle un regalo de otro puerto"],
+      ["¿Cómo termina el cuento?","se durmió mirando hacia el mar","se embarcó en un vapor muy grande","volvió a la casa de su madre","encontró trabajo en el muelle"]
+    ]},
+    { id:"temas", name:"Temas", section:"vaso", kind:"quiz", terms:[
+      ["¿Qué sentimiento le impide pedir comida?","la vergüenza y la timidez","la rabia y la desesperación","la alegría y la frescura","el odio y la desconfianza"],
+      ["¿Qué representa el calor en el cuento?","el hambre y la angustia del joven","la alegría de volver a su casa","el frío del mar durante la noche","la riqueza de la gente del puerto"],
+      ["¿Cómo está el joven al terminar la jornada de trabajo?","completamente agotado y sudando","fuerte y lleno de energía nueva","tranquilo y de muy buen humor","enfermo con una fiebre muy alta"],
+      ["¿Con quién compara el joven a la señora de la lechería?","con su propia madre","con una vieja amiga","con su hermana mayor","con la mujer del capataz"],
+      ["¿Qué siente el joven al final, tendido en la orilla?","paz; se sentía vivir, nada más","miedo de volver a tener hambre","ganas de cantar y de hablar","prisa por buscar otro trabajo"]
+    ]},
+    { id:"cancion", name:"La canción", section:"muelle", kind:"quiz", terms:[
+      ["¿Qué hizo su amor al principio de la canción?","partió en un barco desde el muelle","se casó con ella en aquella iglesia","se marchó a vivir a la capital","volvió del mar después de un año"],
+      ["¿Qué se juraron los dos antes de separarse?","que él volvería y ella esperaría","que se escribirían todas las semanas","que se casarían en la primavera","que nunca hablarían de ese futuro"],
+      ["¿Cuánto tiempo estuvo ella esperando en el muelle?","miles de lunas, muchísimos años","solamente unas cuantas semanas","un mes entero, un día tras otro","hasta el final de aquel verano"],
+      ["¿Por qué llevaba siempre el mismo vestido?","para que él no se equivocara","porque no tenía ninguna otra","porque se lo regaló su madre","para no gastar nada de dinero"],
+      ["¿Qué le hacían los cangrejos?","le mordían la ropa y la ilusión","le traían comida hasta el muelle","le hacían compañía por la noche","le avisaban cuando venía un barco"],
+      ["¿Qué le pasó al cabello con el tiempo?","se le blanqueó poco a poco","se le cayó casi por completo","se lo cortó una tarde de abril","se lo cubrió con un pañuelo"],
+      ["¿De qué se enamoró ella con el paso del tiempo?","del mar que tenía delante","de otro hombre del pueblo","de la vida en la ciudad","del barco que la llevaría"],
+      ["¿Qué imagen usa la canción para su cuerpo en el muelle?","se enraizó como un árbol","se rompió como el cristal","se secó como una flor","se hundió como una piedra"],
+      ["¿Cómo la llamaba la gente del pueblo?","la loca del muelle de San Blas","la novia eterna de aquel mar","la viuda blanca de la costa","la dama triste de aquel pueblo"],
+      ["¿Qué intentaron hacer con ella una tarde?","llevarla a un manicomio","casarla con otro hombre","sacarla del pueblo en tren","darle trabajo en el puerto"],
+      ["¿Qué pasó cuando intentaron llevársela?","nadie pudo separarla del mar","ella se fue sin decir nada","el pueblo entero la ayudó","su amor volvió por fin a casa"],
+      ["¿Cómo termina la canción?","ella se queda sola en el muelle","ella encuentra por fin otro amor","él regresa por fin desde el mar","ella se marcha a otra ciudad"]
+    ]},
+    { id:"real", name:"La historia real", section:"muelle", kind:"quiz", terms:[
+      ["¿Quién inspiró la canción de Maná?","Rebeca Méndez Jiménez","Manuela Ortiz Jiménez","Rebeca Olvera González","Manuel Méndez Rodríguez"],
+      ["¿De qué trabajaba su novio Manuel?","era pescador","era carpintero","era capitán","era panadero"],
+      ["¿Qué le pasó a la barca de Manuel en 1971?","se hundió en una tormenta","se perdió cerca de la costa","llegó muy tarde a otro puerto","lo vendió antes de la boda"],
+      ["¿Cuándo iba a ser la boda?","pocos días después","el año siguiente ya","en la próxima primavera","un mes más tarde ya"],
+      ["¿Dónde está el muelle de San Blas?","en Nayarit, México","en Sinaloa, México","en Valparaíso, Chile","en Cartagena, Colombia"],
+      ["¿Cuántos años lo estuvo esperando?","unos cuarenta años","unos quince años ya","unos sesenta años","unos cinco años solos"]
+    ]},
+    { id:"comp", name:"Comparación", section:"muelle", kind:"quiz", terms:[
+      ["¿Qué tienen en común el cuento y la canción?","los dos ocurren junto al mar","los dos tratan de una gran boda","los dos pasan en la escuela","los dos hablan de la guerra"],
+      ["¿Qué sienten los dos protagonistas?","una soledad muy profunda","una alegría enorme y nueva","un odio hacia toda la gente","una envidia muy fuerte"],
+      ["¿Cómo reacciona cada uno ante la ayuda de otros?","él la rechaza; ella no la acepta","los dos la piden sin vergüenza","los dos la aceptan muy pronto","él la pide, ella la rechaza"],
+      ["¿Qué papel tiene el mar en las dos obras?","da consuelo y también quita","sólo trae cosas muy buenas","no tiene ninguna importancia","sólo aparece al principio"],
+      ["¿Qué tema une las dos obras en esta unidad?","la memoria y los recuerdos","la guerra y la mala política","el dinero y el trabajo duro","la escuela y los estudios"]
+    ]}
+  ]
+},
+{
+  id:"escuela",
+  name:"ESCUELA",
+  tag:"Sustantivos + Verbos",
+  groups:[
+    { id:"sust", name:"Sustantivos", kind:"vocab", terms:[
       ["el aula","classroom","the room in a school where a class meets","la sala de una escuela donde se reúne una clase"],
       ["el bachillerato","high school diploma","the diploma you earn for completing secondary studies","los estudios que se terminan antes de entrar a la universidad"],
       ["la beca","scholarship","money awarded to a student to pay for their studies","el dinero que se le da a un estudiante para pagar sus estudios"],
@@ -489,7 +610,7 @@ const SETS = [
       ["el título","diploma","the official document proving you finished your studies","el documento oficial que prueba que se terminaron los estudios"],
       ["la ventaja","advantage, benefit","a condition that puts you in a better position than others","la condición que pone a alguien en una posición mejor"]
     ]},
-    { id:"verb", name:"Verbos", terms:[
+    { id:"verb", name:"Verbos", kind:"vocab", terms:[
       ["aburrirse","to get bored","to lose interest because something is dull or repetitive","no tener nada que hacer"],
       ["acostumbrarse","to get used to","to grow comfortable with something new over time","familiarizarse con algo"],
       ["aprender","to learn","to take in new knowledge or a new skill","llegar a saber algo"],
@@ -532,9 +653,14 @@ const SETS = [
 /* ---------- build runtime decks ---------- */
 SETS.forEach(set=>{
   set.groups.forEach(g=>{
-    g.items = g.terms.map((t,i)=>({id:set.id+"-"+g.id+i, group:g.id, es:t[0], en:t[1], de:t[2], ds:t[3]}));
+    const quiz = g.kind==="quiz";
+    g.items = g.terms.map((t,i)=> quiz
+      ? {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"quiz", q:t[0], a:t[1], opts:t.slice(1), es:t[1], en:t[0]}
+      : {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"vocab", es:t[0], en:t[1], de:t[2], ds:t[3]});
   });
   set.all = set.groups.reduce((a,g)=>a.concat(g.items),[]);
+  set.nVocab = set.all.filter(t=>t.kind==="vocab").length;
+  set.nQuiz  = set.all.length - set.nVocab;
 });
 
 const REPORT_EMAIL = "bluezonesai@gmail.com";
@@ -548,7 +674,7 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 
 function norm(s){
   return String(s).toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
     .replace(/\(.*?\)/g," ")
     .replace(/[^a-z\s]/g," ")
     .replace(/\s+/g," ").trim()
@@ -579,16 +705,20 @@ const MATCH_DIFF = {
 };
 
 function makeMC(term, pool, diff){
+  if(term.kind==="quiz") return {term, diff, kind:"mc", prompt:term.q, answer:term.a, options:shuffle(term.opts)};
   const d = DIFF[diff], key = d.answerKey;
   const correct = term[key];
-  const seen = new Set([norm(correct)]);
+  const parts = a => a.split(/[,;\/]/).map(norm).filter(Boolean);
+  const taken = new Set(parts(correct).concat([norm(correct)]));
   const opts = [correct];
-  const sameGroup = shuffle(pool.filter(t=>t.id!==term.id && t.group===term.group));
-  const rest = shuffle(pool.filter(t=>t.id!==term.id && t.group!==term.group));
+  const vocab = pool.filter(t=>t.kind==="vocab" && t.id!==term.id);
+  const sameGroup = shuffle(vocab.filter(t=>t.group===term.group));
+  const rest = shuffle(vocab.filter(t=>t.group!==term.group));
   for(const o of sameGroup.concat(rest)){
     if(opts.length>=4) break;
-    if(seen.has(norm(o[key]))) continue;
-    seen.add(norm(o[key]));
+    const p = parts(o[key]).concat([norm(o[key])]);
+    if(p.some(x=>taken.has(x))) continue;
+    p.forEach(x=>taken.add(x));
     opts.push(o[key]);
   }
   return {term, diff, kind:"mc", prompt:term[d.promptKey], answer:correct, options:shuffle(opts)};
@@ -597,18 +727,26 @@ function makeType(term, diff){
   const d = DIFF[diff];
   return {term, diff, kind:"type", prompt:term[d.promptKey], answer:term[d.answerKey]};
 }
+/* how a prompt / option should be styled for a given item */
+const promptClass = (item, diff) => item.kind==="quiz" ? "ask" : DIFF[diff].promptStyle;
+const optClass    = (item, diff) => item.kind==="quiz" ? "" : (DIFF[diff].answerLang==="es" ? "es" : "");
 
 /* ---------- state ---------- */
-const state = { view:"home", mode:"learn", setId:SETS[0].id, group:"sust", diff:"easy", matchDiff:"easy", testLen:10 };
+const state = { view:"home", mode:"learn", setId:SETS[0].id, section:"all", group:"all", diff:"easy", matchDiff:"easy", testLen:10 };
 let learn = null, test = null, match = null, wb = null, matchTimer = null, bestTimes = {};
 
 const curSet = () => SETS.find(s=>s.id===state.setId);
-function curPool(){
+function curGroups(){
   const set = curSet();
-  if(state.group==="all") return set.all;
-  const g = set.groups.find(x=>x.id===state.group);
-  return g ? g.items : set.all;
+  let gs = set.groups;
+  if(set.sections && state.section!=="all") gs = gs.filter(g=>g.section===state.section);
+  if(state.group!=="all") gs = gs.filter(g=>g.id===state.group);
+  return gs;
 }
+const curPool   = () => curGroups().reduce((a,g)=>a.concat(g.items),[]);
+const vocabPool = () => curPool().filter(t=>t.kind==="vocab");
+const hasVocab  = () => vocabPool().length>0;
+const allQuiz   = () => !hasVocab();
 
 /* ---------- report an error ---------- */
 function currentTermOnScreen(){
@@ -620,58 +758,81 @@ function updateReportLink(){
   const lines = ["", "", "---", "Sent from Ospinalet"];
   if(state.view==="study"){
     const set = curSet();
+    const sec = set.sections && state.section!=="all" ? (set.sections.find(x=>x.id===state.section)||{}).name : null;
+    const grp = state.group!=="all" ? (set.groups.find(g=>g.id===state.group)||{}).name : null;
     lines.splice(2,0,
       "Set: " + set.name,
-      "Section: " + (state.group==="all" ? "Ambos" : (set.groups.find(g=>g.id===state.group)||{}).name),
+      "Part: " + [sec, grp].filter(Boolean).join(" › ") || "Todo",
       "Mode: " + ({learn:"Aprender",test:"Examen",wordbank:"Banco",match:"Emparejar",list:"Lista"})[state.mode],
       "Level: " + (state.mode==="match" ? MATCH_DIFF[state.matchDiff].label : DIFF[state.diff].label));
     const t = currentTermOnScreen();
-    if(t) lines.splice(2,0, "Term on screen: " + t.es + " — " + t.en);
+    if(t) lines.splice(2,0, t.kind==="quiz" ? "Question on screen: " + t.q + " — " + t.a : "Term on screen: " + t.es + " — " + t.en);
   }
   const subject = "Ospinalet — error report" + (state.view==="study" ? " (" + curSet().name + ")" : "");
-  const body = "Which word or definition looks wrong, and what should it say?\n" + lines.join("\n");
+  const body = "Which word, question or definition looks wrong, and what should it say?\n" + lines.join("\n");
   $("#reportBtn").href = "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=" + encodeURIComponent(REPORT_EMAIL) +
     "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 }
 
+/* ---------- icons ---------- */
+const ICON = {
+  learn:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3.5h4.5A2 2 0 0 1 8.5 5.5V14a1.5 1.5 0 0 0-1.5-1.5H2zM14 3.5H9.5A2 2 0 0 0 7.5 5.5V14A1.5 1.5 0 0 1 9 12.5h5z"/></svg>',
+  test:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="m5.5 8 2 2 3.5-4"/></svg>',
+  wordbank:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="5" height="4" rx="1"/><rect x="9" y="3" width="5" height="4" rx="1"/><rect x="2" y="9" width="5" height="4" rx="1"/><path d="M9 11h5"/></svg>',
+  match:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h3l6 8h3M2 12h3l1.5-2M11 4h3l-1.5 2"/></svg>',
+  list:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 8h9M5 12h9"/><circle cx="2.5" cy="4" r=".6"/><circle cx="2.5" cy="8" r=".6"/><circle cx="2.5" cy="12" r=".6"/></svg>',
+  bulb:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13h4M6.5 15h3M8 1.5a4.5 4.5 0 0 0-2.6 8.2c.4.3.6.7.6 1.2v.1h4v-.1c0-.5.2-.9.6-1.2A4.5 4.5 0 0 0 8 1.5z"/></svg>'
+};
+
 /* ---------- HOME ---------- */
 function renderHome(){
-  panel.innerHTML = `<div class="home-grid">` + SETS.map(set=>`
-    <div class="setcard">
-      <div>
+  const cards = SETS.map(set=>{
+    const parts = set.sections
+      ? set.sections.map(sec=>{
+          const n = set.groups.filter(g=>g.section===sec.id).reduce((a,g)=>a+g.items.length,0);
+          const q = set.groups.some(g=>g.section===sec.id && g.kind==="quiz");
+          return `<span class="pill${q?" quiz":""}">${esc(sec.name)} ${n}</span>`;
+        }).join("")
+      : set.groups.map(g=>`<span class="pill${g.kind==="quiz"?" quiz":""}">${esc(g.name)} ${g.items.length}</span>`).join("");
+    const counts = [set.nVocab?`${set.nVocab} palabras`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
+    const vocab = set.nVocab>0;
+    return `<div class="setcard${set.featured?" featured":""}">
+      <div class="top">
         <h2>${esc(set.name)}</h2>
-        <p class="meta">${set.all.length} terms</p>
+        ${set.badge?`<span class="badge">${esc(set.badge)}</span>`:""}
       </div>
-      <div class="parts">${set.groups.map(g=>`<span class="pill">${esc(g.name)} ${g.items.length}</span>`).join("")}</div>
+      <p class="tag">${esc(set.tag||"")}${set.tag?" · ":""}${counts}</p>
+      <div class="parts">${parts}</div>
       <div class="go">
-        <button data-set="${set.id}" data-go="learn">Aprender</button>
-        <button data-set="${set.id}" data-go="test">Examen</button>
-        <button data-set="${set.id}" data-go="wordbank">Banco</button>
-        <button data-set="${set.id}" data-go="match">Emparejar</button>
-        <button data-set="${set.id}" data-go="list">Lista</button>
+        <button class="primary" data-set="${set.id}" data-go="learn">${ICON.learn}Aprender</button>
+        <button data-set="${set.id}" data-go="test">${ICON.test}Examen</button>
+        ${vocab?`<button data-set="${set.id}" data-go="wordbank">${ICON.wordbank}Banco</button>
+        <button data-set="${set.id}" data-go="match">${ICON.match}Emparejar</button>`:""}
+        <button data-set="${set.id}" data-go="list">${ICON.list}Lista</button>
       </div>
-    </div>`).join("") + `
-    <div class="setcard blank">
-      <h2>Next unit goes here</h2>
-      <p>New units get added here as we go.</p>
-    </div></div>`;
+    </div>`;
+  }).join("");
+  panel.innerHTML = `
+    <div class="hero">
+      <h2>Repasa español sin estrés.</h2>
+      <p>Pick a set, then drill it however you like: rounds of five, a quick test, a word bank, or a race against the clock.</p>
+    </div>
+    <div class="home-grid">${cards}</div>`;
   panel.querySelectorAll(".go button").forEach(b=>b.addEventListener("click",()=>{
     state.setId = b.dataset.set;
-    state.group = curSet().groups[0].id;
+    state.section = "all"; state.group = "all";
     state.view = "study";
     state.mode = b.dataset.go;
-    buildGroupChips();
     render();
     window.scrollTo({top:0});
   }));
 }
 
 /* ---------- LEARN ----------
-   Rounds of 5 terms. Each round: multiple choice until all five are right,
-   then the same five again as typing. A miss goes to the back of the queue,
-   so it comes back later in the round. ------------------------------------ */
+   Rounds of 5. Multiple choice until all five are right, then the vocab items
+   come back as typing. Quiz questions have nothing to type, so they skip that
+   pass. A miss goes to the back of the queue. --------------------------------- */
 const ROUND_SIZE = 5;
-
 function startLearn(){
   const pool = curPool();
   const order = shuffle(pool);
@@ -684,12 +845,13 @@ function startLearn(){
 const curRound = () => learn.rounds[learn.roundIdx] || [];
 function startPhase(kind){
   learn.phase = kind;
-  learn.queue = shuffle(curRound()).map(t=>t.id);
+  const items = kind==="type" ? curRound().filter(t=>t.kind==="vocab") : curRound();
+  learn.queue = shuffle(items).map(t=>t.id);
   nextLearn();
 }
 function nextLearn(){
   if(!learn.queue.length){
-    if(learn.phase==="mc"){ startPhase("type"); return; }
+    if(learn.phase==="mc" && curRound().some(t=>t.kind==="vocab")){ startPhase("type"); return; }
     curRound().forEach(t=>learn.mastered.add(t.id));
     if(learn.roundIdx >= learn.rounds.length-1) renderLearnDone();
     else renderRoundDone();
@@ -702,27 +864,25 @@ function nextLearn(){
 }
 function learnAnswer(correct){
   learn.asked++;
-  if(correct){
-    learn.queue.shift();
-  }else{
-    learn.missed.add(learn.queue[0]);
-    learn.queue.push(learn.queue.shift());   /* back it goes, later in the round */
-  }
+  if(correct) learn.queue.shift();
+  else { learn.missed.add(learn.queue[0]); learn.queue.push(learn.queue.shift()); }
   learn.step = correct ? "right" : "wrong";
   renderLearn();
 }
 function renderLearn(){
-  const q = learn.current, d = DIFF[learn.diff];
+  const q = learn.current, item = q.term, d = DIFF[learn.diff];
   const size = curRound().length;
-  const leftInPhase = learn.queue.length;
+  const phaseSize = learn.phase==="type" ? curRound().filter(t=>t.kind==="vocab").length : size;
+  const doneInPhase = phaseSize - learn.queue.length;
   const phaseName = learn.phase==="mc" ? "Opci&oacute;n m&uacute;ltiple" : "Escribir";
-  const optClass = d.answerLang==="es" ? "es" : "";
+  const isQ = item.kind==="quiz";
+  const kindLabel = isQ ? "Escoge la respuesta correcta" : (q.kind==="mc" ? d.mcLabel : d.typeLabel);
 
   let body = "";
   if(learn.step==="ask"){
     if(q.kind==="mc"){
       body = `<div class="opts">` + q.options.map((o,i)=>
-        `<button class="opt" data-opt="${esc(o)}"><span class="num">${i+1}</span><span class="${optClass}">${esc(o)}</span></button>`
+        `<button class="opt" data-opt="${esc(o)}"><span class="num">${i+1}</span><span class="${optClass(item,learn.diff)}">${esc(o)}</span></button>`
       ).join("") + `</div>`;
     }else{
       body = `<form class="typebox" id="typeForm">
@@ -737,10 +897,10 @@ function renderLearn(){
   if(learn.step!=="ask"){
     const ok = learn.step==="right";
     verdict = `<div class="verdict ${ok?'ok':'no'}">
-        <b>${ok?'&#10003; Correcto':'&#10007; No exactamente'}</b>
-        <span class="answer"><span class="es">${esc(q.term.es)}</span> &mdash; ${esc(q.term.en)}</span>
-        ${learn.diff!=="easy"?`<span class="gloss">${esc(q.term[learn.diff==="hard"?"ds":"de"])}</span>`:""}
-        ${!ok?`<span class="gloss">It&rsquo;ll come back later in this round.</span>`:""}
+        <b>${ok?'&#10003; ¡Correcto!':'&#10007; Casi&hellip;'}</b>
+        <span class="answer">${isQ ? esc(item.a) : `<span class="es">${esc(item.es)}</span> &mdash; ${esc(item.en)}`}</span>
+        ${!isQ && learn.diff!=="easy" ? `<span class="gloss">${esc(item[learn.diff==="hard"?"ds":"de"])}</span>` : ""}
+        ${!ok ? `<span class="gloss">It&rsquo;ll come back later in this round.</span>` : ""}
       </div>
       <div class="row" style="margin-top:16px"><button class="btn" id="nextBtn">Continuar</button>
       <span class="hint" style="margin:0">press Enter</span></div>`;
@@ -751,15 +911,14 @@ function renderLearn(){
         <span class="roundno">Ronda ${learn.roundIdx+1} <span>de ${learn.rounds.length}</span></span>
         <span class="phase ${learn.phase}">${phaseName}</span>
         <span class="spacer"></span>
-        <span class="pips">${curRound().map((t,i)=>
-          `<i class="${i < size-leftInPhase ? 'on':''}"></i>`).join("")}</span>
+        <span class="pips">${Array.from({length:phaseSize},(_,i)=>`<i class="${i<doneInPhase?'on':''}"></i>`).join("")}</span>
       </div>
       <div class="meter"><i style="width:${Math.round(learn.mastered.size/learn.pool.length*100)}%"></i></div>
       <div class="stats"><span>${learn.mastered.size} / ${learn.pool.length} dominadas</span><span>${learn.asked} preguntas</span></div>
     </div>
     <div class="card">
-      <div class="prompt-kind">${q.kind==="mc"?d.mcLabel:d.typeLabel}</div>
-      <p class="prompt ${d.promptStyle}">${esc(q.prompt)}</p>
+      <div class="prompt-kind">${kindLabel}</div>
+      <p class="prompt ${promptClass(item,learn.diff)}">${esc(q.prompt)}</p>
       ${body}${verdict}
     </div>
     ${learn.step==="ask"&&q.kind==="mc"?'<p class="hint">Tip: press 1&ndash;4 to answer.</p>':''}`;
@@ -788,14 +947,20 @@ function renderLearn(){
     $("#nextBtn").addEventListener("click", nextLearn);
   }
 }
+function itemRow(t){
+  return t.kind==="quiz"
+    ? `<div class="item"><span class="qa">${esc(t.q)}</span><span class="en">${esc(t.a)}</span></div>`
+    : `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`;
+}
 function renderRoundDone(){
   const terms = curRound();
+  const left = learn.rounds.length-learn.roundIdx-1;
+  const anyQuiz = terms.some(t=>t.kind==="quiz");
   panel.innerHTML = `<div class="card done">
-    <p class="big">Ronda ${learn.roundIdx+1} lista</p>
-    <p>${terms.length} words, clicked and typed. ${learn.rounds.length-learn.roundIdx-1} ${learn.rounds.length-learn.roundIdx-1===1?"round":"rounds"} to go.</p>
+    <p class="big">¡Ronda ${learn.roundIdx+1} lista!</p>
+    <p>${terms.length} down. ${left} ${left===1?"round":"rounds"} to go.</p>
     <div class="missed" style="margin-top:0;margin-bottom:22px">
-      <div class="vocab">${terms.map(t=>
-        `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>
+      <div class="vocab${anyQuiz?" one":""}">${terms.map(itemRow).join("")}</div>
     </div>
     <div class="row" style="justify-content:center">
       <button class="btn" id="nextRound">Siguiente ronda</button>
@@ -810,23 +975,24 @@ function renderRoundDone(){
 function renderLearnDone(){
   const missed = [...learn.missed].map(id=>learn.pool.find(t=>t.id===id)).filter(Boolean);
   panel.innerHTML = `<div class="card done">
-    <p class="big">&iexcl;Todo dominado!</p>
-    <p>${learn.pool.length} terms across ${learn.rounds.length} rounds, ${learn.asked} questions.</p>
+    <p class="big">¡Todo dominado!</p>
+    <p>${learn.pool.length} items across ${learn.rounds.length} rounds, ${learn.asked} answers. Ready for the Examen.</p>
     <div class="row" style="justify-content:center">
       <button class="btn" id="again">Repetir</button>
       <button class="btn ghost" id="toTest">Ir al Examen</button>
     </div>
     ${missed.length?`<div class="missed"><h3>Tripped you up along the way</h3>
-      <div class="vocab">${missed.map(t=>`<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div></div>`:""}
+      <div class="vocab${missed.some(t=>t.kind==="quiz")?" one":""}">${missed.map(itemRow).join("")}</div></div>`:""}
   </div>`;
   updateReportLink();
   $("#again").addEventListener("click", startLearn);
   $("#toTest").addEventListener("click", ()=>setMode("test"));
 }
 
-/* ---------- MATCH ---------- */
+/* ---------- MATCH (vocab only) ---------- */
 function startMatch(){
-  const pool = curPool();
+  const pool = vocabPool();
+  if(pool.length<2){ panel.innerHTML = `<div class="card empty">Emparejar needs vocabulary words &mdash; pick a part with words in it.</div>`; return; }
   const n = Math.min(6, pool.length);
   const terms = shuffle(pool).slice(0,n);
   const key = MATCH_DIFF[state.matchDiff].key;
@@ -839,18 +1005,16 @@ function startMatch(){
 }
 function matchClock(){
   if(!match || match.done) return 0;
-  const run = match.started ? (Date.now()-match.started)/1000 : 0;
-  return run + match.penalty;
+  return (match.started ? (Date.now()-match.started)/1000 : 0) + match.penalty;
 }
 function renderMatch(){
   const m = MATCH_DIFF[state.matchDiff];
-  const key = `${state.setId}|${state.group}|${state.matchDiff}`;
+  const key = `${state.setId}|${state.section}|${state.group}|${state.matchDiff}`;
   if(match.done){
     const best = bestTimes[key];
     panel.innerHTML = `<div class="card match-done">
       <p class="time">${match.elapsed.toFixed(1)}s</p>
-      <p>${match.terms.length} pairs${match.penalty?` &middot; +${match.penalty}s in penalties`:" &middot; sin errores"}${
-        best!==undefined?` &middot; best ${best.toFixed(1)}s`:""}</p>
+      <p>${match.terms.length} pairs${match.penalty?` &middot; +${match.penalty}s in penalties`:" &middot; sin errores"}${best!==undefined?` &middot; best ${best.toFixed(1)}s`:""}</p>
       <div class="row" style="justify-content:center">
         <button class="btn" id="againMatch">Otra vez</button>
         <button class="btn ghost" id="toTestM">Ir al Examen</button>
@@ -863,14 +1027,13 @@ function renderMatch(){
   panel.innerHTML = `
     <div class="match-bar">
       <span class="clock" id="clock">0.0s</span>
-      <span>${match.matched.size} / ${match.terms.length} pairs</span>
+      <span id="pairCount">${match.matched.size} / ${match.terms.length} pairs</span>
       ${match.penalty?`<span class="pen">+${match.penalty}s penalty</span>`:""}
       <span class="spacer"></span>
-      <button class="btn ghost" id="resetMatch" style="padding:6px 12px">Barajar</button>
+      <button class="btn ghost" id="resetMatch" style="padding:7px 13px;font-size:14px">Barajar</button>
     </div>
     <div class="tiles">${match.tiles.map(t=>
-      `<button class="tile ${t.side==='word'?'word':m.tileClass}" data-tid="${t.tid}"
-        ${match.matched.has(t.term.id)?'disabled':''}>${esc(t.text)}</button>`).join("")}</div>`;
+      `<button class="tile ${t.side==='word'?'word':m.tileClass}" data-tid="${t.tid}" ${match.matched.has(t.term.id)?'disabled':''}>${esc(t.text)}</button>`).join("")}</div>`;
   updateReportLink();
   $("#resetMatch").addEventListener("click", startMatch);
   panel.querySelectorAll(".tile").forEach(b=>b.addEventListener("click",()=>tileClick(b)));
@@ -886,11 +1049,7 @@ function tileClick(btn){
   const tile = match.tiles.find(t=>t.tid===btn.dataset.tid);
   if(!tile || match.matched.has(tile.term.id)) return;
   if(!match.started) match.started = Date.now();
-  if(!match.sel){
-    match.sel = tile;
-    btn.classList.add("sel");
-    return;
-  }
+  if(!match.sel){ match.sel = tile; btn.classList.add("sel"); return; }
   if(match.sel.tid===tile.tid){ match.sel=null; btn.classList.remove("sel"); return; }
   const first = panel.querySelector(`.tile[data-tid="${match.sel.tid}"]`);
   if(match.sel.term.id===tile.term.id && match.sel.side!==tile.side){
@@ -900,20 +1059,16 @@ function tileClick(btn){
     setTimeout(()=>{
       [first,btn].forEach(el=>el.classList.add("gone"));
       if(match.matched.size===match.terms.length){
-        match.elapsed = matchClock();
-        match.done = true;
-        clearInterval(matchTimer);
-        const key = `${state.setId}|${state.group}|${state.matchDiff}`;
+        match.elapsed = matchClock(); match.done = true; clearInterval(matchTimer);
+        const key = `${state.setId}|${state.section}|${state.group}|${state.matchDiff}`;
         if(bestTimes[key]===undefined || match.elapsed<bestTimes[key]) bestTimes[key]=match.elapsed;
         setTimeout(renderMatch, 260);
       }else{
-        const c = panel.querySelector(".match-bar span:nth-of-type(1)");
-        if(c) c.textContent = `${match.matched.size} / ${match.terms.length} pairs`;
+        const c = $("#pairCount"); if(c) c.textContent = `${match.matched.size} / ${match.terms.length} pairs`;
       }
     }, 180);
   }else{
-    match.busy = true;
-    match.penalty += 1;
+    match.busy = true; match.penalty += 1;
     [first,btn].forEach(el=>{ el.classList.remove("sel"); el.classList.add("miss"); });
     setTimeout(()=>{
       [first,btn].forEach(el=>el.classList.remove("miss"));
@@ -921,35 +1076,33 @@ function tileClick(btn){
       const pen = panel.querySelector(".match-bar .pen");
       if(pen) pen.textContent = `+${match.penalty}s penalty`;
       else{
-        const bar = panel.querySelector(".match-bar .spacer");
-        if(bar){ const s=document.createElement("span"); s.className="pen"; s.textContent=`+${match.penalty}s penalty`; bar.parentNode.insertBefore(s,bar); }
+        const sp = panel.querySelector(".match-bar .spacer");
+        if(sp){ const s=document.createElement("span"); s.className="pen"; s.textContent=`+${match.penalty}s penalty`; sp.parentNode.insertBefore(s,sp); }
       }
     }, 420);
   }
 }
 
-/* ---------- WORD BANK ----------
-   15 random terms. Definition on each row, an empty box beside it, the words
-   in a bank at the bottom. Drag a word into a box, or tap the word then the
-   box. ---------------------------------------------------------------------- */
-const WB_LEN = 15;
+/* ---------- WORD BANK (vocab only) ---------- */
+const WB_LEN = 15, WB_DECOYS = 5;
 const WB_PROMPT = {easy:"en", medium:"de", hard:"ds"};
 const WB_NOTE = {
   easy:"English meaning on each row &mdash; drop in the Spanish word.",
   medium:"English definition on each row &mdash; drop in the Spanish word.",
   hard:"Definici&oacute;n en espa&ntilde;ol &mdash; arrastra la palabra correcta. No English."
 };
-
 function startWordbank(){
-  const pool = curPool();
+  const pool = vocabPool();
+  if(pool.length<2){ panel.innerHTML = `<div class="card empty">Banco needs vocabulary words &mdash; pick a part with words in it.</div>`; return; }
   const n = Math.min(WB_LEN, pool.length);
-  const questions = shuffle(pool).slice(0,n);
-  wb = { pool, diff:state.diff, questions, bank:shuffle(questions).map(t=>t.id),
-         placed:{}, selected:null, graded:false };
+  const shuffled = shuffle(pool);
+  const questions = shuffled.slice(0,n);
+  const decoys = shuffled.slice(n, n + Math.min(WB_DECOYS, Math.max(0, pool.length - n)));
+  const bankAll = shuffle(questions.concat(decoys)).map(t=>t.id);
+  wb = { pool, diff:state.diff, questions, decoys:decoys.length, bankAll, bank:bankAll.slice(), placed:{}, selected:null, graded:false };
   renderWordbank();
 }
 function wbPlace(qi, termId){
-  /* if that word sits in another box, clear that one first */
   Object.keys(wb.placed).forEach(k=>{ if(wb.placed[k]===termId) delete wb.placed[k]; });
   const displaced = wb.placed[qi];
   wb.placed[qi] = termId;
@@ -966,126 +1119,84 @@ function wbReturn(qi){
   renderWordbank();
 }
 function renderWordbank(){
-  const key = WB_PROMPT[wb.diff];
-  const spanish = wb.diff==="hard";
+  const key = WB_PROMPT[wb.diff], spanish = wb.diff==="hard";
   const byId = id => wb.pool.find(t=>t.id===id);
   const filled = Object.keys(wb.placed).length;
-
   let head = "";
   if(wb.graded){
     const right = wb.questions.filter((t,i)=>wb.placed[i]===t.id).length;
     head = `<div class="score">
       <span class="big">${Math.round(right/wb.questions.length*100)}%</span>
-      <span class="detail">${right} of ${wb.questions.length} correct</span>
+      <span class="detail"><b>${right} of ${wb.questions.length} correct</b>${right===wb.questions.length?"¡Perfecto!":"Wrong ones are marked below."}</span>
       <span class="spacer"></span>
       <span class="row"><button class="btn" id="wbNew">Otra hoja</button></span>
     </div>`;
   }
-
   const rows = wb.questions.map((t,i)=>{
-    const placedId = wb.placed[i];
-    const placedTerm = placedId ? byId(placedId) : null;
+    const placedId = wb.placed[i], placedTerm = placedId ? byId(placedId) : null;
     let cls = "wb-box" + (placedTerm ? " filled" : "");
     let inner = placedTerm ? esc(placedTerm.es) : "";
-    if(wb.graded){
-      const ok = placedId===t.id;
-      cls = "wb-box filled " + (ok ? "correct" : "wrong");
-      if(!placedTerm) inner = "&mdash;";
-    }
-    return `<div class="wb-row${wb.graded?(wb.placed[i]===t.id?" ok":" no"):""}">
+    if(wb.graded){ cls = "wb-box filled " + (placedId===t.id ? "correct" : "wrong"); if(!placedTerm) inner = "&mdash;"; }
+    return `<div class="wb-row">
       <span class="wb-num">${i+1}.</span>
-      <div class="${cls}" data-box="${i}" tabindex="0" role="button"
-        aria-label="Respuesta ${i+1}">${inner}</div>
+      <div class="${cls}" data-box="${i}" tabindex="0" role="button" aria-label="Respuesta ${i+1}">${inner}</div>
       <p class="wb-def ${spanish?"spanish":""}">${esc(t[key])}</p>
-      ${wb.graded && wb.placed[i]!==t.id
-        ? `<p class="wb-fix">Correcta: <span class="es">${esc(t.es)}</span></p>` : ""}
+      ${wb.graded && wb.placed[i]!==t.id ? `<p class="wb-fix">Correcta: <span class="es">${esc(t.es)}</span></p>` : ""}
     </div>`;
   }).join("");
-
   const bank = wb.graded ? "" : `
     <div class="wb-bank">
       <div class="wb-bank-head">
         <span class="label">Banco de palabras</span>
-        <span class="wb-count">${wb.bank.length} left</span>
+        ${wb.decoys?`<span class="wb-hint">${wb.decoys} won&rsquo;t be used</span>`:""}
+        <span class="wb-count">${wb.bankAll.length} words &middot; ${wb.questions.length} are answers</span>
       </div>
       <div class="wb-words" id="wbWords">${
         wb.bank.length
           ? wb.bank.map(id=>`<button class="wb-word${wb.selected===id?" sel":""}" draggable="true" data-word="${id}">${esc(byId(id).es)}</button>`).join("")
-          : `<span class="wb-empty">Bank empty &mdash; every word is placed.</span>`
+          : `<span class="wb-empty">Every word is placed.</span>`
       }</div>
     </div>`;
-
   const footer = wb.graded ? "" : `
     <div class="row" style="margin-top:18px">
       <button class="btn" id="wbSubmit">Entregar</button>
       <button class="btn ghost" id="wbClear">Vaciar</button>
       <span class="hint" style="margin:0" id="wbCount">${filled} of ${wb.questions.length} filled</span>
     </div>`;
-
   panel.innerHTML = head + `<div class="card"><div class="wb-list">${rows}</div></div>` + bank + footer;
   updateReportLink();
-  if(wb.graded){
-    $("#wbNew").addEventListener("click", startWordbank);
-    return;
-  }
+  if(wb.graded){ $("#wbNew").addEventListener("click", startWordbank); return; }
 
-  /* click / tap to place */
   panel.querySelectorAll(".wb-word").forEach(w=>{
-    w.addEventListener("click",()=>{
-      wb.selected = wb.selected===w.dataset.word ? null : w.dataset.word;
-      renderWordbank();
-    });
-    w.addEventListener("dragstart",e=>{
-      e.dataTransfer.setData("text/plain", w.dataset.word);
-      e.dataTransfer.effectAllowed = "move";
-      wb.selected = w.dataset.word;
-    });
+    w.addEventListener("click",()=>{ wb.selected = wb.selected===w.dataset.word ? null : w.dataset.word; renderWordbank(); });
+    w.addEventListener("dragstart",e=>{ e.dataTransfer.setData("text/plain", w.dataset.word); e.dataTransfer.effectAllowed="move"; wb.selected = w.dataset.word; });
   });
   panel.querySelectorAll(".wb-box").forEach(box=>{
     const qi = +box.dataset.box;
-    const activate = ()=>{
-      if(wb.selected) wbPlace(qi, wb.selected);
-      else if(wb.placed[qi]) wbReturn(qi);
-    };
+    const activate = ()=>{ if(wb.selected) wbPlace(qi, wb.selected); else if(wb.placed[qi]) wbReturn(qi); };
     box.addEventListener("click", activate);
     box.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(); }});
     box.addEventListener("dragover",e=>{ e.preventDefault(); box.classList.add("over"); });
     box.addEventListener("dragleave",()=>box.classList.remove("over"));
-    box.addEventListener("drop",e=>{
-      e.preventDefault(); box.classList.remove("over");
-      const id = e.dataTransfer.getData("text/plain");
-      if(id) wbPlace(qi, id);
-    });
+    box.addEventListener("drop",e=>{ e.preventDefault(); box.classList.remove("over"); const id=e.dataTransfer.getData("text/plain"); if(id) wbPlace(qi,id); });
   });
-  /* drag a placed word back out onto the bank */
   const words = $("#wbWords");
   if(words){
     words.addEventListener("dragover",e=>e.preventDefault());
-    words.addEventListener("drop",e=>{
-      e.preventDefault();
-      const id = e.dataTransfer.getData("text/plain");
-      const qi = Object.keys(wb.placed).find(k=>wb.placed[k]===id);
-      if(qi!==undefined) wbReturn(+qi);
-    });
+    words.addEventListener("drop",e=>{ e.preventDefault(); const id=e.dataTransfer.getData("text/plain"); const qi=Object.keys(wb.placed).find(k=>wb.placed[k]===id); if(qi!==undefined) wbReturn(+qi); });
   }
   $("#wbSubmit").addEventListener("click",()=>{
     const blanks = wb.questions.length - Object.keys(wb.placed).length;
     if(blanks>0 && !wbConfirm(blanks)) return;
     wb.graded = true; renderWordbank(); window.scrollTo({top:0,behavior:"smooth"});
   });
-  $("#wbClear").addEventListener("click",()=>{
-    wb.placed = {}; wb.selected = null;
-    wb.bank = shuffle(wb.questions).map(t=>t.id);
-    renderWordbank();
-  });
+  $("#wbClear").addEventListener("click",()=>{ wb.placed={}; wb.selected=null; wb.bank=shuffle(wb.bankAll); renderWordbank(); });
 }
 let wbWarned = false;
 function wbConfirm(blanks){
-  if(wbWarned){ wbWarned = false; return true; }
+  if(wbWarned){ wbWarned=false; return true; }
   wbWarned = true;
-  const c = $("#wbCount");
-  c.textContent = `${blanks} still empty — those count as wrong. Press Entregar again.`;
-  c.style.color = "var(--bad)";
+  const c = $("#wbCount"); c.textContent = `${blanks} still empty — those count as wrong. Press Entregar again.`; c.style.color="var(--bad)";
   return false;
 }
 
@@ -1098,14 +1209,14 @@ function startTest(){
   renderTest();
 }
 function renderTest(){
-  const qs = test.questions, d = DIFF[test.diff];
-  const optClass = d.answerLang==="es" ? "es" : "";
+  const qs = test.questions;
   let head = "";
   if(test.graded){
     const right = qs.filter((q,i)=>test.answers[i]===q.answer).length;
+    const pct = Math.round(right/qs.length*100);
     head = `<div class="score">
-      <span class="big">${Math.round(right/qs.length*100)}%</span>
-      <span class="detail">${right} of ${qs.length} correct</span>
+      <span class="big">${pct}%</span>
+      <span class="detail"><b>${right} of ${qs.length} correct</b>${pct===100?"¡Perfecto!":pct>=80?"Nice — polish the ones marked below.":"Worth another pass on the ones marked below."}</span>
       <span class="spacer"></span>
       <span class="row">
         <button class="btn" id="newTest">Nuevo examen</button>
@@ -1113,21 +1224,21 @@ function renderTest(){
       </span></div>`;
   }
   const body = qs.map((q,i)=>{
-    const chosen = test.answers[i];
+    const chosen = test.answers[i], item = q.term;
     const cls = test.graded ? (chosen===q.answer?"marked-ok":"marked-wrong") : "";
     return `<div class="q ${cls}">
       <div class="q-head">
         <span class="q-num">${test.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(i+1)+"."}</span>
-        <p class="q-text ${d.promptStyle}">${esc(q.prompt)}</p>
+        <p class="q-text ${promptClass(item,test.diff)}">${esc(q.prompt)}</p>
       </div>
-      <div class="opts">${q.options.map(o=>{
-        let k = "";
-        if(test.graded){ if(o===q.answer) k="correct"; else if(o===chosen) k="wrong"; }
-        else if(o===chosen) k="chosen";
-        return `<button class="opt ${k}" ${test.graded?"disabled":""} data-q="${i}" data-opt="${esc(o)}">
-          <span class="${optClass}">${esc(o)}</span></button>`;
+      <div class="opts">${q.options.map((o,k)=>{
+        let c = "";
+        if(test.graded){ if(o===q.answer) c="correct"; else if(o===chosen) c="wrong"; }
+        else if(o===chosen) c="chosen";
+        return `<button class="opt ${c}" ${test.graded?"disabled":""} data-q="${i}" data-opt="${esc(o)}">
+          <span class="num">${"ABCD"[k]}</span><span class="${optClass(item,test.diff)}">${esc(o)}</span></button>`;
       }).join("")}</div>
-      ${test.graded && test.diff!=="easy" ? `<p class="gloss"><span class="es">${esc(q.term.es)}</span> &mdash; ${esc(q.term.en)}</p>` : ""}
+      ${test.graded && item.kind==="vocab" && test.diff!=="easy" ? `<p class="gloss"><span class="es">${esc(item.es)}</span> &mdash; ${esc(item.en)}</p>` : ""}
     </div>`;
   }).join("");
   const footer = test.graded ? "" :
@@ -1144,9 +1255,7 @@ function renderTest(){
       test.answers[i] = b.dataset.opt;
       panel.querySelectorAll('.opt[data-q="'+i+'"]').forEach(x=>x.classList.remove("chosen"));
       b.classList.add("chosen");
-      const c = $("#count");
-      c.textContent = `${Object.keys(test.answers).length} of ${qs.length} answered`;
-      c.style.color = "";
+      const c = $("#count"); c.textContent = `${Object.keys(test.answers).length} of ${qs.length} answered`; c.style.color="";
       skipWarned = false;
     });
   });
@@ -1161,98 +1270,110 @@ function renderTest(){
     const rm = $("#retryMissed");
     if(rm) rm.addEventListener("click",()=>{
       const missedTerms = test.questions.filter((q,i)=>test.answers[i]!==q.answer).map(q=>q.term);
-      test = { pool:test.pool, diff:test.diff,
-        questions:shuffle(missedTerms).map(t=>makeMC(t,test.pool,test.diff)), answers:{}, graded:false };
+      test = { pool:test.pool, diff:test.diff, questions:shuffle(missedTerms).map(t=>makeMC(t,test.pool,test.diff)), answers:{}, graded:false };
       renderTest(); window.scrollTo({top:0,behavior:"smooth"});
     });
   }
 }
 let skipWarned = false;
 function confirmSkip(left){
-  if(skipWarned){ skipWarned = false; return true; }
+  if(skipWarned){ skipWarned=false; return true; }
   skipWarned = true;
-  const c = $("#count");
-  c.textContent = `${left} unanswered — those count as wrong. Press Entregar again to submit.`;
-  c.style.color = "var(--bad)";
+  const c = $("#count"); c.textContent = `${left} unanswered — those count as wrong. Press Entregar again to submit.`; c.style.color="var(--bad)";
   return false;
 }
 
 /* ---------- LISTA ---------- */
 function renderList(){
-  const set = curSet();
-  const groups = state.group==="all" ? set.groups : set.groups.filter(g=>g.id===state.group);
+  const groups = curGroups();
   const showDefs = state.diff!=="easy";
   const defKey = state.diff==="hard" ? "ds" : "de";
   const inner = groups.map(g=>{
-    const rows = showDefs
-      ? `<div class="deftable">${g.items.map(t=>
-          `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
-           <div class="d ${state.diff==='hard'?'spanish':''}">${esc(t[defKey])}</div></div>`).join("")}</div>`
-      : `<div class="vocab">${g.items.map(t=>
-          `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>`;
+    let rows;
+    if(g.kind==="quiz"){
+      rows = `<div class="deftable">${g.items.map(t=>`<div class="row2"><div class="qq">${esc(t.q)}</div><div class="aa">${esc(t.a)}</div></div>`).join("")}</div>`;
+    }else if(showDefs){
+      rows = `<div class="deftable">${g.items.map(t=>
+        `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
+         <div class="d ${state.diff==='hard'?'spanish':''}">${esc(t[defKey])}</div></div>`).join("")}</div>`;
+    }else{
+      rows = `<div class="vocab">${g.items.map(t=>`<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>`;
+    }
     return `<section class="listsec"><h2>${esc(g.name)} &middot; ${g.items.length}</h2>${rows}</section>`;
   }).join("");
-  panel.innerHTML = `<div class="card">${inner}</div>
-    <p class="foot">Showing ${showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>`;
+  panel.innerHTML = `<div class="card">${inner}</div>` +
+    (hasVocab() ? `<p class="foot">Words show ${showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>` : "");
   updateReportLink();
 }
 
 /* ---------- chrome ---------- */
-function buildGroupChips(){
+function chipRow(container, chips, current, onPick){
+  container.innerHTML = chips.map(c=>
+    `<button class="chip" data-id="${c.id}" aria-pressed="${c.id===current}">${esc(c.name)}${c.n!==undefined?`<span class="n">${c.n}</span>`:""}</button>`).join("");
+  container.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{ onPick(b.dataset.id); }));
+}
+function buildPartChips(){
   const set = curSet();
-  const chips = set.groups.map(g=>({id:g.id,name:g.name}));
-  chips.push({id:"all",name:"Ambos"});
-  $("#groupGroup").innerHTML = chips.map(c=>
-    `<button class="chip" data-group="${c.id}" aria-pressed="${c.id===state.group}">${esc(c.name)}</button>`).join("");
-  $("#groupGroup").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
-    state.group = c.dataset.group;
-    $("#groupGroup").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
-    render();
-  }));
+  if(set.sections){
+    $("#sectionField").hidden = false;
+    chipRow($("#sectionGroup"),
+      set.sections.map(s=>({id:s.id,name:s.name,n:set.groups.filter(g=>g.section===s.id).reduce((a,g)=>a+g.items.length,0)})).concat([{id:"all",name:"Todo",n:set.all.length}]),
+      state.section, id=>{ state.section=id; state.group="all"; render(); });
+    const subs = state.section==="all" ? [] : set.groups.filter(g=>g.section===state.section);
+    $("#groupField").hidden = subs.length<2;
+    $("#groupLabel").textContent = "Sección";
+    if(subs.length>=2){
+      chipRow($("#groupGroup"), subs.map(g=>({id:g.id,name:g.name,n:g.items.length})).concat([{id:"all",name:"Todas"}]),
+        state.group, id=>{ state.group=id; render(); });
+    }
+  }else{
+    $("#sectionField").hidden = true;
+    $("#groupField").hidden = false;
+    $("#groupLabel").textContent = "Parte";
+    chipRow($("#groupGroup"), set.groups.map(g=>({id:g.id,name:g.name,n:g.items.length})).concat([{id:"all",name:set.groups.length===2?"Ambos":"Todos"}]),
+      state.group, id=>{ state.group=id; render(); });
+  }
 }
 function buildDiffChips(){
   const isMatch = state.mode==="match";
-  const opts = isMatch
-    ? [["easy",MATCH_DIFF.easy.label],["hard",MATCH_DIFF.hard.label]]
-    : [["easy",DIFF.easy.label],["medium",DIFF.medium.label],["hard",DIFF.hard.label]];
-  const cur = isMatch ? state.matchDiff : state.diff;
-  $("#diffGroup").innerHTML = opts.map(([id,label])=>
-    `<button class="chip" data-diff="${id}" aria-pressed="${id===cur}">${label}</button>`).join("");
-  $("#diffGroup").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
-    if(state.mode==="match") state.matchDiff = c.dataset.diff; else state.diff = c.dataset.diff;
-    $("#diffGroup").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", String(x===c)));
-    render();
-  }));
+  const opts = isMatch ? [["easy",MATCH_DIFF.easy.label],["hard",MATCH_DIFF.hard.label]]
+                       : [["easy",DIFF.easy.label],["medium",DIFF.medium.label],["hard",DIFF.hard.label]];
+  chipRow($("#diffGroup"), opts.map(([id,label])=>({id,name:label})), isMatch?state.matchDiff:state.diff,
+    id=>{ if(state.mode==="match") state.matchDiff=id; else state.diff=id; render(); });
 }
 function render(){
   clearInterval(matchTimer);
   const home = state.view==="home";
-  $("#tabs").hidden = home;
-  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===state.mode)));
+  $("#setHead").hidden = home;
   $("#controls").hidden = home;
-  $("#backBtn").hidden = home;
-  $("#lenField").hidden = home || state.mode!=="test";
+  if(home){ updateReportLink(); renderHome(); return; }
 
-  $("#brandBtn").classList.toggle("big", home);
-  $("#eyebrow").hidden = home;
-  $("#pageTitle").hidden = home;
-  if(home){
-    $("#pageSub").textContent = `${SETS.length} ${SETS.length===1?"set":"sets"} · learn, match and test yourself`;
-    updateReportLink();
-    renderHome();
-    return;
-  }
   const set = curSet();
+  const vocab = hasVocab();
+  if(!vocab && (state.mode==="wordbank" || state.mode==="match")) state.mode = "test";
+  document.querySelectorAll('.tab[data-mode="wordbank"], .tab[data-mode="match"]').forEach(t=>t.hidden = set.nVocab===0);
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===state.mode)));
+  $("#setTag").textContent = set.tag || "";
+  $("#setTag").hidden = !set.tag;
   $("#pageTitle").textContent = set.name;
-  $("#pageSub").textContent = `${set.all.length} terms · ${set.groups.map(g=>g.name.toLowerCase()+" "+g.items.length).join(", ")}`;
-  buildDiffChips();
-  $("#modeNote").innerHTML = state.mode==="list"
-    ? "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>"
-    : state.mode==="wordbank"
-      ? `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions, all the words at the bottom. Drag one into a box, or tap the word then the box.</span>`
-    : state.mode==="match"
-      ? `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock — a wrong pair costs a second.</span>`
-      : `<b>${DIFF[state.diff].label}</b><span>${DIFF[state.diff].note}${state.mode==="learn"?" Rounds of five: multiple choice until all five are right, then the same five by typing. Miss one and it comes back later in the round.":""}</span>`;
+  $("#pageSub").textContent = [set.nVocab?`${set.nVocab} palabras`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
+  buildPartChips();
+  $("#diffField").hidden = !vocab;
+  $("#lenField").hidden = state.mode!=="test";
+  if(vocab) buildDiffChips();
+
+  const poolQuizOnly = !vocab;
+  let note;
+  if(state.mode==="list") note = poolQuizOnly
+    ? "<span>Every question with its answer &mdash; read straight through before you drill.</span>"
+    : "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>";
+  else if(state.mode==="wordbank") note = `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions and ${WB_LEN+WB_DECOYS} words in the bank &mdash; ${WB_DECOYS} of them are decoys. Drag a word into a box, or tap the word then the box.</span>`;
+  else if(state.mode==="match") note = `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock &mdash; a wrong pair costs a second.</span>`;
+  else if(poolQuizOnly) note = state.mode==="learn"
+    ? "<b>Aprender</b><span>Rounds of five questions. Miss one and it comes back later in the round.</span>"
+    : "<b>Examen</b><span>Multiple choice, graded at the end. All four options are about the same length, so length never gives the answer away.</span>";
+  else note = `<b>${DIFF[state.diff].label}</b><span>${DIFF[state.diff].note}${state.mode==="learn"?" Rounds of five: multiple choice until all five are right, then the words come back as typing. Miss one and it comes back later in the round.":""}</span>`;
+  $("#modeNote").innerHTML = note;
 
   if(state.mode==="learn") startLearn();
   else if(state.mode==="test") startTest();
@@ -1260,11 +1381,7 @@ function render(){
   else if(state.mode==="match") startMatch();
   else renderList();
 }
-function setMode(m){
-  state.mode = m;
-  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===m)));
-  render();
-}
+function setMode(m){ state.mode = m; render(); }
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setMode(t.dataset.mode)));
 document.querySelectorAll("#lenGroup .chip").forEach(c=>c.addEventListener("click",()=>{
   state.testLen = +c.dataset.len;
@@ -1278,12 +1395,8 @@ document.addEventListener("keydown",e=>{
   if(state.view!=="study"||state.mode!=="learn"||!learn) return;
   if(learn.step!=="ask"){ if(e.key==="Enter"){ e.preventDefault(); nextLearn(); } return; }
   if((e.target.tagName||"").toLowerCase()==="input") return;
-  if(/^[1-4]$/.test(e.key)){
-    const btns = panel.querySelectorAll(".opt");
-    if(btns[+e.key-1]) btns[+e.key-1].click();
-  }
+  if(/^[1-4]$/.test(e.key)){ const btns = panel.querySelectorAll(".opt"); if(btns[+e.key-1]) btns[+e.key-1].click(); }
 });
-buildGroupChips();
 render();
 </script>
 
