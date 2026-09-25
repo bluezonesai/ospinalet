@@ -1525,22 +1525,28 @@ function confirmSkip(left){
 function renderList(){
   const groups = curGroups();
   const showDefs = state.diff!=="easy";
-  const defKey = state.diff==="hard" ? "ds" : state.diff==="fill" ? "fb" : "de";
+  const defKey = state.diff==="hard" ? "ds" : "de";
+  const both = state.diff==="fill";   /* Frases level: the list shows both definitions, not the sentence */
   const inner = groups.map(g=>{
     let rows;
     if(g.kind==="quiz"){
       rows = `<div class="deftable">${g.items.map(t=>`<div class="row2"><div class="qq">${esc(t.q)}</div><div class="aa">${esc(t.a)}</div></div>`).join("")}</div>`;
+    }else if(both){
+      rows = `<div class="deftable">${g.items.map(t=>
+        `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
+         <div class="d spanish">${esc(t.ds)}</div>
+         <div class="d">${esc(t.de)}</div></div>`).join("")}</div>`;
     }else if(showDefs){
       rows = `<div class="deftable">${g.items.map(t=>
         `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
-         <div class="d ${state.diff!=='medium'?'spanish':''}">${fmt(t[defKey])}</div></div>`).join("")}</div>`;
+         <div class="d ${state.diff==='hard'?'spanish':''}">${esc(t[defKey])}</div></div>`).join("")}</div>`;
     }else{
       rows = `<div class="vocab">${g.items.map(t=>`<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>`;
     }
     return `<section class="listsec"><h2>${esc(g.name)} &middot; ${g.items.length}</h2>${rows}</section>`;
   }).join("");
   panel.innerHTML = `<div class="card">${inner}</div>` +
-    (hasVocab() ? `<p class="foot">Words show ${state.diff==='fill'?'the story sentences':showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>` : "");
+    (hasVocab() ? `<p class="foot">Words show ${both?'the Spanish and English definitions':showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings only'} &mdash; switch with the Nivel buttons.</p>` : "");
   updateReportLink();
 }
 
