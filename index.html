@@ -191,6 +191,11 @@ h1{font-weight:800;font-size:25px;line-height:1.15;margin:0 0 4px;letter-spacing
 .prompt.def{font-size:21px;line-height:1.35;max-width:32em;font-weight:500}
 .prompt.def.spanish{font-style:italic}
 .prompt.ask{font-size:23px;line-height:1.3;max-width:26em;font-weight:700}
+.prompt.fill{font-style:normal;font-weight:500}
+.q-text.fill{font-style:normal}
+.blank{display:inline-block;min-width:5.5em;height:1em;border-bottom:2.5px solid var(--accent);vertical-align:baseline;margin:0 .15em;border-radius:1px}
+.tile .blank{min-width:3.5em;border-bottom-width:2px}
+.wb-def .blank{min-width:4.5em}
 .opts{display:grid;gap:9px}
 .opt{
   display:flex;gap:13px;align-items:center;text-align:left;width:100%;
@@ -309,6 +314,18 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .wb-word:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .wb-empty{font-size:13px;color:var(--muted)}
 
+/* ---------- examen completo ---------- */
+.full-part{margin-bottom:18px}
+.full-part-head{margin-bottom:6px}
+.full-part-head h2{font-size:20px;font-weight:800;margin:6px 0 4px}
+.full-part-head p{margin:0 0 6px;color:var(--muted);font-size:14px}
+.full-badge{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warm);background:var(--warm-soft);border-radius:99px;padding:4px 10px}
+.full-block{padding-top:16px;margin-top:10px;border-top:1px solid var(--line)}
+.full-h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:0 0 10px}
+.full-h3 span{font-weight:500;letter-spacing:0;text-transform:none}
+.wb-bank.inblock{position:sticky;top:8px;bottom:auto;margin:0 0 6px;z-index:2}
+.full-footer{margin-top:6px;margin-bottom:10px}
+
 /* ---------- list ---------- */
 .listsec + .listsec{margin-top:28px}
 .listsec h2{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
@@ -388,6 +405,7 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
         <button class="tab" role="tab" data-mode="test"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="m5.5 8 2 2 3.5-4"/></svg><span>Examen</span></button>
         <button class="tab" role="tab" data-mode="wordbank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="5" height="4" rx="1"/><rect x="9" y="3" width="5" height="4" rx="1"/><rect x="2" y="9" width="5" height="4" rx="1"/><path d="M9 11h5"/></svg><span>Banco</span></button>
         <button class="tab" role="tab" data-mode="match"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h3l6 8h3M2 12h3l1.5-2M11 4h3l-1.5 2"/></svg><span>Emparejar</span></button>
+        <button class="tab" role="tab" data-mode="full"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2.5" width="10" height="11.5" rx="1.5"/><path d="M6 1.5h4v2H6zM5.5 7.5h5M5.5 10.5h3"/></svg><span>Completo</span></button>
         <button class="tab" role="tab" data-mode="list"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 8h9M5 12h9"/><circle cx="2.5" cy="4" r=".6"/><circle cx="2.5" cy="8" r=".6"/><circle cx="2.5" cy="12" r=".6"/></svg><span>Lista</span></button>
       </div>
     </div>
@@ -423,74 +441,74 @@ const SETS = [
   name:"EL VASO DE LECHE + EL MUELLE DE SAN BLAS",
   tag:"Unidad 2 · Memoria y recuerdos",
   featured:true, badge:"Próximo examen",
-  sections:[{id:"vocab",name:"Vocabulario"},{id:"vaso",name:"El vaso de leche"},{id:"muelle",name:"El muelle de San Blas"}],
+  sections:[{"id":"vocab","name":"Vocabulario"},{"id":"vaso","name":"El vaso de leche"},{"id":"muelle","name":"El muelle de San Blas"}],
   groups:[
     { id:"sust", name:"Sustantivos", section:"vocab", kind:"vocab", terms:[
-      ["la alegría","happiness","the feeling of being glad and full of joy","el sentimiento de estar contento"],
-      ["la angustia","anguish","deep distress or torment of the mind","la aflicción muy grande que aprieta el pecho"],
-      ["el barco","boat","a vessel that carries people or cargo on water","el vehículo que navega por el agua"],
-      ["la cara","face","the front of a person's head","la parte delantera de la cabeza"],
-      ["la caridad","charity","generous help given to people in need","la ayuda generosa que se da a los necesitados"],
-      ["la costa","coast","the land along the edge of the sea","la tierra que está al lado del mar"],
-      ["el descanso","rest","a pause taken from work or effort","la pausa que se toma después del esfuerzo"],
-      ["el dolor","pain","the physical hurt you feel from a wound or illness","la sensación que produce una herida o una enfermedad"],
-      ["la frescura","coolness, freshness","the quality of being cool and newly made","la sensación agradable de algo frío y limpio"],
-      ["el hambre","hunger","the need to eat","la necesidad de comer"],
-      ["el marinero","sailor","a person who works aboard a ship","la persona que trabaja en el mar"],
-      ["el orgullo","pride","a high opinion of your own worth or achievements","la alta opinión que alguien tiene de sí mismo"],
-      ["la pena","grief, suffering","deep sadness, especially over a loss","la tristeza profunda, sobre todo por una pérdida"],
-      ["el peso","weight","how heavy something is","cuántos kilos tiene una cosa"],
-      ["el puerto","port","the place where ships dock to load and unload","el sitio junto al mar donde atracan las embarcaciones"],
-      ["el rostro","face","a person's features; another word for the face","la parte del cuerpo donde están los ojos y la boca"],
-      ["el saco","bag","a large bag for carrying things","la bolsa grande que sirve para llevar cosas"],
-      ["la sonrisa","smile","the expression made when the corners of the mouth turn up","el gesto alegre que se hace con la boca"],
-      ["la vergüenza","shame","the bad feeling of having done something wrong in front of others","lo que se siente cuando uno queda mal delante de otros"]
+      ["la alegría","happiness","the feeling of being glad and full of joy","el sentimiento de estar contento","Lloró otra vez, pero ahora con ___, sintiendo que una gran frescura lo penetraba."],
+      ["la angustia","anguish","deep distress or torment of the mind","la aflicción muy grande que aprieta el pecho","Le agradeció el ofrecimiento con una sonrisa llena de ___ y se fue."],
+      ["el barco","boat","a vessel that carries people or cargo on water","el vehículo que navega por el agua","___ acababa de llegar la noche anterior y cargaba trigo."],
+      ["la cara","face","the front of a person's head","la parte delantera de la cabeza","Se limpió con su pañuelo los ojos y ___."],
+      ["la caridad","charity","generous help given to people in need","la ayuda generosa que se da a los necesitados","Tenía vergüenza de que su aspecto despertara sentimientos de ___."],
+      ["la costa","coast","the land along the edge of the sea","la tierra que está al lado del mar","Aunque era muy joven, había hecho varios viajes por toda ___ de América del Sur."],
+      ["el descanso","rest","a pause taken from work or effort","la pausa que se toma después del esfuerzo","A la hora de almorzar hubo un breve ___."],
+      ["el dolor","pain","the physical hurt you feel from a wound or illness","la sensación que produce una herida o una enfermedad","Sintió un ___ como una quemadura en las entrañas y se detuvo."],
+      ["la frescura","coolness, freshness","the quality of being cool and newly made","la sensación agradable de algo frío y limpio","Lloró con alegría, sintiendo que una gran ___ lo penetraba."],
+      ["el hambre","hunger","the need to eat","la necesidad de comer","Hacía tres días justos que no comía; tenía mucha ___."],
+      ["el marinero","sailor","a person who works aboard a ship","la persona que trabaja en el mar","___ parecía esperar a alguien, con un bulto de papel en la mano."],
+      ["el orgullo","pride","a high opinion of your own worth or achievements","la alta opinión que alguien tiene de sí mismo","Se resistía a pedir comida más por su timidez y vergüenza que por ___."],
+      ["la pena","grief, suffering","deep sadness, especially over a loss","la tristeza profunda, sobre todo por una pérdida","Afirmó la cabeza en las manos y lloró con ___, con rabia, con ganas de llorar."],
+      ["el peso","weight","how heavy something is","cuántos kilos tiene una cosa","Cargó sacos toda la mañana y ___ le doblaba la espalda."],
+      ["el puerto","port","the place where ships dock to load and unload","el sitio junto al mar donde atracan las embarcaciones","Hacía seis días que vagaba por las calles y muelles de aquel ___."],
+      ["el rostro","face","a person's features; another word for the face","la parte del cuerpo donde están los ojos y la boca","Vio su casa, ___ de su madre y el de sus hermanos."],
+      ["el saco","bag","a large bag for carrying things","la bolsa grande que sirve para llevar cosas","Cargaba un ___ pesado de trigo tras otro."],
+      ["la sonrisa","smile","the expression made when the corners of the mouth turn up","el gesto alegre que se hace con la boca","Dijo que no tenía hambre, mientras dirigía al marinero una ___ triste."],
+      ["la vergüenza","shame","the bad feeling of having done something wrong in front of others","lo que se siente cuando uno queda mal delante de otros","No se atrevía a mirar a la señora; sentía mucha ___ de sus propósitos."]
     ]},
     { id:"verb", name:"Verbos", section:"vocab", kind:"vocab", terms:[
-      ["andar","to walk","to move along on foot","moverse a pie de un lugar a otro"],
-      ["aparecer","to appear","to come into sight","dejarse ver, hacerse visible"],
-      ["atreverse (a)","to dare (to)","to be bold enough to do something risky","tener el valor de hacer algo arriesgado"],
-      ["cargar","to load","to put a load onto something, or carry it","poner algo pesado encima para transportarlo"],
-      ["conseguir","to obtain","to get the thing you were after","obtener lo que se buscaba"],
-      ["dejar","to leave (behind)","to let something stay where it is and go without it","no llevarse algo, abandonarlo en un sitio"],
-      ["descansar","to rest","to stop working for a while to recover","tomar una pausa para recuperar las fuerzas"],
-      ["detenerse","to stop","to come to a halt","interrumpir la marcha y quedarse quieto"],
-      ["elegir","to choose, elect","to pick one option out of several","tomar una opción entre varias"],
-      ["gritar","to shout, yell","to say something very loudly","hablar muy fuerte, dando voces"],
-      ["llorar","to cry","to shed tears","echar lágrimas por los ojos"],
-      ["pagar","to pay","to give money for something","dar dinero a cambio de algo"],
-      ["pararse","to stop","to come to a halt, or to stand up","quedarse quieto en un sitio; ponerse de pie"],
-      ["resistir","to resist","to hold out against something and endure it","aguantar algo sin ceder"],
-      ["temer","to fear","to be afraid of something","tener miedo de algo"],
-      ["vagar","to wander","to walk around with no fixed destination","ir de un lado a otro sin rumbo fijo"]
+      ["andar","to walk","to move along on foot","moverse a pie de un lugar a otro","Tenía tanta hambre que al ___ vacilaba como un borracho."],
+      ["aparecer","to appear","to come into sight","dejarse ver, hacerse visible","Entre unos vagones vio ___ a un joven delgado que miraba hacia el mar."],
+      ["atreverse (a)","to dare (to)","to be bold enough to do something risky","tener el valor de hacer algo arriesgado","Estuvo un rato mirando hasta que pudo ___ a hablar con el capataz."],
+      ["cargar","to load","to put a load onto something, or carry it","poner algo pesado encima para transportarlo","Fue aceptado y empezó a ___ los pesados sacos."],
+      ["conseguir","to obtain","to get the thing you were after","obtener lo que se buscaba","Le preguntó al capataz si era posible ___ un adelanto."],
+      ["dejar","to leave (behind)","to let something stay where it is and go without it","no llevarse algo, abandonarlo en un sitio","El vapor inglés lo iba a ___ en el primer puerto grande que tocara."],
+      ["descansar","to rest","to stop working for a while to recover","tomar una pausa para recuperar las fuerzas","Él se tendió en el suelo a ___, disimulando su hambre."],
+      ["detenerse","to stop","to come to a halt","interrumpir la marcha y quedarse quieto","Dio un paso más corto que los demás, como para ___."],
+      ["elegir","to choose, elect","to pick one option out of several","tomar una opción entre varias","Estuvo un momento indeciso, sin saber qué mesa ___."],
+      ["gritar","to shout, yell","to say something very loudly","hablar muy fuerte, dando voces","Cuando pasó frente al barco, el marinero le empezó a ___ en inglés."],
+      ["llorar","to cry","to shed tears","echar lágrimas por los ojos","Se dio cuenta de que iba a ___ a gritos delante de la señora."],
+      ["pagar","to pay","to give money for something","dar dinero a cambio de algo","Resolvió ir a comer a cualquier parte, sin ___."],
+      ["pararse","to stop","to come to a halt, or to stand up","quedarse quieto en un sitio; ponerse de pie","Se resistía a ___ delante de los vapores a las horas de comida."],
+      ["resistir","to resist","to hold out against something and endure it","aguantar algo sin ceder","Convencido de que no podía ___ mucho más, decidió recurrir a cualquier medio."],
+      ["temer","to fear","to be afraid of something","tener miedo de algo","Apresuró el paso, porque parecía ___ arrepentirse de su respuesta."],
+      ["vagar","to wander","to walk around with no fixed destination","ir de un lado a otro sin rumbo fijo","Hacía seis días que no hacía más que ___ por las calles del puerto."]
     ]},
     { id:"adj", name:"Adjetivos", section:"vocab", kind:"vocab", terms:[
-      ["ardiente","burning","on fire, or extremely hot","que arde o quema"],
-      ["avergonzado","ashamed","feeling bad about something you did","que se siente mal por algo que hizo"],
-      ["caliente","warm, hot","having a high temperature","que tiene una temperatura alta"],
-      ["corto","short","not long","que no es largo"],
-      ["delgado","thin","slim, not fat","que no es gordo"],
-      ["desesperado","desperate","having lost hope and ready to do anything","que ha perdido la esperanza"],
-      ["distinto","different","not the same as something else","que no es igual a otro"],
-      ["distraído","distracted","not paying attention","que no presta atención"],
-      ["fatigado","fatigued","worn out and very tired","muy cansado"],
-      ["lejano","far away","at a great distance","que está muy lejos"],
-      ["manchado","stained","marked with spots of dirt","que está sucio con marcas"],
-      ["suave","soft","smooth and gentle to the touch","que es agradable y blando al tacto"]
+      ["ardiente","burning","on fire, or extremely hot","que arde o quema","No pudo deshacer aquel nudo ___ que le subía hasta la garganta."],
+      ["avergonzado","ashamed","feeling bad about something you did","que se siente mal por algo que hizo","El joven, ___ de su aspecto, apresuró el paso."],
+      ["caliente","warm, hot","having a high temperature","que tiene una temperatura alta","Algo ___ subió desde su corazón hasta la garganta."],
+      ["corto","short","not long","que no es largo","Dio un paso más ___ que los demás, como para detenerse."],
+      ["delgado","thin","slim, not fat","que no es gordo","Entre unos vagones apareció un joven ___."],
+      ["desesperado","desperate","having lost hope and ready to do anything","que ha perdido la esperanza","Era un muchacho ___: hacía tres días que no comía."],
+      ["distinto","different","not the same as something else","que no es igual a otro","Cada viaje era ___ del anterior."],
+      ["distraído","distracted","not paying attention","que no presta atención","Caminaba por la orilla del muelle con las manos en los bolsillos, ___ o pensando."],
+      ["fatigado","fatigued","worn out and very tired","muy cansado","Al principio trabajó bien, pero después empezó a sentirse ___."],
+      ["lejano","far away","at a great distance","que está muy lejos","Ella miraba hacia la calle, a un punto ___, y su rostro estaba triste."],
+      ["manchado","stained","marked with spots of dirt","que está sucio con marcas","Tenía en la mano un bulto de papel blanco, ___ de grasa."],
+      ["suave","soft","smooth and gentle to the touch","que es agradable y blando al tacto","Acudió la señora y con voz ___ le preguntó qué se iba a servir."]
     ]},
     { id:"adv", name:"Adverbios", section:"vocab", kind:"vocab", terms:[
-      ["ante","before","in the presence of; faced with","en presencia de alguien o de algo"],
-      ["delante de","in front of","positioned at the front of something","en la zona anterior de algo, no en la de atrás"],
-      ["detrás de","behind","at the back of something","en la parte de atrás de algo"],
-      ["frente a","in front of (and facing)","directly facing something","cara a cara con algo, mirándolo"],
-      ["hacia","toward(s)","in the direction of","en dirección a un lugar"]
+      ["ante","before","in the presence of; faced with","en presencia de alguien o de algo","Todo lo que él quería apareció y desapareció ___ sus ojos cerrados."],
+      ["delante de","in front of","positioned at the front of something","en la zona anterior de algo, no en la de atrás","Se resistía a pararse ___ los vapores a las horas de comida."],
+      ["detrás de","behind","at the back of something","en la parte de atrás de algo","___ un mostrador estaba de pie una señora rubia."],
+      ["frente a","in front of (and facing)","directly facing something","cara a cara con algo, mirándolo","Se paró ___ la lechería y esperó que saliera el viejo."],
+      ["hacia","toward(s)","in the direction of","en dirección a un lugar","Se quedó dormido con el rostro vuelto ___ el mar."]
     ]},
     { id:"expr", name:"Expresiones", section:"vocab", kind:"vocab", terms:[
-      ["como si...","as if...","used to compare something with an imagined situation","se usa para comparar con algo imaginario"],
-      ["estar de pie","to be standing","to be on your feet rather than sitting","estar levantado, no sentado"],
-      ["lo importante","the important thing","the thing that matters most","lo que más vale de todo"],
-      ["poco a poco","little by little","gradually, in small steps","de manera gradual, en pasos pequeños"],
-      ["tener ganas (de + inf.)","to feel like (doing something)","to want to do something right now","querer hacer algo en ese momento"]
+      ["como si...","as if...","used to compare something with an imagined situation","se usa para comparar con algo imaginario","Lloró con ganas, ___ nunca hubiese llorado."],
+      ["estar de pie","to be standing","to be on your feet rather than sitting","estar levantado, no sentado","Detrás del mostrador, una señora rubia parecía ___ desde hacía horas."],
+      ["lo importante","the important thing","the thing that matters most","lo que más vale de todo","Resolvió ir a comer sin pagar; ___ era comer, comer, comer."],
+      ["poco a poco","little by little","gradually, in small steps","de manera gradual, en pasos pequeños","Sentía que ___ se le encendía en el estómago la quemadura de antes."],
+      ["tener ganas (de + inf.)","to feel like (doing something)","to want to do something right now","querer hacer algo en ese momento","Al final ya no parecía ___ de pensar, ni de cantar, ni de hablar."]
     ]},
     { id:"puerto", name:"En el puerto", section:"vaso", kind:"quiz", terms:[
       ["¿Dónde tiene lugar el cuento?","en un puerto junto al mar","en un pueblo de la montaña","en una finca en el campo","en la capital del país"],
@@ -656,9 +674,10 @@ SETS.forEach(set=>{
     const quiz = g.kind==="quiz";
     g.items = g.terms.map((t,i)=> quiz
       ? {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"quiz", q:t[0], a:t[1], opts:t.slice(1), es:t[1], en:t[0]}
-      : {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"vocab", es:t[0], en:t[1], de:t[2], ds:t[3]});
+      : {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"vocab", es:t[0], en:t[1], de:t[2], ds:t[3], fb:t[4]||null});
   });
   set.all = set.groups.reduce((a,g)=>a.concat(g.items),[]);
+  set.hasFill = set.all.some(t=>t.kind==="vocab" && t.fb);
   set.nVocab = set.all.filter(t=>t.kind==="vocab").length;
   set.nQuiz  = set.all.length - set.nVocab;
 });
@@ -669,6 +688,18 @@ const REPORT_EMAIL = "bluezonesai@gmail.com";
 const $ = s => document.querySelector(s);
 const panel = $("#panel");
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt = s => esc(s).replace(/_{2,}/g,'<span class="blank" aria-label="blank"></span>');
+/* put the word back into its sentence: drop the article when the sentence already supplies a determiner */
+const DETS = new Set("un una unos unas el la los las mucho mucha muchos muchas gran breve cada aquel aquella su sus mi este esta poco poca tanto tanta de con por sin".split(" "));
+function fillSentence(item){
+  const sent = item.fb || "";
+  let word = item.es.split(",")[0].replace(/\s*\(.*?\)/,"").replace(/\.{2,}$/,"").trim();
+  const m = sent.match(/(\S+)\s+_{2,}/);
+  const prev = m ? m[1].toLowerCase().replace(/[^a-záéíóúñü]/g,"") : "";
+  if(DETS.has(prev)) word = word.replace(/^(el|la|los|las)\s+/i,"");
+  if(/^_{2,}/.test(sent)) word = word.charAt(0).toUpperCase()+word.slice(1);
+  return sent.replace(/_{2,}/, word);
+}
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 const pick = a => a[Math.floor(Math.random()*a.length)];
 
@@ -697,11 +728,15 @@ const DIFF = {
           note:"English definition &rarr; pick the Spanish word.", ph:"Spanish word…"},
   hard:  {promptKey:"ds", answerKey:"es", promptStyle:"def spanish", answerLang:"es",
           label:"Difícil", mcLabel:"Escoge la palabra correcta", typeLabel:"Escribe la palabra",
-          note:"Spanish definition &rarr; pick the Spanish word. No English anywhere.", ph:"la palabra…"}
+          note:"Spanish definition &rarr; pick the Spanish word. No English anywhere.", ph:"la palabra…"},
+  fill:  {promptKey:"fb", answerKey:"es", promptStyle:"def spanish fill", answerLang:"es",
+          label:"Frases", mcLabel:"Completa la frase", typeLabel:"Escribe la palabra que falta",
+          note:"A sentence from the story with a blank &rarr; the word that completes it. This is the test format.", ph:"la palabra que falta…"}
 };
 const MATCH_DIFF = {
   easy:{label:"Fácil", key:"de", tileClass:"", note:"Match each Spanish word to its English definition."},
-  hard:{label:"Difícil", key:"ds", tileClass:"esdef", note:"Match each Spanish definition to its Spanish word. No English."}
+  hard:{label:"Difícil", key:"ds", tileClass:"esdef", note:"Match each Spanish definition to its Spanish word. No English."},
+  fill:{label:"Frases", key:"fb", tileClass:"esdef", note:"Match each sentence to the word that fills its blank."}
 };
 
 function makeMC(term, pool, diff){
@@ -763,7 +798,7 @@ function updateReportLink(){
     lines.splice(2,0,
       "Set: " + set.name,
       "Part: " + [sec, grp].filter(Boolean).join(" › ") || "Todo",
-      "Mode: " + ({learn:"Aprender",test:"Examen",wordbank:"Banco",match:"Emparejar",list:"Lista"})[state.mode],
+      "Mode: " + ({learn:"Aprender",test:"Examen",wordbank:"Banco",match:"Emparejar",full:"Completo",list:"Lista"})[state.mode],
       "Level: " + (state.mode==="match" ? MATCH_DIFF[state.matchDiff].label : DIFF[state.diff].label));
     const t = currentTermOnScreen();
     if(t) lines.splice(2,0, t.kind==="quiz" ? "Question on screen: " + t.q + " — " + t.a : "Term on screen: " + t.es + " — " + t.en);
@@ -780,6 +815,7 @@ const ICON = {
   test:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="m5.5 8 2 2 3.5-4"/></svg>',
   wordbank:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="5" height="4" rx="1"/><rect x="9" y="3" width="5" height="4" rx="1"/><rect x="2" y="9" width="5" height="4" rx="1"/><path d="M9 11h5"/></svg>',
   match:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h3l6 8h3M2 12h3l1.5-2M11 4h3l-1.5 2"/></svg>',
+  full:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2.5" width="10" height="11.5" rx="1.5"/><path d="M6 1.5h4v2H6zM5.5 7.5h5M5.5 10.5h3"/></svg>',
   list:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 8h9M5 12h9"/><circle cx="2.5" cy="4" r=".6"/><circle cx="2.5" cy="8" r=".6"/><circle cx="2.5" cy="12" r=".6"/></svg>',
   bulb:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13h4M6.5 15h3M8 1.5a4.5 4.5 0 0 0-2.6 8.2c.4.3.6.7.6 1.2v.1h4v-.1c0-.5.2-.9.6-1.2A4.5 4.5 0 0 0 8 1.5z"/></svg>'
 };
@@ -808,6 +844,7 @@ function renderHome(){
         <button data-set="${set.id}" data-go="test">${ICON.test}Examen</button>
         ${vocab?`<button data-set="${set.id}" data-go="wordbank">${ICON.wordbank}Banco</button>
         <button data-set="${set.id}" data-go="match">${ICON.match}Emparejar</button>`:""}
+        ${set.nQuiz>0 && vocab?`<button data-set="${set.id}" data-go="full">${ICON.full}Completo</button>`:""}
         <button data-set="${set.id}" data-go="list">${ICON.list}Lista</button>
       </div>
     </div>`;
@@ -817,10 +854,14 @@ function renderHome(){
       <h2>Repasa español sin estrés.</h2>
       <p>Pick a set, then drill it however you like: rounds of five, a quick test, a word bank, or a race against the clock.</p>
     </div>
-    <div class="home-grid">${cards}</div>`;
+    <div class="home-grid">${cards}</div>
+    <div class="tip">${ICON.bulb}<div><b>Heads up:</b> the last Escuela test was fill-in-the-blank from a word bank, not multiple choice. <b>Banco</b> is the closest practice for that format.</div></div>`;
   panel.querySelectorAll(".go button").forEach(b=>b.addEventListener("click",()=>{
     state.setId = b.dataset.set;
     state.section = "all"; state.group = "all";
+    const hasFill = curSet().hasFill;
+    state.diff = hasFill ? "fill" : (state.diff==="fill" ? "easy" : state.diff);
+    state.matchDiff = hasFill ? "fill" : (state.matchDiff==="fill" ? "easy" : state.matchDiff);
     state.view = "study";
     state.mode = b.dataset.go;
     render();
@@ -899,7 +940,8 @@ function renderLearn(){
     verdict = `<div class="verdict ${ok?'ok':'no'}">
         <b>${ok?'&#10003; ¡Correcto!':'&#10007; Casi&hellip;'}</b>
         <span class="answer">${isQ ? esc(item.a) : `<span class="es">${esc(item.es)}</span> &mdash; ${esc(item.en)}`}</span>
-        ${!isQ && learn.diff!=="easy" ? `<span class="gloss">${esc(item[learn.diff==="hard"?"ds":"de"])}</span>` : ""}
+        ${!isQ && learn.diff==="fill" ? `<span class="gloss">${esc(fillSentence(item))}</span>` : ""}
+        ${!isQ && (learn.diff==="medium"||learn.diff==="hard") ? `<span class="gloss">${esc(item[learn.diff==="hard"?"ds":"de"])}</span>` : ""}
         ${!ok ? `<span class="gloss">It&rsquo;ll come back later in this round.</span>` : ""}
       </div>
       <div class="row" style="margin-top:16px"><button class="btn" id="nextBtn">Continuar</button>
@@ -918,7 +960,7 @@ function renderLearn(){
     </div>
     <div class="card">
       <div class="prompt-kind">${kindLabel}</div>
-      <p class="prompt ${promptClass(item,learn.diff)}">${esc(q.prompt)}</p>
+      <p class="prompt ${promptClass(item,learn.diff)}">${fmt(q.prompt)}</p>
       ${body}${verdict}
     </div>
     ${learn.step==="ask"&&q.kind==="mc"?'<p class="hint">Tip: press 1&ndash;4 to answer.</p>':''}`;
@@ -1033,7 +1075,7 @@ function renderMatch(){
       <button class="btn ghost" id="resetMatch" style="padding:7px 13px;font-size:14px">Barajar</button>
     </div>
     <div class="tiles">${match.tiles.map(t=>
-      `<button class="tile ${t.side==='word'?'word':m.tileClass}" data-tid="${t.tid}" ${match.matched.has(t.term.id)?'disabled':''}>${esc(t.text)}</button>`).join("")}</div>`;
+      `<button class="tile ${t.side==='word'?'word':m.tileClass}" data-tid="${t.tid}" ${match.matched.has(t.term.id)?'disabled':''}>${fmt(t.text)}</button>`).join("")}</div>`;
   updateReportLink();
   $("#resetMatch").addEventListener("click", startMatch);
   panel.querySelectorAll(".tile").forEach(b=>b.addEventListener("click",()=>tileClick(b)));
@@ -1085,11 +1127,12 @@ function tileClick(btn){
 
 /* ---------- WORD BANK (vocab only) ---------- */
 const WB_LEN = 15, WB_DECOYS = 5;
-const WB_PROMPT = {easy:"en", medium:"de", hard:"ds"};
+const WB_PROMPT = {easy:"en", medium:"de", hard:"ds", fill:"fb"};
 const WB_NOTE = {
   easy:"English meaning on each row &mdash; drop in the Spanish word.",
   medium:"English definition on each row &mdash; drop in the Spanish word.",
-  hard:"Definici&oacute;n en espa&ntilde;ol &mdash; arrastra la palabra correcta. No English."
+  hard:"Definici&oacute;n en espa&ntilde;ol &mdash; arrastra la palabra correcta. No English.",
+  fill:"Frases del cuento con un hueco &mdash; arrastra la palabra que falta. Exactly the test format."
 };
 function startWordbank(){
   const pool = vocabPool();
@@ -1119,7 +1162,7 @@ function wbReturn(qi){
   renderWordbank();
 }
 function renderWordbank(){
-  const key = WB_PROMPT[wb.diff], spanish = wb.diff==="hard";
+  const key = WB_PROMPT[wb.diff], spanish = wb.diff!=="easy" && wb.diff!=="medium";
   const byId = id => wb.pool.find(t=>t.id===id);
   const filled = Object.keys(wb.placed).length;
   let head = "";
@@ -1140,7 +1183,7 @@ function renderWordbank(){
     return `<div class="wb-row">
       <span class="wb-num">${i+1}.</span>
       <div class="${cls}" data-box="${i}" tabindex="0" role="button" aria-label="Respuesta ${i+1}">${inner}</div>
-      <p class="wb-def ${spanish?"spanish":""}">${esc(t[key])}</p>
+      <p class="wb-def ${spanish?"spanish":""}">${fmt(t[key])}</p>
       ${wb.graded && wb.placed[i]!==t.id ? `<p class="wb-fix">Correcta: <span class="es">${esc(t.es)}</span></p>` : ""}
     </div>`;
   }).join("");
@@ -1200,6 +1243,201 @@ function wbConfirm(blanks){
   return false;
 }
 
+/* ---------- EXAMEN COMPLETO ----------
+   The whole set in one sitting. Part 1: every vocabulary word as a sentence
+   with a blank, in word-bank blocks of 15 (each bank carries 5 decoys).
+   Part 2: every comprehension question as multiple choice. One grade. ------- */
+const FULL_BLOCK = 15, FULL_DECOYS = 5;
+let full = null;
+function startFull(){
+  const set = curSet();
+  const vkey = set.hasFill ? "fb" : "en";
+  const vocab = shuffle(set.all.filter(t=>t.kind==="vocab"));
+  const blocks = [];
+  for(let i=0;i<vocab.length;i+=FULL_BLOCK){
+    const items = vocab.slice(i,i+FULL_BLOCK);
+    const others = shuffle(vocab.filter(t=>!items.includes(t))).slice(0,FULL_DECOYS);
+    const bankAll = shuffle(items.concat(others)).map(t=>t.id);
+    blocks.push({items, decoys:others.length, bankAll, bank:bankAll.slice(), placed:{}});
+  }
+  const quiz = shuffle(set.all.filter(t=>t.kind==="quiz")).map(t=>makeMC(t,set.all,"easy"));
+  full = { set, vkey, blocks, quiz, answers:{}, sel:null, graded:false, warned:false };
+  renderFull();
+}
+const fullById = id => full.set.all.find(t=>t.id===id);
+function fullBlockHTML(bi){
+  const b = full.blocks[bi], spanish = full.vkey==="fb";
+  const rows = b.items.map((t,i)=>{
+    const pid = b.placed[i], pt = pid ? fullById(pid) : null;
+    let cls = "wb-box" + (pt ? " filled" : "");
+    let inner = pt ? esc(pt.es) : "";
+    if(full.graded){ cls = "wb-box filled " + (pid===t.id ? "correct" : "wrong"); if(!pt) inner = "&mdash;"; }
+    const n = full.blocks.slice(0,bi).reduce((a,x)=>a+x.items.length,0) + i + 1;
+    return `<div class="wb-row">
+      <span class="wb-num">${n}.</span>
+      <div class="${cls}" data-block="${bi}" data-box="${i}" tabindex="0" role="button" aria-label="Respuesta ${n}">${inner}</div>
+      <p class="wb-def ${spanish?"spanish":""}">${fmt(t[full.vkey])}</p>
+      ${full.graded && pid!==t.id ? `<p class="wb-fix">Correcta: <span class="es">${esc(t.es)}</span></p>` : ""}
+    </div>`;
+  }).join("");
+  const bank = full.graded ? "" : `
+    <div class="wb-bank inblock">
+      <div class="wb-bank-head">
+        <span class="label">Banco ${bi+1}</span>
+        ${b.decoys?`<span class="wb-hint">${b.decoys} won&rsquo;t be used</span>`:""}
+        <span class="wb-count">${Object.keys(b.placed).length} / ${b.items.length} filled</span>
+      </div>
+      <div class="wb-words" data-bankof="${bi}">${
+        b.bank.length
+          ? b.bank.map(id=>`<button class="wb-word${full.sel&&full.sel.block===bi&&full.sel.word===id?" sel":""}" draggable="true" data-block="${bi}" data-word="${id}">${esc(fullById(id).es)}</button>`).join("")
+          : `<span class="wb-empty">Every word is placed.</span>`
+      }</div>
+    </div>`;
+  return `<section class="full-block" data-block="${bi}">
+      <h3 class="full-h3">Bloque ${bi+1} <span>de ${full.blocks.length}</span></h3>
+      ${bank}
+      <div class="wb-list">${rows}</div>
+    </section>`;
+}
+function renderFull(){
+  const nV = full.blocks.reduce((a,b)=>a+b.items.length,0), nQ = full.quiz.length;
+  let head = "";
+  if(full.graded){
+    const rV = full.blocks.reduce((a,b)=>a+b.items.filter((t,i)=>b.placed[i]===t.id).length,0);
+    const rQ = full.quiz.filter((q,i)=>full.answers[i]===q.answer).length;
+    const pct = Math.round((rV+rQ)/(nV+nQ)*100);
+    head = `<div class="score">
+      <span class="big">${pct}%</span>
+      <span class="detail"><b>${rV+rQ} of ${nV+nQ} correct</b>Vocabulario ${rV}/${nV} &middot; Comprensi&oacute;n ${rQ}/${nQ}</span>
+      <span class="spacer"></span>
+      <span class="row"><button class="btn" id="fullNew">Otra vez</button></span>
+    </div>`;
+  }
+  const part1 = `<div class="card full-part">
+      <div class="full-part-head"><span class="full-badge">Parte 1</span><h2>Vocabulario &mdash; completa las frases</h2>
+        <p>${nV} sentences in blocks of ${FULL_BLOCK}. Each block has its own bank; ${FULL_DECOYS} words in every bank are decoys.</p></div>
+      ${full.blocks.map((b,i)=>fullBlockHTML(i)).join("")}
+    </div>`;
+  const part2 = `<div class="card full-part">
+      <div class="full-part-head"><span class="full-badge">Parte 2</span><h2>Comprensi&oacute;n &mdash; escoge la respuesta</h2>
+        <p>${nQ} questions on the story and the song. Multiple choice, one answer each.</p></div>
+      ${full.quiz.map((q,i)=>{
+        const chosen = full.answers[i];
+        const cls = full.graded ? (chosen===q.answer?"marked-ok":"marked-wrong") : "";
+        return `<div class="q ${cls}">
+          <div class="q-head">
+            <span class="q-num">${full.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(nV+i+1)+"."}</span>
+            <p class="q-text ask">${esc(q.prompt)}</p>
+          </div>
+          <div class="opts">${q.options.map((o,k)=>{
+            let c=""; if(full.graded){ if(o===q.answer) c="correct"; else if(o===chosen) c="wrong"; } else if(o===chosen) c="chosen";
+            return `<button class="opt ${c}" ${full.graded?"disabled":""} data-q="${i}" data-opt="${esc(o)}"><span class="num">${"ABCD"[k]}</span><span>${esc(o)}</span></button>`;
+          }).join("")}</div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  const footer = full.graded ? "" : `
+    <div class="row full-footer">
+      <button class="btn" id="fullSubmit">Entregar todo</button>
+      <span class="hint" style="margin:0" id="fullCount">${fullFilled()} of ${nV+nQ} answered</span>
+    </div>`;
+  panel.innerHTML = head + part1 + part2 + footer;
+  updateReportLink();
+  if(full.graded){ $("#fullNew").addEventListener("click", startFull); return; }
+  bindFullBlocks();
+  panel.querySelectorAll(".opt:not(:disabled)").forEach(b=>b.addEventListener("click",()=>{
+    const i = +b.dataset.q;
+    full.answers[i] = b.dataset.opt;
+    panel.querySelectorAll('.opt[data-q="'+i+'"]').forEach(x=>x.classList.remove("chosen"));
+    b.classList.add("chosen");
+    fullCountUpdate();
+  }));
+  $("#fullSubmit").addEventListener("click",()=>{
+    const left = nV+nQ-fullFilled();
+    if(left>0 && !full.warned){
+      full.warned = true;
+      const c = $("#fullCount"); c.textContent = `${left} still blank — those count as wrong. Press Entregar todo again.`; c.style.color="var(--bad)";
+      return;
+    }
+    full.graded = true; renderFull(); window.scrollTo({top:0,behavior:"smooth"});
+  });
+}
+function fullFilled(){
+  return full.blocks.reduce((a,b)=>a+Object.keys(b.placed).length,0) + Object.keys(full.answers).length;
+}
+function fullCountUpdate(){
+  const c = $("#fullCount"); if(!c) return;
+  const n = full.blocks.reduce((a,b)=>a+b.items.length,0)+full.quiz.length;
+  c.textContent = `${fullFilled()} of ${n} answered`; c.style.color=""; full.warned=false;
+}
+function fullRefreshBlock(bi){
+  const old = panel.querySelector(`.full-block[data-block="${bi}"]`);
+  if(!old) return;
+  const tmp = document.createElement("div"); tmp.innerHTML = fullBlockHTML(bi);
+  old.replaceWith(tmp.firstElementChild);
+  bindFullBlocks(bi);
+  fullCountUpdate();
+}
+function fullPlace(bi, qi, id){
+  const b = full.blocks[bi];
+  Object.keys(b.placed).forEach(k=>{ if(b.placed[k]===id) delete b.placed[k]; });
+  const displaced = b.placed[qi];
+  b.placed[qi] = id;
+  b.bank = b.bank.filter(x=>x!==id);
+  if(displaced && displaced!==id) b.bank.push(displaced);
+  full.sel = null;
+  fullRefreshBlock(bi);
+}
+function fullReturn(bi, qi){
+  const b = full.blocks[bi], id = b.placed[qi];
+  if(!id) return;
+  delete b.placed[qi];
+  if(!b.bank.includes(id)) b.bank.push(id);
+  fullRefreshBlock(bi);
+}
+function bindFullBlocks(only){
+  const scope = only===undefined ? panel : panel.querySelector(`.full-block[data-block="${only}"]`);
+  if(!scope) return;
+  scope.querySelectorAll(".wb-word").forEach(w=>{
+    const bi = +w.dataset.block, id = w.dataset.word;
+    w.addEventListener("click",()=>{
+      const same = full.sel && full.sel.block===bi && full.sel.word===id;
+      const prevBlock = full.sel ? full.sel.block : null;
+      full.sel = same ? null : {block:bi, word:id};
+      if(prevBlock!==null && prevBlock!==bi) fullRefreshBlock(prevBlock);
+      fullRefreshBlock(bi);
+    });
+    w.addEventListener("dragstart",e=>{ e.dataTransfer.setData("text/plain", bi+"|"+id); e.dataTransfer.effectAllowed="move"; full.sel={block:bi, word:id}; });
+  });
+  scope.querySelectorAll(".wb-box").forEach(box=>{
+    const bi = +box.dataset.block, qi = +box.dataset.box;
+    const activate = ()=>{
+      if(full.sel && full.sel.block===bi) fullPlace(bi, qi, full.sel.word);
+      else if(full.blocks[bi].placed[qi]) fullReturn(bi, qi);
+    };
+    box.addEventListener("click", activate);
+    box.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(); }});
+    box.addEventListener("dragover",e=>{ e.preventDefault(); box.classList.add("over"); });
+    box.addEventListener("dragleave",()=>box.classList.remove("over"));
+    box.addEventListener("drop",e=>{
+      e.preventDefault(); box.classList.remove("over");
+      const [sb,id] = (e.dataTransfer.getData("text/plain")||"").split("|");
+      if(id && +sb===bi) fullPlace(bi, qi, id);
+    });
+  });
+  scope.querySelectorAll(".wb-words").forEach(words=>{
+    const bi = +words.dataset.bankof;
+    words.addEventListener("dragover",e=>e.preventDefault());
+    words.addEventListener("drop",e=>{
+      e.preventDefault();
+      const [sb,id] = (e.dataTransfer.getData("text/plain")||"").split("|");
+      if(+sb!==bi) return;
+      const qi = Object.keys(full.blocks[bi].placed).find(k=>full.blocks[bi].placed[k]===id);
+      if(qi!==undefined) fullReturn(bi, +qi);
+    });
+  });
+}
+
 /* ---------- TEST (multiple choice only) ---------- */
 function startTest(){
   const pool = curPool();
@@ -1229,7 +1467,7 @@ function renderTest(){
     return `<div class="q ${cls}">
       <div class="q-head">
         <span class="q-num">${test.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(i+1)+"."}</span>
-        <p class="q-text ${promptClass(item,test.diff)}">${esc(q.prompt)}</p>
+        <p class="q-text ${promptClass(item,test.diff)}">${fmt(q.prompt)}</p>
       </div>
       <div class="opts">${q.options.map((o,k)=>{
         let c = "";
@@ -1287,7 +1525,7 @@ function confirmSkip(left){
 function renderList(){
   const groups = curGroups();
   const showDefs = state.diff!=="easy";
-  const defKey = state.diff==="hard" ? "ds" : "de";
+  const defKey = state.diff==="hard" ? "ds" : state.diff==="fill" ? "fb" : "de";
   const inner = groups.map(g=>{
     let rows;
     if(g.kind==="quiz"){
@@ -1295,14 +1533,14 @@ function renderList(){
     }else if(showDefs){
       rows = `<div class="deftable">${g.items.map(t=>
         `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
-         <div class="d ${state.diff==='hard'?'spanish':''}">${esc(t[defKey])}</div></div>`).join("")}</div>`;
+         <div class="d ${state.diff!=='medium'?'spanish':''}">${fmt(t[defKey])}</div></div>`).join("")}</div>`;
     }else{
       rows = `<div class="vocab">${g.items.map(t=>`<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`).join("")}</div>`;
     }
     return `<section class="listsec"><h2>${esc(g.name)} &middot; ${g.items.length}</h2>${rows}</section>`;
   }).join("");
   panel.innerHTML = `<div class="card">${inner}</div>` +
-    (hasVocab() ? `<p class="foot">Words show ${showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>` : "");
+    (hasVocab() ? `<p class="foot">Words show ${state.diff==='fill'?'the story sentences':showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings'} &mdash; switch with the Nivel buttons.</p>` : "");
   updateReportLink();
 }
 
@@ -1335,9 +1573,9 @@ function buildPartChips(){
   }
 }
 function buildDiffChips(){
-  const isMatch = state.mode==="match";
-  const opts = isMatch ? [["easy",MATCH_DIFF.easy.label],["hard",MATCH_DIFF.hard.label]]
-                       : [["easy",DIFF.easy.label],["medium",DIFF.medium.label],["hard",DIFF.hard.label]];
+  const isMatch = state.mode==="match", fill = curSet().hasFill;
+  const opts = isMatch ? [["easy",MATCH_DIFF.easy.label],["hard",MATCH_DIFF.hard.label]].concat(fill?[["fill",MATCH_DIFF.fill.label]]:[])
+                       : [["easy",DIFF.easy.label],["medium",DIFF.medium.label],["hard",DIFF.hard.label]].concat(fill?[["fill",DIFF.fill.label]]:[]);
   chipRow($("#diffGroup"), opts.map(([id,label])=>({id,name:label})), isMatch?state.matchDiff:state.diff,
     id=>{ if(state.mode==="match") state.matchDiff=id; else state.diff=id; render(); });
 }
@@ -1350,21 +1588,27 @@ function render(){
 
   const set = curSet();
   const vocab = hasVocab();
+  if(!set.hasFill){ if(state.diff==="fill") state.diff="easy"; if(state.matchDiff==="fill") state.matchDiff="easy"; }
   if(!vocab && (state.mode==="wordbank" || state.mode==="match")) state.mode = "test";
   document.querySelectorAll('.tab[data-mode="wordbank"], .tab[data-mode="match"]').forEach(t=>t.hidden = set.nVocab===0);
+  $('.tab[data-mode="full"]').hidden = !(set.nQuiz>0 && set.nVocab>0);
+  if(state.mode==="full" && !(set.nQuiz>0 && set.nVocab>0)) state.mode = "test";
+  const isFull = state.mode==="full";
+  $("#sectionField").hidden = isFull; $("#groupField").hidden = isFull;
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===state.mode)));
   $("#setTag").textContent = set.tag || "";
   $("#setTag").hidden = !set.tag;
   $("#pageTitle").textContent = set.name;
   $("#pageSub").textContent = [set.nVocab?`${set.nVocab} palabras`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
-  buildPartChips();
-  $("#diffField").hidden = !vocab;
+  if(!isFull) buildPartChips();
+  $("#diffField").hidden = !vocab || isFull;
   $("#lenField").hidden = state.mode!=="test";
-  if(vocab) buildDiffChips();
+  if(vocab && !isFull) buildDiffChips();
 
   const poolQuizOnly = !vocab;
   let note;
-  if(state.mode==="list") note = poolQuizOnly
+  if(isFull) note = `<b>Examen completo</b><span>The whole set in one sitting: every word as a sentence with a blank (word banks of ${FULL_BLOCK}, ${FULL_DECOYS} decoys each), then every story and song question as multiple choice. One grade at the end.</span>`;
+  else if(state.mode==="list") note = poolQuizOnly
     ? "<span>Every question with its answer &mdash; read straight through before you drill.</span>"
     : "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>";
   else if(state.mode==="wordbank") note = `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions and ${WB_LEN+WB_DECOYS} words in the bank &mdash; ${WB_DECOYS} of them are decoys. Drag a word into a box, or tap the word then the box.</span>`;
@@ -1376,6 +1620,7 @@ function render(){
   $("#modeNote").innerHTML = note;
 
   if(state.mode==="learn") startLearn();
+  else if(state.mode==="full") startFull();
   else if(state.mode==="test") startTest();
   else if(state.mode==="wordbank") startWordbank();
   else if(state.mode==="match") startMatch();
