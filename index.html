@@ -250,6 +250,17 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 .q.marked-wrong .q-num{color:var(--bad)}
 .q.marked-ok .q-num{color:var(--good)}
 .q .gloss{margin:10px 0 0 38px;font-size:13px;color:var(--muted)}
+.q .gloss.why{color:var(--accent)}
+.typerow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-left:38px}
+.typerow input{flex:0 1 260px;min-width:180px}
+input.ok{border-color:var(--good);background:var(--good-soft);color:var(--good);font-weight:700}
+input.bad{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.typerow .fix{font-size:14px;color:var(--good)}
+.typerow .fix b{font-weight:700}
+.typerow .fix .alt{color:var(--muted);font-weight:400}
+.wb-row.typed{grid-template-columns:26px 200px 1fr}
+.wb-row.typed input[type="text"]{min-width:0;font-size:15.5px;padding:9px 12px}
+@media (max-width:640px){ .wb-row.typed{grid-template-columns:24px 1fr} .wb-row.typed input{grid-column:2;order:2} .typerow{margin-left:0} }
 .score{
   display:flex;gap:22px;align-items:center;flex-wrap:wrap;
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
@@ -1557,7 +1568,8 @@ let full = null;
 function startFull(){
   const set = curSet();
   const vkey = set.hasFill ? "fb" : "en";
-  const vocab = shuffle(set.all.filter(t=>t.kind!=="quiz"));
+  const vocab = shuffle(set.all.filter(t=>t.kind==="vocab"));
+  const gram = shuffle(set.all.filter(t=>t.kind==="gram"));
   const blocks = [];
   for(let i=0;i<vocab.length;i+=FULL_BLOCK){
     const items = vocab.slice(i,i+FULL_BLOCK);
@@ -1566,7 +1578,7 @@ function startFull(){
     blocks.push({items, decoys:others.length, bankAll, bank:bankAll.slice(), placed:{}});
   }
   const quiz = shuffle(set.all.filter(t=>t.kind==="quiz")).map(t=>makeMC(t,set.all,"easy"));
-  full = { set, vkey, blocks, quiz, answers:{}, sel:null, graded:false, warned:false };
+  full = { set, vkey, blocks, gram, typed:{}, quiz, answers:{}, sel:null, graded:false, warned:false };
   renderFull();
 }
 const fullById = id => full.set.all.find(t=>t.id===id);
@@ -1605,33 +1617,50 @@ function fullBlockHTML(bi){
     </section>`;
 }
 function renderFull(){
-  const nV = full.blocks.reduce((a,b)=>a+b.items.length,0), nQ = full.quiz.length;
+  const nV = full.blocks.reduce((a,b)=>a+b.items.length,0), nG = full.gram.length, nQ = full.quiz.length;
+  const gramOk = (t,i) => checkGram(t, full.typed[i]||"")==="ok";
   let head = "";
   if(full.graded){
     const rV = full.blocks.reduce((a,b)=>a+b.items.filter((t,i)=>b.placed[i]===t.id).length,0);
+    const rG = full.gram.filter(gramOk).length;
     const rQ = full.quiz.filter((q,i)=>full.answers[i]===q.answer).length;
-    const pct = Math.round((rV+rQ)/(nV+nQ)*100);
+    const pct = Math.round((rV+rG+rQ)/(nV+nG+nQ)*100);
     head = `<div class="score">
       <span class="big">${pct}%</span>
-      <span class="detail"><b>${rV+rQ} of ${nV+nQ} correct</b>${full.set.nVocab?"Vocabulario":"Verbos"} ${rV}/${nV} &middot; Preguntas ${rQ}/${nQ}</span>
+      <span class="detail"><b>${rV+rG+rQ} of ${nV+nG+nQ} correct</b>${[nV?`Vocabulario ${rV}/${nV}`:null, nG?`Verbos ${rG}/${nG}`:null, nQ?`Preguntas ${rQ}/${nQ}`:null].filter(Boolean).join(" &middot; ")}</span>
       <span class="spacer"></span>
       <span class="row"><button class="btn" id="fullNew">Otra vez</button></span>
     </div>`;
   }
-  const part1 = `<div class="card full-part">
-      <div class="full-part-head"><span class="full-badge">Parte 1</span><h2>${full.set.nVocab?"Vocabulario":"Verbos"} &mdash; completa las frases</h2>
+  let partNo = 0;
+  const part1 = nV ? `<div class="card full-part">
+      <div class="full-part-head"><span class="full-badge">Parte ${++partNo}</span><h2>Vocabulario &mdash; completa las frases</h2>
         <p>${nV} sentences in blocks of ${FULL_BLOCK}. Each block has its own bank; ${FULL_DECOYS} words in every bank are decoys.</p></div>
       ${full.blocks.map((b,i)=>fullBlockHTML(i)).join("")}
-    </div>`;
+    </div>` : "";
+  const partG = nG ? `<div class="card full-part">
+      <div class="full-part-head"><span class="full-badge">Parte ${++partNo}</span><h2>Verbos &mdash; escribe la forma correcta</h2>
+        <p>${nG} blanks, like the worksheet: no bank, no options. Write the form with its accents. Enter jumps to the next blank.</p></div>
+      <div class="wb-list">${full.gram.map((t,i)=>{
+        const v = full.typed[i]||"", ok = full.graded && gramOk(t,i), r = full.graded ? checkGram(t,v) : null;
+        return `<div class="wb-row typed ${full.graded?(ok?"ok":"no"):""}">
+          <span class="wb-num">${full.graded?(ok?"&#10003;":"&#10007;"):(nV+i+1)+"."}</span>
+          <input type="text" class="spanish ${full.graded?(ok?"ok":"bad"):""}" data-g="${i}" value="${esc(v)}" ${full.graded?"disabled":""}
+                 autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forma…">
+          <p class="wb-def spanish">${fmt(t.q)}</p>
+          ${full.graded && !ok ? `<p class="wb-fix">${r==="accent"?"Acento: ":"Correcta: "}<span class="es">${esc(t.a)}</span>${t.alt.length?` (o ${esc(t.alt.join(", "))})`:""} &mdash; ${esc(t.why)}</p>` : ""}
+        </div>`;
+      }).join("")}</div>
+    </div>` : "";
   const part2 = `<div class="card full-part">
-      <div class="full-part-head"><span class="full-badge">Parte 2</span><h2>Comprensi&oacute;n &mdash; escoge la respuesta</h2>
-        <p>${nQ} questions on the story and the song. Multiple choice, one answer each.</p></div>
+      <div class="full-part-head"><span class="full-badge">Parte ${++partNo}</span><h2>Comprensi&oacute;n &mdash; escoge la respuesta</h2>
+        <p>${nQ} questions. Multiple choice, one answer each.</p></div>
       ${full.quiz.map((q,i)=>{
         const chosen = full.answers[i];
         const cls = full.graded ? (chosen===q.answer?"marked-ok":"marked-wrong") : "";
         return `<div class="q ${cls}">
           <div class="q-head">
-            <span class="q-num">${full.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(nV+i+1)+"."}</span>
+            <span class="q-num">${full.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(nV+nG+i+1)+"."}</span>
             <p class="q-text ask">${esc(q.prompt)}</p>
           </div>
           <div class="opts">${q.options.map((o,k)=>{
@@ -1644,12 +1673,16 @@ function renderFull(){
   const footer = full.graded ? "" : `
     <div class="row full-footer">
       <button class="btn" id="fullSubmit">Entregar todo</button>
-      <span class="hint" style="margin:0" id="fullCount">${fullFilled()} of ${nV+nQ} answered</span>
+      <span class="hint" style="margin:0" id="fullCount">${fullFilled()} of ${nV+nG+nQ} answered</span>
     </div>`;
-  panel.innerHTML = head + part1 + part2 + footer;
+  panel.innerHTML = head + part1 + partG + part2 + footer;
   updateReportLink();
   if(full.graded){ $("#fullNew").addEventListener("click", startFull); return; }
   bindFullBlocks();
+  panel.querySelectorAll(".wb-row.typed input:not(:disabled)").forEach(inp=>{
+    inp.addEventListener("input",()=>{ const i=+inp.dataset.g; if(inp.value.trim()) full.typed[i]=inp.value; else delete full.typed[i]; fullCountUpdate(); });
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); const all=[...panel.querySelectorAll(".wb-row.typed input")]; const n=all[all.indexOf(inp)+1]; if(n) n.focus(); } });
+  });
   panel.querySelectorAll(".opt:not(:disabled)").forEach(b=>b.addEventListener("click",()=>{
     const i = +b.dataset.q;
     full.answers[i] = b.dataset.opt;
@@ -1658,7 +1691,7 @@ function renderFull(){
     fullCountUpdate();
   }));
   $("#fullSubmit").addEventListener("click",()=>{
-    const left = nV+nQ-fullFilled();
+    const left = nV+nG+nQ-fullFilled();
     if(left>0 && !full.warned){
       full.warned = true;
       const c = $("#fullCount"); c.textContent = `${left} still blank — those count as wrong. Press Entregar todo again.`; c.style.color="var(--bad)";
@@ -1668,11 +1701,11 @@ function renderFull(){
   });
 }
 function fullFilled(){
-  return full.blocks.reduce((a,b)=>a+Object.keys(b.placed).length,0) + Object.keys(full.answers).length;
+  return full.blocks.reduce((a,b)=>a+Object.keys(b.placed).length,0) + Object.keys(full.typed).length + Object.keys(full.answers).length;
 }
 function fullCountUpdate(){
   const c = $("#fullCount"); if(!c) return;
-  const n = full.blocks.reduce((a,b)=>a+b.items.length,0)+full.quiz.length;
+  const n = full.blocks.reduce((a,b)=>a+b.items.length,0)+full.gram.length+full.quiz.length;
   c.textContent = `${fullFilled()} of ${n} answered`; c.style.color=""; full.warned=false;
 }
 function fullRefreshBlock(bi){
@@ -1753,9 +1786,10 @@ function startTest(){
 }
 function renderTest(){
   const qs = test.questions;
+  const isRight = (q,i) => q.term.kind==="gram" ? checkGram(q.term, test.answers[i]||"")==="ok" : test.answers[i]===q.answer;
   let head = "";
   if(test.graded){
-    const right = qs.filter((q,i)=>test.answers[i]===q.answer).length;
+    const right = qs.filter(isRight).length;
     const pct = Math.round(right/qs.length*100);
     head = `<div class="score">
       <span class="big">${pct}%</span>
@@ -1768,10 +1802,26 @@ function renderTest(){
   }
   const body = qs.map((q,i)=>{
     const chosen = test.answers[i], item = q.term;
-    const cls = test.graded ? (chosen===q.answer?"marked-ok":"marked-wrong") : "";
+    const ok = isRight(q,i);
+    const cls = test.graded ? (ok?"marked-ok":"marked-wrong") : "";
+    if(item.kind==="gram"){
+      const r = test.graded ? checkGram(item, chosen||"") : null;
+      return `<div class="q ${cls}">
+        <div class="q-head">
+          <span class="q-num">${test.graded?(ok?"&#10003;":"&#10007;"):(i+1)+"."}</span>
+          <p class="q-text ${promptClass(item,test.diff)}">${fmt(q.prompt)}</p>
+        </div>
+        <div class="typerow">
+          <input type="text" class="spanish ${test.graded?(ok?"ok":"bad"):""}" data-q="${i}" value="${esc(chosen||"")}" ${test.graded?"disabled":""}
+                 autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="escribe la forma…">
+          ${test.graded && !ok ? `<span class="fix">${r==="accent"?"acento: ":""}<b>${esc(item.a)}</b>${item.alt.length?` <span class="alt">(o ${esc(item.alt.join(", "))})</span>`:""}</span>` : ""}
+        </div>
+        ${test.graded ? `<p class="gloss why">${esc(item.why)}</p>` : ""}
+      </div>`;
+    }
     return `<div class="q ${cls}">
       <div class="q-head">
-        <span class="q-num">${test.graded?(chosen===q.answer?"&#10003;":"&#10007;"):(i+1)+"."}</span>
+        <span class="q-num">${test.graded?(ok?"&#10003;":"&#10007;"):(i+1)+"."}</span>
         <p class="q-text ${promptClass(item,test.diff)}">${fmt(q.prompt)}</p>
       </div>
       <div class="opts">${q.options.map((o,k)=>{
@@ -1792,14 +1842,24 @@ function renderTest(){
   panel.innerHTML = head + `<div class="card">${body}</div>` + footer;
   updateReportLink();
 
+  const countUp = ()=>{ const c = $("#count"); if(c){ c.textContent = `${Object.keys(test.answers).length} of ${qs.length} answered`; c.style.color=""; } skipWarned = false; };
   panel.querySelectorAll(".opt:not(:disabled)").forEach(b=>{
     b.addEventListener("click",()=>{
       const i = +b.dataset.q;
       test.answers[i] = b.dataset.opt;
       panel.querySelectorAll('.opt[data-q="'+i+'"]').forEach(x=>x.classList.remove("chosen"));
       b.classList.add("chosen");
-      const c = $("#count"); c.textContent = `${Object.keys(test.answers).length} of ${qs.length} answered`; c.style.color="";
-      skipWarned = false;
+      countUp();
+    });
+  });
+  panel.querySelectorAll(".typerow input:not(:disabled)").forEach(inp=>{
+    inp.addEventListener("input",()=>{
+      const i = +inp.dataset.q;
+      if(inp.value.trim()) test.answers[i] = inp.value; else delete test.answers[i];
+      countUp();
+    });
+    inp.addEventListener("keydown",e=>{
+      if(e.key==="Enter"){ e.preventDefault(); const all=[...panel.querySelectorAll(".typerow input")]; const n=all[all.indexOf(inp)+1]; if(n) n.focus(); }
     });
   });
   if(!test.graded){
@@ -1812,7 +1872,7 @@ function renderTest(){
     $("#newTest").addEventListener("click", startTest);
     const rm = $("#retryMissed");
     if(rm) rm.addEventListener("click",()=>{
-      const missedTerms = test.questions.filter((q,i)=>test.answers[i]!==q.answer).map(q=>q.term);
+      const missedTerms = test.questions.filter((q,i)=>!isRight(q,i)).map(q=>q.term);
       test = { pool:test.pool, diff:test.diff, questions:shuffle(missedTerms).map(t=>makeMC(t,test.pool,test.diff)), answers:{}, graded:false };
       renderTest(); window.scrollTo({top:0,behavior:"smooth"});
     });
@@ -1921,14 +1981,14 @@ function render(){
 
   const poolQuizOnly = !vocab;
   let note;
-  if(isFull) note = `<b>Examen completo</b><span>The whole set in one sitting: every word as a sentence with a blank (word banks of ${FULL_BLOCK}, ${FULL_DECOYS} decoys each), then every story and song question as multiple choice. One grade at the end.</span>`;
+  if(isFull) note = `<b>Examen completo</b><span>The whole set in one sitting: ${set.nVocab?`every word as a sentence with a blank (word banks of ${FULL_BLOCK}, ${FULL_DECOYS} decoys each), `:""}${set.nGram?`every verb blank written out by hand with accents, `:""}then every reading question as multiple choice. One grade at the end.</span>`;
   else if(state.mode==="list") note = poolQuizOnly
     ? "<span>Every question with its answer &mdash; read straight through before you drill.</span>"
     : "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>";
   else if(vocab && !realVocab() && state.mode==="wordbank") note = `<b>Banco de verbos</b><span>Cada frase tiene un hueco y el infinitivo entre paréntesis; arrastra la forma correcta. ${WB_LEN} frases, ${WB_LEN+WB_DECOYS} formas en el banco (${WB_DECOYS} sobran).</span>`;
   else if(vocab && !realVocab() && state.mode==="match") note = `<b>Emparejar</b><span>Une cada frase con la forma verbal que la completa. Seis parejas contra el reloj.</span>`;
   else if(vocab && !realVocab() && state.mode==="learn") note = `<b>Aprender</b><span>Rondas de cinco: escoge la forma correcta, luego escríbela &mdash; con acentos. Cada respuesta explica por qué ese tiempo.</span>`;
-  else if(vocab && !realVocab() && state.mode==="test") note = `<b>Examen</b><span>Escoge el tiempo correcto para cada hueco. Las cuatro opciones son formas del mismo verbo.</span>`;
+  else if(vocab && !realVocab() && state.mode==="test") note = `<b>Examen escrito</b><span>Como en la hoja: escribe la forma correcta en cada hueco, con acentos. Las preguntas de lectura siguen siendo de opción múltiple.</span>`;
   else if(state.mode==="wordbank") note = `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions and ${WB_LEN+WB_DECOYS} words in the bank &mdash; ${WB_DECOYS} of them are decoys. Drag a word into a box, or tap the word then the box.</span>`;
   else if(state.mode==="match") note = `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock &mdash; a wrong pair costs a second.</span>`;
   else if(poolQuizOnly) note = state.mode==="learn"
