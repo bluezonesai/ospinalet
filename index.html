@@ -149,6 +149,9 @@ h1{font-weight:800;font-size:25px;line-height:1.15;margin:0 0 4px;letter-spacing
 .setcard .parts{display:flex;gap:7px;flex-wrap:wrap}
 .pill{font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:4px 11px}
 .pill.quiz{color:var(--warm);background:var(--warm-soft)}
+.pill.gram{color:var(--good);background:var(--good-soft)}
+.verdict .why{color:var(--accent);font-weight:600}
+.deftable .alt{font-weight:400;color:var(--muted);font-size:13px}
 .setcard .go{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 .go button{
   appearance:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;
@@ -437,10 +440,187 @@ input[type="text"]:focus{outline:2px solid var(--accent);outline-offset:0;border
 <script>
 const SETS = [
 {
+  id:"encuentro",
+  name:"ENCUENTRO + PASADOS",
+  tag:"Pretérito · Imperfecto · Pluscuamperfecto",
+  featured:true, badge:"Próximo examen",
+  sections:[{"id":"gram","name":"Gramática"},{"id":"enc","name":"Encuentro"}],
+  groups:[
+    { id:"hoja", name:"La hoja de pasados", section:"gram", kind:"gram", terms:[
+      ["Ayer, mientras yo ___ (estudiar) en mi habitación, mi hermano entró de repente.","estudiaba","estudié","había estudiado","estudio","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaba estudiando"],
+      ["Ayer, mientras yo estudiaba en mi habitación, mi hermano ___ (entrar) de repente.","entró","entraba","había entrado","entra","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Cuando llegamos al cine, la película ya ___ (empezar), así que nos perdimos el inicio.","había empezado","empezó","empezaba","ha empezado","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Todos los veranos de mi infancia, nosotros ___ (ir) a la playa.","íbamos","fuimos","habíamos ido","vamos","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Todos los veranos de mi infancia, nosotros íbamos a la playa y ___ (construir) castillos de arena.","construíamos","construimos","habíamos construido","construíais","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["El suelo estaba muy mojado porque ___ (llover) intensamente durante toda la noche.","había llovido","llovió","llovía","ha llovido","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Anoche a las diez, ¿qué ___ (hacer) tú? Yo te llamé pero no respondiste.","hacías","hiciste","habías hecho","haces","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estabas haciendo"],
+      ["Cuando el profesor entró al aula, los alumnos ___ (hablar) ruidosamente.","hablaban","hablaron","habían hablado","hablan","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaban hablando"],
+      ["Ella no pudo comprar el vestido porque se ___ (olvidar) la cartera en casa.","había olvidado","olvidó","olvidaba","ha olvidado","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["El reloj ___ (dar) las doce cuando finalmente terminamos el proyecto.","daba","dará","había dado","da","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","dio|estaba dando"],
+      ["Mientras el chef ___ (cocinar) el plato principal, su ayudante cortaba las verduras.","cocinaba","cocinó","había cocinado","cocina","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaba cocinando"],
+      ["Mientras el chef cocinaba el plato principal, su ayudante ___ (cortar) las verduras.","cortaba","cortó","había cortado","corta","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaba cortando"],
+      ["Mis abuelos ___ (vivir) en una casa muy antigua que tenía un jardín enorme.","vivían","vivieron","habían vivido","viven","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Mis abuelos vivían en una casa muy antigua que ___ (tener) un jardín enorme.","tenía","tuvo","había tenido","tiene","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["El sospechoso confesó que ___ (robar) el cuadro dos días antes.","había robado","robó","robaba","ha robado","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["La semana pasada, Juan ___ (tener) un accidente de coche mientras conducía hacia el trabajo.","tuvo","tenía","había tenido","tiene","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["La semana pasada, Juan tuvo un accidente de coche mientras ___ (conducir) hacia el trabajo.","conducía","condujo","había conducido","conduce","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaba conduciendo"],
+      ["Yo nunca ___ (ver) nieve real hasta que viajé a los Alpes el año pasado.","había visto","vi","veía","he visto","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["De niña, Elena ___ (ser) muy tímida, pero siempre sacaba excelentes notas.","era","fue","había sido","es","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["De niña, Elena era muy tímida, pero siempre ___ (sacar) excelentes notas.","sacaba","sacó","había sacado","saca","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Cuando por fin me llamaron para la entrevista, yo ya ___ (esperar) más de dos horas en la sala.","había esperado","esperé","esperaba","he esperado","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…).","llevaba esperando"],
+      ["El teléfono ___ (sonar) tres veces y luego se cortó la línea.","sonó","sonaba","había sonado","suena","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["El teléfono sonó tres veces y luego se ___ (cortar) la línea.","cortó","cortaba","había cortado","corta","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Carlos no tenía hambre al mediodía porque ___ (desayunar) un bocadillo gigante por la mañana.","había desayunado","desayunó","desayunaba","ha desayunado","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Los niños ___ (jugar) en el parque cuando empezó a granizar de repente.","jugaban","jugaron","habían jugado","juegan","Imperfecto: descripción, costumbre, o acción de fondo en progreso.","estaban jugando"],
+      ["El escritor ___ (publicar) su primera novela en 2015.","publicó","publicaba","había publicado","publica","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["El escritor publicó su primera novela en 2015 y rápidamente ___ (convertirse) en un éxito.","se convirtió","se convertía","se había convertido","se convierte","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Antes de mudarse a Madrid, ellos ___ (vivir) en un pequeño pueblo costero durante cinco años.","habían vivido","vivían","viven","habrían vivido","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…).","vivieron"]
+    ]},
+    { id:"encgram", name:"Pasados en Encuentro", section:"gram", kind:"gram", terms:[
+      ["La luna ya ___ (llegar) a lo alto del cielo, y nuestra hoguera estaba casi apagada.","había llegado","llegó","llegaba","llega","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["La luna ya había llegado a lo alto del cielo, y nuestra hoguera ___ (estar) casi apagada.","estaba","estuvo","había estado","está","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Un chasquido estruendoso de tormenta me ___ (despertar) de mi sueño.","despertó","despertaba","había despertado","despierta","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["No ___ (ser) como ningún pájaro que hubiera visto antes.","eran","fueron","habían sido","son","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["___ (saltar) de mi hamaca y caminé hasta la playa.","Salté","Saltaba","Había saltado","Salto","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Salté de mi hamaca y ___ (caminar) hasta la playa.","caminé","caminaba","había caminado","camino","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Las canoas con enormes velas ___ (flotar) en la bahía.","flotaban","flotaron","habían flotado","flotan","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Las ___ (estar) observando toda la noche.","estuve","estaba","había estado","estoy","Pasado continuo: acción en desarrollo en ese momento (estaba + -ndo)."],
+      ["Cuando ___ (salir) el sol, cada canoa grande dio a luz a muchas canoas pequeñas.","salió","salía","había salido","sale","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Cuando salió el sol, cada canoa grande ___ (dar) a luz a muchas canoas pequeñas.","dio","daba","había dado","da","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["___ (correr) y encontré a nuestro jefe todavía dormido en su hamaca.","Corrí","Corría","Había corrido","Corro","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["No los reconocimos como seres humanos porque ___ (ocultar) sus cuerpos bajo colores.","ocultaban","ocultaron","habían ocultado","ocultan","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Tres de ellos se ___ (arrodillar) delante de su jefe y clavaron palos en la arena.","arrodillaron","arrodillaban","habían arrodillado","arrodillan","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Yo, que aún no ___ (ser) un hombre, los seguí llorando.","era","fui","había sido","soy","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Yo, que aún no era un hombre, los ___ (seguir) llorando.","seguí","seguía","había seguido","sigo","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Nadie me ___ (escuchar), ya que yo no era sino un niño.","escuchó","escuchaba","había escuchado","escucha","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["El extranjero ___ (hacer) un ruido extraño con la boca, como el ladrido de un perro amarillo.","hizo","hacía","había hecho","hace","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Nuestro jefe les ___ (dar) a los extranjeros bolas de hilo de algodón.","dio","daba","había dado","da","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Nuestros jóvenes volvieron a reírse, sabiendo que nuestro jefe ___ (bromear).","bromeaba","bromeó","había bromeado","bromea","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Por un rato ___ (olvidar) mi sueño. Por un rato no tuve miedo.","olvidé","olvidaba","había olvidado","olvido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Por un rato olvidé mi sueño. Por un rato no ___ (tener) miedo.","tuve","tenía","había tenido","tengo","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Nuestro jefe enrolló hojas de tabaco y les enseñó a fumar, pero ___ (toser) y resoplaban.","tosían","tosieron","habían tosido","tosen","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Sus ojos ___ (ser) azules y grises como las variaciones del mar.","eran","fueron","habían sido","son","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["De repente ___ (recordar) mi sueño y miré de frente a cada uno de los extranjeros.","recordé","recordaba","había recordado","recuerdo","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Salté llorando: «No les den la bienvenida». Pero la bienvenida ya ___ (estar) dada.","estaba","estuvo","había estado","está","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Le di las bolas lisas que un extranjero ___ (dejar) caer en mi mano.","había dejado","dejó","dejaba","deja","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Mi cemí ___ (estar) callado. Sólo hablaba en sueños.","estaba","estuvo","había estado","está","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Mi cemí estaba callado. Sólo hablaba en sueños. En realidad, ya me ___ (hablar).","había hablado","habló","hablaba","habla","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Cuando regresé a la fiesta, uno de los extranjeros me ___ (dejar) tocar su afilado palo de plata.","dejó","dejaba","había dejado","deja","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Ellos ___ (desear) todo lo que los extranjeros habían traído.","deseaban","desearon","habían deseado","desean","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Ellos deseaban todo lo que los extranjeros ___ (traer).","habían traído","trajeron","traían","traen","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Al día siguiente los extranjeros ___ (regresar) a sus enormes canoas.","regresaron","regresaban","habían regresado","regresan","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Se ___ (llevar) a cinco de nuestros hombres y muchos loros. También me llevaron a mí.","llevaron","llevaban","habían llevado","llevan","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Así que ___ (ser) fuerte y no lloré. Pero tenía miedo.","fui","era","había sido","soy","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Así que fui fuerte y no lloré. Pero ___ (tener) miedo.","tenía","tuve","había tenido","tengo","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Aquella noche, mientras mi gente ___ (dormir) en la costa, las gigantes canoas abandonaron nuestra bahía.","dormía","durmió","había dormido","duerme","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Aquella noche, mientras mi gente dormía en la costa, las gigantes canoas ___ (abandonar) nuestra bahía.","abandonaron","abandonaban","habían abandonado","abandonan","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Sigilosamente me ___ (dejar) caer desde uno de los lados de la gran canoa.","dejé","dejaba","había dejado","dejo","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Me hundí más y más en las aguas frías. Luego ___ (nadar) hacia aquella costa extraña.","nadé","nadaba","había nadado","nado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["___ (caminar) muchos días siguiendo al sol. Muchas noches nadé.","Caminé","Caminaba","Había caminado","Camino","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["A lo largo del camino le fui contando a la gente cómo ___ (navegar) en una canoa muy grande.","había navegado","navegué","navegaba","navego","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["Pero ni siquiera quienes vieron las grandes canoas me ___ (oír). Porque yo era un niño.","oyeron","oían","habían oído","oyen","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Pero ni siquiera quienes vieron las grandes canoas me oyeron. Porque yo ___ (ser) un niño.","era","fui","había sido","soy","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["Y así ___ (perder) nuestras tierras a manos de los extranjeros del cielo.","perdimos","perdíamos","habíamos perdido","perdemos","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["Y ésa es la razón por la cual yo, ahora ya un hombre viejo, no ___ (soñar) más sueños.","sueño","soñé","soñaba","había soñado","Presente: el narrador viejo habla de ahora, no del pasado."]
+    ]},
+    { id:"formas", name:"Formas", section:"gram", kind:"gram", terms:[
+      ["yo · tener · pretérito","tuve","tenía","tuvo","había tenido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["él · hacer · pretérito","hizo","hacía","hice","había hecho","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["nosotros · ir · imperfecto","íbamos","fuimos","vamos","habíamos ido","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["ellos · ser · imperfecto","eran","fueron","son","habían sido","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["yo · ver · imperfecto","veía","vi","veo","había visto","Imperfecto: descripción, costumbre, o acción de fondo en progreso."],
+      ["tú · poder · pretérito","pudiste","podías","pudo","habías podido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ella · poner · pretérito","puso","ponía","pongo","había puesto","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ellos · decir · pretérito","dijeron","decían","dicen","habían dicho","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · venir · pretérito","vine","venía","vino","había venido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["usted · querer · pretérito","quiso","quería","quise","había querido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · saber · pretérito","supe","sabía","supo","había sabido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · andar · pretérito","anduve","andaba","anduvo","había andado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["nosotros · estar · pretérito","estuvimos","estábamos","estamos","habíamos estado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ellos · traer · pretérito","trajeron","traían","traen","habían traído","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["él · dar · pretérito","dio","daba","da","había dado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · dar · pretérito","di","daba","dio","había dado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ella · pedir · pretérito","pidió","pedía","pide","había pedido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["él · dormir · pretérito","durmió","dormía","duerme","había dormido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ellos · sentir · pretérito","sintieron","sentían","sienten","habían sentido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["él · morir · pretérito","murió","moría","muere","había muerto","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · buscar · pretérito","busqué","buscaba","buscó","había buscado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · llegar · pretérito","llegué","llegaba","llegó","había llegado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · empezar · pretérito","empecé","empezaba","empezó","había empezado","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["él · leer · pretérito","leyó","leía","lee","había leído","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ellos · oír · pretérito","oyeron","oían","oyen","habían oído","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ella · caer · pretérito","cayó","caía","cae","había caído","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · creer · pretérito","creí","creía","creyó","había creído","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["nosotros · ver · pretérito","vimos","veíamos","vemos","habíamos visto","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["tú · ir · pretérito","fuiste","ibas","vas","habías ido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["yo · ser · pretérito","fui","era","soy","había sido","Pretérito: acción terminada, puntual, o que hace avanzar la historia."],
+      ["ellos · haber + comer · pluscuamperfecto","habían comido","comieron","comían","han comido","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["yo · haber + escribir · pluscuamperfecto","había escrito","escribí","escribía","he escrito","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["tú · haber + ver · pluscuamperfecto","habías visto","viste","veías","has visto","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["nosotros · haber + abrir · pluscuamperfecto","habíamos abierto","abrimos","abríamos","hemos abierto","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["ella · haber + decir · pluscuamperfecto","había dicho","dijo","decía","ha dicho","Pluscuamperfecto: acción anterior a otra acción del pasado (ya había…)."],
+      ["yo · estar + leer · pasado continuo","estaba leyendo","leía","leí","había leído","Pasado continuo: acción en desarrollo en ese momento (estaba + -ndo)."],
+      ["ellos · estar + dormir · pasado continuo","estaban durmiendo","dormían","durmieron","habían dormido","Pasado continuo: acción en desarrollo en ese momento (estaba + -ndo)."],
+      ["tú · estar + decir · pasado continuo","estabas diciendo","decías","dijiste","habías dicho","Pasado continuo: acción en desarrollo en ese momento (estaba + -ndo)."]
+    ]},
+    { id:"tiempos", name:"¿Qué tiempo?", section:"gram", kind:"quiz", terms:[
+      ["«Todos los veranos íbamos a la playa.» ¿Por qué imperfecto?","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Cuando llegamos, la película ya había empezado.» ¿Por qué pluscuamperfecto?","Pluscuamperfecto: anterior a otra acción","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pasado continuo: acción en pleno desarrollo"],
+      ["«El teléfono sonó tres veces.» ¿Por qué pretérito?","Pretérito: acción terminada y puntual ya","Imperfecto: costumbre o acción repetida","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Los niños estaban jugando cuando empezó a granizar.» ¿Qué tiempo es «estaban jugando»?","Pasado continuo: acción en pleno desarrollo","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción"],
+      ["«De niña, Elena era muy tímida.» ¿Por qué imperfecto?","Imperfecto: describe cómo era alguien","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«El sospechoso confesó que había robado el cuadro.» ¿Por qué pluscuamperfecto?","Pluscuamperfecto: anterior a otra acción","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pasado continuo: acción en pleno desarrollo"],
+      ["«Un chasquido de tormenta me despertó.» ¿Por qué pretérito?","Pretérito: acción terminada y puntual ya","Imperfecto: costumbre o acción repetida","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Nuestra hoguera estaba casi apagada.» ¿Por qué imperfecto?","Imperfecto: describe la escena de fondo","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Mientras mi gente dormía, las canoas abandonaron la bahía.» ¿Qué tiempo lleva «dormía»?","Imperfecto: acción de fondo interrumpida","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Mientras mi gente dormía, las canoas abandonaron la bahía.» ¿Qué tiempo lleva «abandonaron»?","Pretérito: la acción que interrumpe","Imperfecto: costumbre o acción repetida","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Le di las bolas que un extranjero había dejado caer.» ¿Por qué «había dejado»?","Pluscuamperfecto: anterior a otra acción","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pasado continuo: acción en pleno desarrollo"],
+      ["«Anoche a las diez, ¿qué hacías?» ¿Por qué imperfecto?","Imperfecto: acción en curso a esa hora","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Yo nunca había visto nieve hasta que viajé a los Alpes.» ¿Por qué «había visto»?","Pluscuamperfecto: anterior a otra acción","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pasado continuo: acción en pleno desarrollo"],
+      ["«Caminé muchos días siguiendo al sol.» ¿Por qué pretérito?","Pretérito: acción completa ya cerrada","Imperfecto: costumbre o acción repetida","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["«Mi cemí sólo hablaba en sueños.» ¿Por qué imperfecto?","Imperfecto: costumbre o acción repetida","Pretérito: acción terminada y puntual ya","Pluscuamperfecto: anterior a otra acción","Pasado continuo: acción en pleno desarrollo"],
+      ["Palabras que suelen pedir imperfecto:","mientras, siempre, todos los días, de niño","ayer, anoche, de repente, una vez, luego","ya, antes de, todavía no, nunca antes de","ahora, hoy, mañana, en este mismo momento"],
+      ["Palabras que suelen pedir pretérito:","ayer, anoche, de repente, una vez, luego","mientras, siempre, todos los días, de niño","ya, antes de, todavía no, nunca antes de","ahora, hoy, mañana, en este mismo momento"],
+      ["Palabras que suelen pedir pluscuamperfecto:","ya, antes de, todavía no, nunca antes de","ayer, anoche, de repente, una vez, luego","mientras, siempre, todos los días, de niño","ahora, hoy, mañana, en este mismo momento"]
+    ]},
+    { id:"comp", name:"La historia", section:"enc", kind:"quiz", terms:[
+      ["¿Quién narra la historia de Encuentro?","un niño taíno que ya es viejo","un marinero de las carabelas","el jefe de la tribu del pueblo","el capitán de los extranjeros"],
+      ["¿Qué soñó el niño la noche antes de la llegada?","tres pájaros con dientes en los picos","tres canoas llenas de oro y de plata","un fuego que quemaba toda la playa","una serpiente enorme que salía del mar"],
+      ["¿Qué vio el niño en la bahía al despertar?","tres canoas con enormes velas","tres pájaros gigantes volando","muchos peces muertos en la orilla","un barco roto contra las rocas"],
+      ["¿Qué le suplicó el niño a su jefe?","que no les diera la bienvenida","que les regalara todo su oro","que atacara a los extranjeros","que escondiera a todos los niños"],
+      ["¿Qué le respondió el jefe al niño?","que no era más que un niño","que tenía toda la razón","que debían huir enseguida","que los pájaros eran reales"],
+      ["¿Por qué no los reconocieron como seres humanos?","ocultaban sus cuerpos bajo colores","hablaban una lengua muy extraña","venían en canoas muy grandes","tenían los ojos de un color claro"],
+      ["¿Qué hicieron tres extranjeros al llegar a la playa?","se arrodillaron y clavaron palos","dispararon hacia el cielo tres veces","repartieron comida a los niños","cantaron y bailaron en la arena"],
+      ["¿Qué hizo el jefe para comprobar si eran hombres?","tomó a uno por la mano y lo pellizcó","le preguntó el nombre a cada uno de ellos","les ofreció pescado para probarlos","les pidió que se quitaran la ropa"],
+      ["¿Cómo era la piel del extranjero según el niño?","como la luna para su sol","como la arena de la playa","como la corteza de un árbol","como el agua de la bahía"],
+      ["¿De dónde creía el jefe que venían los extranjeros?","del cielo, por lo pálidos que eran","de una isla vecina pero muy lejana","del fondo del mar, por sus velas","de la tierra de los antepasados muertos"],
+      ["¿Qué dijo el hermano mayor del niño?","que quizás tuvieran rabo","que eran dioses del mar","que debían matarlos pronto","que eran hombres normales"],
+      ["¿Qué les dio el jefe a los extranjeros?","hilo de algodón, lanzas, bolas y loros","oro, plata, piedras preciosas y perlas","casas, tierras, canoas y redes de pesca","frutas, agua dulce, sal y hojas de tabaco"],
+      ["¿Qué les dieron los extranjeros a cambio?","bolitas de colores, conchas y tejidos","espadas, espejos y monedas de plata","caballos, perros y pájaros grandes","libros, mapas y ropa de muchos colores"],
+      ["¿Qué pasó cuando el jefe les enseñó a fumar?","tosían y resoplaban","fumaron con gusto","se enojaron mucho","se quedaron dormidos"],
+      ["¿Cómo eran los ojos del jefe de los extranjeros?","azules y grises como el mar","negros y brillantes como la noche","verdes y claros como las hojas","amarillos y fríos como el oro"],
+      ["¿Qué tocaban los extranjeros con interés?","los anillos y brazaletes de oro","la piel de la cara y los brazos","las canoas y las redes de pesca","las hamacas y las ollas de barro"],
+      ["¿Cómo describe el niño la sonrisa del jefe extranjero?","la sonrisa de la serpiente","la sonrisa de un niño feliz","la sonrisa de un perro amarillo","la sonrisa de un loro verde"],
+      ["¿Qué le pidió el niño a su cemí?","que hiciera marcharse a los extranjeros","que le diera un afilado palo de plata","que trajera muchas más canoas gigantes","que le quitara el miedo de aquel sueño"],
+      ["¿Qué le pasó al niño al sujetar el palo de plata?","le mordió y le sangró la mano","se le cayó al agua de la bahía","se lo quitaron de inmediato","se rompió en dos pedazos"],
+      ["¿Por qué nadie escuchó al niño?","porque deseaban lo que traían","porque hablaba demasiado bajo","porque estaban todos dormidos","porque no entendían su idioma"],
+      ["¿Qué se llevaron los extranjeros al día siguiente?","cinco hombres, muchos loros y al niño","todo el oro y toda la comida del pueblo","las canoas pequeñas de los jóvenes","al jefe de la tribu y a sus hijos mayores"],
+      ["¿Cómo escapó el niño de la gran canoa?","se dejó caer al mar y nadó","robó una canoa pequeña","saltó a otra tierra cercana","lo soltaron en la costa"],
+      ["¿Qué hizo el niño después de escapar?","caminó y nadó muchos días avisando","volvió a su pueblo a esconderse","buscó a los extranjeros para luchar","se quedó a vivir en la otra costa"],
+      ["¿Por qué nadie le creyó en su camino?","porque era un niño","porque mentía mucho","porque no hablaba","porque estaba enfermo"],
+      ["¿Qué perdieron finalmente los taínos según el narrador?","sus tierras, sus almas y su idioma","sus canoas, sus loros y todo su oro","sus sueños, sus casas y a su jefe","sus hijos, sus playas y su comida"],
+      ["¿Por qué el narrador ya no sueña?","porque los sueños no fueron escuchados","porque es demasiado viejo para dormir","porque los extranjeros se lo prohibieron","porque olvidó por completo cómo soñar"],
+      ["¿Para qué cuenta el viejo su historia?","para que sea un aviso para todos","para que le devuelvan su tierra","para que lo recuerden como héroe","para que los niños tengan miedo"],
+      ["¿Qué significan los «pájaros con dientes» del sueño?","las carabelas con velas blancas","los loros que los extranjeros se llevaron","las tormentas que azotaban la bahía","los cemíes de madera de su pueblo"],
+      ["¿Qué eran los «charcos redondos que devolvían la cara»?","espejos","monedas","escudos","platos"],
+      ["¿Qué eran los «dardos que salían de un palo con ruido de trueno»?","armas de fuego","flechas de hierro","campanas grandes","tambores de guerra"]
+    ]}
+  ]
+},
+{
   id:"unidad2",
   name:"EL VASO DE LECHE + EL MUELLE DE SAN BLAS",
   tag:"Unidad 2 · Memoria y recuerdos",
-  featured:true, badge:"Próximo examen",
   sections:[{"id":"vocab","name":"Vocabulario"},{"id":"vaso","name":"El vaso de leche"},{"id":"muelle","name":"El muelle de San Blas"}],
   groups:[
     { id:"sust", name:"Sustantivos", section:"vocab", kind:"vocab", terms:[
@@ -668,18 +848,24 @@ const SETS = [
 ];
 
 
+
 /* ---------- build runtime decks ---------- */
 SETS.forEach(set=>{
   set.groups.forEach(g=>{
-    const quiz = g.kind==="quiz";
-    g.items = g.terms.map((t,i)=> quiz
-      ? {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"quiz", q:t[0], a:t[1], opts:t.slice(1), es:t[1], en:t[0]}
-      : {id:set.id+"-"+g.id+i, group:g.id, section:g.section||null, kind:"vocab", es:t[0], en:t[1], de:t[2], ds:t[3], fb:t[4]||null});
+    g.items = g.terms.map((t,i)=>{
+      const id = set.id+"-"+g.id+i, base = {id, group:g.id, section:g.section||null};
+      if(g.kind==="quiz") return {...base, kind:"quiz", q:t[0], a:t[1], opts:t.slice(1), es:t[1], en:t[0]};
+      if(g.kind==="gram") return {...base, kind:"gram", q:t[0], a:t[1], opts:t.slice(1,5), why:t[5]||"", alt:(t[6]||"").split("|").filter(Boolean),
+                                  es:t[1], en:t[0], fb:t[0], de:t[5]||"", ds:t[5]||""};
+      return {...base, kind:"vocab", es:t[0], en:t[1], de:t[2], ds:t[3], fb:t[4]||null};
+    });
   });
   set.all = set.groups.reduce((a,g)=>a.concat(g.items),[]);
-  set.hasFill = set.all.some(t=>t.kind==="vocab" && t.fb);
+  set.hasFill = set.all.some(t=>(t.kind==="vocab" && t.fb) || t.kind==="gram");
   set.nVocab = set.all.filter(t=>t.kind==="vocab").length;
-  set.nQuiz  = set.all.length - set.nVocab;
+  set.nGram  = set.all.filter(t=>t.kind==="gram").length;
+  set.nQuiz  = set.all.filter(t=>t.kind==="quiz").length;
+  set.nDrill = set.nVocab + set.nGram;
 });
 
 const REPORT_EMAIL = "bluezonesai@gmail.com";
@@ -692,7 +878,8 @@ const fmt = s => esc(s).replace(/_{2,}/g,'<span class="blank" aria-label="blank"
 /* put the word back into its sentence: drop the article when the sentence already supplies a determiner */
 const DETS = new Set("un una unos unas el la los las mucho mucha muchos muchas gran breve cada aquel aquella su sus mi este esta poco poca tanto tanta de con por sin".split(" "));
 function fillSentence(item){
-  const sent = item.fb || "";
+  let sent = item.fb || "";
+  if(item.kind==="gram") sent = sent.replace(/\s*\([^)]*\)/g,"");
   let word = item.es.split(",")[0].replace(/\s*\(.*?\)/,"").replace(/\.{2,}$/,"").trim();
   const m = sent.match(/(\S+)\s+_{2,}/);
   const prev = m ? m[1].toLowerCase().replace(/[^a-záéíóúñü]/g,"") : "";
@@ -718,6 +905,17 @@ function accepts(answer, input){
   parts.push(norm(answer), norm(answer.replace(/,/g," ")));
   return parts.includes(given);
 }
+/* grammar answers: accents count. "ok", "accent" (right letters, tilde wrong or missing) or "no". */
+function checkGram(item, input){
+  const clean = s => String(s).toLowerCase().replace(/\s+/g," ").trim();
+  const strip = s => clean(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const cands = [item.a].concat(item.alt||[]);
+  const g = clean(input);
+  if(!g) return "no";
+  if(cands.some(c=>clean(c)===g)) return "ok";
+  if(cands.some(c=>strip(c)===strip(g))) return "accent";
+  return "no";
+}
 
 const DIFF = {
   easy:  {promptKey:"es", answerKey:"en", promptStyle:"term",        answerLang:"en",
@@ -740,7 +938,7 @@ const MATCH_DIFF = {
 };
 
 function makeMC(term, pool, diff){
-  if(term.kind==="quiz") return {term, diff, kind:"mc", prompt:term.q, answer:term.a, options:shuffle(term.opts)};
+  if(term.opts) return {term, diff, kind:"mc", prompt:term.q, answer:term.a, options:shuffle(term.opts)};
   const d = DIFF[diff], key = d.answerKey;
   const correct = term[key];
   const parts = a => a.split(/[,;\/]/).map(norm).filter(Boolean);
@@ -759,12 +957,13 @@ function makeMC(term, pool, diff){
   return {term, diff, kind:"mc", prompt:term[d.promptKey], answer:correct, options:shuffle(opts)};
 }
 function makeType(term, diff){
+  if(term.kind==="gram") return {term, diff, kind:"type", prompt:term.q, answer:term.a};
   const d = DIFF[diff];
   return {term, diff, kind:"type", prompt:term[d.promptKey], answer:term[d.answerKey]};
 }
 /* how a prompt / option should be styled for a given item */
-const promptClass = (item, diff) => item.kind==="quiz" ? "ask" : DIFF[diff].promptStyle;
-const optClass    = (item, diff) => item.kind==="quiz" ? "" : (DIFF[diff].answerLang==="es" ? "es" : "");
+const promptClass = (item, diff) => item.kind==="quiz" ? "ask" : item.kind==="gram" ? "def spanish fill" : DIFF[diff].promptStyle;
+const optClass    = (item, diff) => item.kind==="quiz" ? "" : item.kind==="gram" ? "es" : (DIFF[diff].answerLang==="es" ? "es" : "");
 
 /* ---------- state ---------- */
 const state = { view:"home", mode:"learn", setId:SETS[0].id, section:"all", group:"all", diff:"easy", matchDiff:"easy", testLen:10 };
@@ -779,8 +978,9 @@ function curGroups(){
   return gs;
 }
 const curPool   = () => curGroups().reduce((a,g)=>a.concat(g.items),[]);
-const vocabPool = () => curPool().filter(t=>t.kind==="vocab");
+const vocabPool = () => curPool().filter(t=>t.kind!=="quiz");   /* anything drillable: words or verb blanks */
 const hasVocab  = () => vocabPool().length>0;
+const realVocab = () => curPool().some(t=>t.kind==="vocab");     /* true words, which have Nivel */
 const allQuiz   = () => !hasVocab();
 
 /* ---------- report an error ---------- */
@@ -826,12 +1026,13 @@ function renderHome(){
     const parts = set.sections
       ? set.sections.map(sec=>{
           const n = set.groups.filter(g=>g.section===sec.id).reduce((a,g)=>a+g.items.length,0);
-          const q = set.groups.some(g=>g.section===sec.id && g.kind==="quiz");
-          return `<span class="pill${q?" quiz":""}">${esc(sec.name)} ${n}</span>`;
+          const kinds = new Set(set.groups.filter(g=>g.section===sec.id).map(g=>g.kind||"vocab"));
+          const cls = kinds.has("gram") ? " gram" : kinds.has("quiz") && !kinds.has("vocab") ? " quiz" : "";
+          return `<span class="pill${cls}">${esc(sec.name)} ${n}</span>`;
         }).join("")
       : set.groups.map(g=>`<span class="pill${g.kind==="quiz"?" quiz":""}">${esc(g.name)} ${g.items.length}</span>`).join("");
-    const counts = [set.nVocab?`${set.nVocab} palabras`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
-    const vocab = set.nVocab>0;
+    const counts = [set.nVocab?`${set.nVocab} palabras`:null, set.nGram?`${set.nGram} verbos`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
+    const vocab = set.nDrill>0;
     return `<div class="setcard${set.featured?" featured":""}">
       <div class="top">
         <h2>${esc(set.name)}</h2>
@@ -886,13 +1087,13 @@ function startLearn(){
 const curRound = () => learn.rounds[learn.roundIdx] || [];
 function startPhase(kind){
   learn.phase = kind;
-  const items = kind==="type" ? curRound().filter(t=>t.kind==="vocab") : curRound();
+  const items = kind==="type" ? curRound().filter(t=>t.kind!=="quiz") : curRound();
   learn.queue = shuffle(items).map(t=>t.id);
   nextLearn();
 }
 function nextLearn(){
   if(!learn.queue.length){
-    if(learn.phase==="mc" && curRound().some(t=>t.kind==="vocab")){ startPhase("type"); return; }
+    if(learn.phase==="mc" && curRound().some(t=>t.kind!=="quiz")){ startPhase("type"); return; }
     curRound().forEach(t=>learn.mastered.add(t.id));
     if(learn.roundIdx >= learn.rounds.length-1) renderLearnDone();
     else renderRoundDone();
@@ -903,7 +1104,8 @@ function nextLearn(){
   learn.step = "ask";
   renderLearn();
 }
-function learnAnswer(correct){
+function learnAnswer(correct, note){
+  learn.note = note || null;
   learn.asked++;
   if(correct) learn.queue.shift();
   else { learn.missed.add(learn.queue[0]); learn.queue.push(learn.queue.shift()); }
@@ -913,11 +1115,11 @@ function learnAnswer(correct){
 function renderLearn(){
   const q = learn.current, item = q.term, d = DIFF[learn.diff];
   const size = curRound().length;
-  const phaseSize = learn.phase==="type" ? curRound().filter(t=>t.kind==="vocab").length : size;
+  const phaseSize = learn.phase==="type" ? curRound().filter(t=>t.kind!=="quiz").length : size;
   const doneInPhase = phaseSize - learn.queue.length;
   const phaseName = learn.phase==="mc" ? "Opci&oacute;n m&uacute;ltiple" : "Escribir";
-  const isQ = item.kind==="quiz";
-  const kindLabel = isQ ? "Escoge la respuesta correcta" : (q.kind==="mc" ? d.mcLabel : d.typeLabel);
+  const isQ = item.kind==="quiz", isG = item.kind==="gram";
+  const kindLabel = isQ ? "Escoge la respuesta correcta" : isG ? (q.kind==="mc" ? "Escoge la forma correcta" : "Escribe la forma correcta (con acentos)") : (q.kind==="mc" ? d.mcLabel : d.typeLabel);
 
   let body = "";
   if(learn.step==="ask"){
@@ -927,8 +1129,8 @@ function renderLearn(){
       ).join("") + `</div>`;
     }else{
       body = `<form class="typebox" id="typeForm">
-          <input type="text" id="typeInput" class="${d.answerLang==='es'?'spanish':''}" autocomplete="off"
-                 autocapitalize="off" spellcheck="false" placeholder="${d.ph}">
+          <input type="text" id="typeInput" class="${isG||d.answerLang==='es'?'spanish':''}" autocomplete="off"
+                 autocapitalize="off" spellcheck="false" placeholder="${isG?'la forma del verbo…':d.ph}">
           <button class="btn" type="submit">Check</button>
           <button class="btn ghost" type="button" id="dunno">No s&eacute;</button>
         </form>`;
@@ -938,9 +1140,10 @@ function renderLearn(){
   if(learn.step!=="ask"){
     const ok = learn.step==="right";
     verdict = `<div class="verdict ${ok?'ok':'no'}">
-        <b>${ok?'&#10003; ¡Correcto!':'&#10007; Casi&hellip;'}</b>
-        <span class="answer">${isQ ? esc(item.a) : `<span class="es">${esc(item.es)}</span> &mdash; ${esc(item.en)}`}</span>
-        ${!isQ && learn.diff==="fill" ? `<span class="gloss">${esc(fillSentence(item))}</span>` : ""}
+        <b>${ok?'&#10003; ¡Correcto!':learn.note==="accent"?'&#10007; Casi &mdash; revisa el acento':'&#10007; Casi&hellip;'}</b>
+        <span class="answer">${isQ ? esc(item.a) : isG ? `<span class="es">${esc(item.a)}</span>${item.alt&&item.alt.length?` <span class="gloss" style="display:inline">(también: ${esc(item.alt.join(", "))})</span>`:""}` : `<span class="es">${esc(item.es)}</span> &mdash; ${esc(item.en)}`}</span>
+        ${isG ? `<span class="gloss">${esc(fillSentence(item))}</span><span class="gloss why">${esc(item.why)}</span>` : ""}
+        ${!isQ && !isG && learn.diff==="fill" ? `<span class="gloss">${esc(fillSentence(item))}</span>` : ""}
         ${!isQ && (learn.diff==="medium"||learn.diff==="hard") ? `<span class="gloss">${esc(item[learn.diff==="hard"?"ds":"de"])}</span>` : ""}
         ${!ok ? `<span class="gloss">It&rsquo;ll come back later in this round.</span>` : ""}
       </div>
@@ -981,7 +1184,11 @@ function renderLearn(){
       });
     }else{
       const inp = $("#typeInput"); inp.focus();
-      $("#typeForm").addEventListener("submit",e=>{ e.preventDefault(); learnAnswer(accepts(q.answer, inp.value)); });
+      $("#typeForm").addEventListener("submit",e=>{
+        e.preventDefault();
+        if(isG){ const r = checkGram(item, inp.value); learnAnswer(r==="ok", r==="accent"?"accent":null); }
+        else learnAnswer(accepts(q.answer, inp.value));
+      });
       $("#dunno").addEventListener("click",()=>learnAnswer(false));
     }
   }else{
@@ -990,14 +1197,14 @@ function renderLearn(){
   }
 }
 function itemRow(t){
-  return t.kind==="quiz"
-    ? `<div class="item"><span class="qa">${esc(t.q)}</span><span class="en">${esc(t.a)}</span></div>`
+  return t.kind==="quiz" || t.kind==="gram"
+    ? `<div class="item"><span class="qa">${t.kind==="gram"?fmt(t.q):esc(t.q)}</span><span class="en">${esc(t.a)}</span></div>`
     : `<div class="item"><span class="es">${esc(t.es)}</span><span class="en">${esc(t.en)}</span></div>`;
 }
 function renderRoundDone(){
   const terms = curRound();
   const left = learn.rounds.length-learn.roundIdx-1;
-  const anyQuiz = terms.some(t=>t.kind==="quiz");
+  const anyQuiz = terms.some(t=>t.kind!=="vocab");
   panel.innerHTML = `<div class="card done">
     <p class="big">¡Ronda ${learn.roundIdx+1} lista!</p>
     <p>${terms.length} down. ${left} ${left===1?"round":"rounds"} to go.</p>
@@ -1024,7 +1231,7 @@ function renderLearnDone(){
       <button class="btn ghost" id="toTest">Ir al Examen</button>
     </div>
     ${missed.length?`<div class="missed"><h3>Tripped you up along the way</h3>
-      <div class="vocab${missed.some(t=>t.kind==="quiz")?" one":""}">${missed.map(itemRow).join("")}</div></div>`:""}
+      <div class="vocab${missed.some(t=>t.kind!=="vocab")?" one":""}">${missed.map(itemRow).join("")}</div></div>`:""}
   </div>`;
   updateReportLink();
   $("#again").addEventListener("click", startLearn);
@@ -1252,7 +1459,7 @@ let full = null;
 function startFull(){
   const set = curSet();
   const vkey = set.hasFill ? "fb" : "en";
-  const vocab = shuffle(set.all.filter(t=>t.kind==="vocab"));
+  const vocab = shuffle(set.all.filter(t=>t.kind!=="quiz"));
   const blocks = [];
   for(let i=0;i<vocab.length;i+=FULL_BLOCK){
     const items = vocab.slice(i,i+FULL_BLOCK);
@@ -1308,13 +1515,13 @@ function renderFull(){
     const pct = Math.round((rV+rQ)/(nV+nQ)*100);
     head = `<div class="score">
       <span class="big">${pct}%</span>
-      <span class="detail"><b>${rV+rQ} of ${nV+nQ} correct</b>Vocabulario ${rV}/${nV} &middot; Comprensi&oacute;n ${rQ}/${nQ}</span>
+      <span class="detail"><b>${rV+rQ} of ${nV+nQ} correct</b>${full.set.nVocab?"Vocabulario":"Verbos"} ${rV}/${nV} &middot; Preguntas ${rQ}/${nQ}</span>
       <span class="spacer"></span>
       <span class="row"><button class="btn" id="fullNew">Otra vez</button></span>
     </div>`;
   }
   const part1 = `<div class="card full-part">
-      <div class="full-part-head"><span class="full-badge">Parte 1</span><h2>Vocabulario &mdash; completa las frases</h2>
+      <div class="full-part-head"><span class="full-badge">Parte 1</span><h2>${full.set.nVocab?"Vocabulario":"Verbos"} &mdash; completa las frases</h2>
         <p>${nV} sentences in blocks of ${FULL_BLOCK}. Each block has its own bank; ${FULL_DECOYS} words in every bank are decoys.</p></div>
       ${full.blocks.map((b,i)=>fullBlockHTML(i)).join("")}
     </div>`;
@@ -1531,6 +1738,8 @@ function renderList(){
     let rows;
     if(g.kind==="quiz"){
       rows = `<div class="deftable">${g.items.map(t=>`<div class="row2"><div class="qq">${esc(t.q)}</div><div class="aa">${esc(t.a)}</div></div>`).join("")}</div>`;
+    }else if(g.kind==="gram"){
+      rows = `<div class="deftable">${g.items.map(t=>`<div class="row2"><div class="qq">${fmt(t.q)}</div><div class="aa">${esc(t.a)}${t.alt.length?` <span class="alt">(también: ${esc(t.alt.join(", "))})</span>`:""}</div><div class="d">${esc(t.why)}</div></div>`).join("")}</div>`;
     }else if(both){
       rows = `<div class="deftable">${g.items.map(t=>
         `<div class="row2"><div class="t">${esc(t.es)}<span class="en">${esc(t.en)}</span></div>
@@ -1546,7 +1755,7 @@ function renderList(){
     return `<section class="listsec"><h2>${esc(g.name)} &middot; ${g.items.length}</h2>${rows}</section>`;
   }).join("");
   panel.innerHTML = `<div class="card">${inner}</div>` +
-    (hasVocab() ? `<p class="foot">Words show ${both?'the Spanish and English definitions':showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings only'} &mdash; switch with the Nivel buttons.</p>` : "");
+    (realVocab() ? `<p class="foot">Words show ${both?'the Spanish and English definitions':showDefs?(state.diff==='hard'?'Spanish definitions':'English definitions'):'English meanings only'} &mdash; switch with the Nivel buttons.</p>` : "");
   updateReportLink();
 }
 
@@ -1595,21 +1804,22 @@ function render(){
   const set = curSet();
   const vocab = hasVocab();
   if(!set.hasFill){ if(state.diff==="fill") state.diff="easy"; if(state.matchDiff==="fill") state.matchDiff="easy"; }
+  if(vocab && !realVocab()){ state.diff = "fill"; state.matchDiff = "fill"; }
   if(!vocab && (state.mode==="wordbank" || state.mode==="match")) state.mode = "test";
-  document.querySelectorAll('.tab[data-mode="wordbank"], .tab[data-mode="match"]').forEach(t=>t.hidden = set.nVocab===0);
-  $('.tab[data-mode="full"]').hidden = !(set.nQuiz>0 && set.nVocab>0);
-  if(state.mode==="full" && !(set.nQuiz>0 && set.nVocab>0)) state.mode = "test";
+  document.querySelectorAll('.tab[data-mode="wordbank"], .tab[data-mode="match"]').forEach(t=>t.hidden = set.nDrill===0);
+  $('.tab[data-mode="full"]').hidden = !(set.nQuiz>0 && set.nDrill>0);
+  if(state.mode==="full" && !(set.nQuiz>0 && set.nDrill>0)) state.mode = "test";
   const isFull = state.mode==="full";
   $("#sectionField").hidden = isFull; $("#groupField").hidden = isFull;
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.mode===state.mode)));
   $("#setTag").textContent = set.tag || "";
   $("#setTag").hidden = !set.tag;
   $("#pageTitle").textContent = set.name;
-  $("#pageSub").textContent = [set.nVocab?`${set.nVocab} palabras`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
+  $("#pageSub").textContent = [set.nVocab?`${set.nVocab} palabras`:null, set.nGram?`${set.nGram} verbos`:null, set.nQuiz?`${set.nQuiz} preguntas`:null].filter(Boolean).join(" · ");
   if(!isFull) buildPartChips();
-  $("#diffField").hidden = !vocab || isFull;
+  $("#diffField").hidden = !realVocab() || isFull;
   $("#lenField").hidden = state.mode!=="test";
-  if(vocab && !isFull) buildDiffChips();
+  if(realVocab() && !isFull) buildDiffChips();
 
   const poolQuizOnly = !vocab;
   let note;
@@ -1617,6 +1827,10 @@ function render(){
   else if(state.mode==="list") note = poolQuizOnly
     ? "<span>Every question with its answer &mdash; read straight through before you drill.</span>"
     : "<span>The full list. Nivel switches between meanings, English definitions and Spanish definitions.</span>";
+  else if(vocab && !realVocab() && state.mode==="wordbank") note = `<b>Banco de verbos</b><span>Cada frase tiene un hueco y el infinitivo entre paréntesis; arrastra la forma correcta. ${WB_LEN} frases, ${WB_LEN+WB_DECOYS} formas en el banco (${WB_DECOYS} sobran).</span>`;
+  else if(vocab && !realVocab() && state.mode==="match") note = `<b>Emparejar</b><span>Une cada frase con la forma verbal que la completa. Seis parejas contra el reloj.</span>`;
+  else if(vocab && !realVocab() && state.mode==="learn") note = `<b>Aprender</b><span>Rondas de cinco: escoge la forma correcta, luego escríbela &mdash; con acentos. Cada respuesta explica por qué ese tiempo.</span>`;
+  else if(vocab && !realVocab() && state.mode==="test") note = `<b>Examen</b><span>Escoge el tiempo correcto para cada hueco. Las cuatro opciones son formas del mismo verbo.</span>`;
   else if(state.mode==="wordbank") note = `<b>${DIFF[state.diff].label}</b><span>${WB_NOTE[state.diff]} ${WB_LEN} questions and ${WB_LEN+WB_DECOYS} words in the bank &mdash; ${WB_DECOYS} of them are decoys. Drag a word into a box, or tap the word then the box.</span>`;
   else if(state.mode==="match") note = `<b>${MATCH_DIFF[state.matchDiff].label}</b><span>${MATCH_DIFF[state.matchDiff].note} Six pairs, against the clock &mdash; a wrong pair costs a second.</span>`;
   else if(poolQuizOnly) note = state.mode==="learn"
@@ -1650,6 +1864,5 @@ document.addEventListener("keydown",e=>{
 });
 render();
 </script>
-
 </body>
 </html>
